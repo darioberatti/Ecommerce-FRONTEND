@@ -1,8 +1,15 @@
-import './App.css';
+import { Route, Routes } from "react-router";
+import "./App.css";
+import Register from "./commons/Register";
 
 function App() {
   return (
-    <h1>HOLA</h1>
+    <div>
+      <h1>HOLA</h1>
+      <Routes>
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </div>
   );
 }
 
