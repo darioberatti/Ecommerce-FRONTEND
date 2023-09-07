@@ -15,9 +15,14 @@ function App() {
   const userContext = useContext(authContext);
 
   useEffect(() => {
-    // axios.get("http://localhost:3001/api/users/me")
-    // .then(user=>userContext.user=(user.data.user))
-    // .catch(err=> console.error(err))
+    axios
+      .get("http://localhost:3001/api/users/me", {
+        withCredentials: true,
+      })
+      .then((user) => {
+        console.log("user Data--->", user.data.payload);
+      })
+      .catch((err) => console.log("Estoy en el error"));
 
     axios
       .get("http://localhost:3001/api/products")
