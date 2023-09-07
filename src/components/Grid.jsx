@@ -18,7 +18,7 @@ const Grid = ({items}) => {
         }}
       >
         {items.map((item, i) => {
-          return <Card item={item} />;
+          return <Card item={item} key={i}/>;
         })}
       </div>
     </div>

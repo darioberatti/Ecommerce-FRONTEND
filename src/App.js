@@ -22,8 +22,9 @@ function App() {
   return (
     <div>
      <Navbar />
-       <Grid items={products}/>
+       
       <Routes>
+        <Route path="/" element={<Grid items={products}/>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginForm/>} />
       </Routes>
