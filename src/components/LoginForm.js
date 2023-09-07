@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { Component, useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../context/authContext";
+
 
 const LoginForm = () => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  
-  const userContext = useContext(authContext);
+  const navigate = useNavigate()
 
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -25,22 +25,9 @@ const LoginForm = () => {
         email: email,
         password: password,
       })
-      .then((res) => res.data)
-      .then((user) => userContext.toggleAuth(user))
+      .then(()=> navigate("/"))
       .catch((err) => console.log(err));
   };
-
-  // handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   this.setState({ [name]: value });
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const { email, password } = this.state;
-  // };
-
-// console.log("userContext-->", userContext);
 
     return (
       <div
@@ -64,6 +51,7 @@ const LoginForm = () => {
               aria-describedby="emailHelp"
               // value={email}
               onChange={onChangeEmail}
+              required
             />
             <div id="emailHelp" class="form-text">
               We'll never share your email with anyone else.
@@ -79,6 +67,7 @@ const LoginForm = () => {
               id="exampleInputPassword1"
               // value={password}
               onChange={onChangePassword}
+              require
             />
           </div>
           <div class="mb-3 form-check">
@@ -107,29 +96,4 @@ const LoginForm = () => {
 
 export default LoginForm;
 
-{
-  /* <div>
-<h2>Iniciar sesión</h2>
-<form onSubmit={this.handleSubmit}>
-  <div>
-    <label>Email:</label>
-    <input
-      type="email"
-      name="email"
-      value={email}
-      onChange={this.handleInputChange}
-    />
-  </div>
-  <div>
-    <label>Contraseña:</label>
-    <input
-      type="password"
-      name="password"
-      value={password}
-      onChange={this.handleInputChange}
-    />
-  </div>
-  <button type="submit">Iniciar sesión</button>
-</form>
-</div> */
-}
+

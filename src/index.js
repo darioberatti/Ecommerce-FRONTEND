@@ -9,15 +9,20 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 // import { createStore } from 'redux';
 // import { Provider } from 'react-redux';
 // import rootReducer from './redux/reducers';
+import store from "./redux/store";
+import { Provider } from "react-redux";
 
 // const store = createStore(rootReducer);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <Provider store={store}>
- <BrowserRouter>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+
+  <BrowserRouter>
+    <Provider store={store}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Provider>
   </BrowserRouter>
   // </Provider>
 );

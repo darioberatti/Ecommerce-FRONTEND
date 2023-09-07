@@ -6,41 +6,39 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Register from "./commons/Register";
 import Navbar from "./components/Navbar";
-import LoginForm from "./components/LoginForm"; // Crea un componente LoginForm
-import AuthContextProvider, { authContext } from "./context/authContext";
+import LoginForm from "./components/LoginForm";
+import { loginUser } from "./redux/user";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
   const [products, setProducts] = useState([]);
-
-  const userContext = useContext(authContext);
+  const usuario = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/users/me", {
-        withCredentials: true,
-      })
+      .get("http://localhost:3001/api/users/me", { withCredentials: true })
       .then((user) => {
-        console.log("user Data--->", user.data.payload);
+        dispatch(loginUser(user.data.payload));
       })
-      .catch((err) => console.log("Estoy en el error"));
+      .catch((err) => console.error(err));
 
     axios
       .get("http://localhost:3001/api/products")
       .then((response) => setProducts(response.data));
   }, []);
 
-  return (
-    <AuthContextProvider>
-      <div>
-        <Navbar />
+  console.log(usuario);
 
-        <Routes>
-          <Route path="/" element={<Grid items={products} />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<LoginForm />} />
-        </Routes>
-      </div>
-    </AuthContextProvider>
+  return (
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Grid items={products} />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<LoginForm />} />
+      </Routes>
+    </div>
   );
 }
 

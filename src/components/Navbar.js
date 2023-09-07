@@ -1,18 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { authContext } from "../context/authContext";
+import { useSelector } from "react-redux";
+
 
 const Navbar = () => {
-  const userContext = useContext(authContext);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("/api/users/me")
-  //     .then((res) => res.data)
-  //     .then((user) => setUser(user))
-  //     .catch(() => console.error("Necesitas loguearte"));
-  // }, []);
+  const usuario = useSelector((state)=> state.user.value)
 
   return (
     <>
@@ -42,10 +33,10 @@ const Navbar = () => {
             </form>
           </div>
           <div>
-            {userContext.isAuthenticated ? (
+            {usuario.name ? (
               <Link>
                 <button type="button" class="btn btn-dark">
-                  <strong>{userContext.user.name}</strong>
+                  <strong>{usuario.name}</strong>
                 </button>
               </Link>
             ) : (
