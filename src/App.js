@@ -1,14 +1,24 @@
 import './App.css';
-import Login from './components/Login';
-function App() {
 
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import LoginButton from './LoginButton';
+import LoginForm from './LoginForm'; // Crea un componente LoginForm
+
+const App = () => {
   return (
-    <div>
-      <Login/>
-
-    </div>
-    
+    <Router>
+      <div>
+        <Switch>
+          {/* Otras rutas de la aplicación */}
+          <Route path="/login" component={LoginForm} />
+        </Switch>
+        <LoginButton />
+      </div>
+    </Router>
   );
 }
 
 export default App;
+
