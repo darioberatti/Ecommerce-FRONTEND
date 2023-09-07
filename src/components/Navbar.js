@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { authContext } from "../context/authContext";
 
 const Navbar = () => {
-  const [user, setUser] = useState({});
+  const userContext = useContext(authContext);
 
   // useEffect(() => {
   //   axios
@@ -41,10 +42,10 @@ const Navbar = () => {
             </form>
           </div>
           <div>
-            {user.id ? (
+            {userContext.isAuthenticated ? (
               <Link>
                 <button type="button" class="btn btn-dark">
-                  <strong>{user.name}</strong>
+                  <strong>{userContext.user.name}</strong>
                 </button>
               </Link>
             ) : (
