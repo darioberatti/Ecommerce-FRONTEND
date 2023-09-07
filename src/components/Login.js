@@ -21,14 +21,14 @@ class Login extends Component {
     const { email, password } = this.state;
 
     axios
-      .post('/api/login', {
+      .post('/api/users/login', {
         email,
         password,
       })
       .then((response) => {
         if (response.status === 200) {
-          // Redireccionar al dashboard u otra página después del inicio de sesión exitoso
-          this.props.history.push('/register'); 
+          // Redireccionar a otra página después del inicio de sesión exitoso
+          this.props.history.push('/home'); 
         }
       })
       .catch((error) => {
@@ -45,7 +45,7 @@ class Login extends Component {
 
     return (
       <div>
-        <h2>Iniciar sesión</h2>
+        <h2 href="http://localhost:3001/api/login">Iniciar sesión</h2>
         <form onSubmit={this.handleSubmit}>
           <div>
             <label>Email:</label>
@@ -68,7 +68,9 @@ class Login extends Component {
           <button type="submit">Iniciar sesión</button>
           {error && <p>{error}</p>}
         </form>
+        
       </div>
+      
     );
   }
 }

@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from './reducers';
+import rootReducer from './redux/reducers';
 
 const store = createStore(rootReducer);
 const root = ReactDOM.createRoot(document.getElementById("root"));
