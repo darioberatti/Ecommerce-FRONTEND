@@ -3,6 +3,9 @@ import "./App.css";
 import Grid from "./components/Grid";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Register from "./commons/Register";
+import Navbar from "./components/Navbar";
+
 
 function App() {
      const [products, setProducts ] = useState([])
@@ -16,7 +19,11 @@ function App() {
 
   return (
     <div>
-      <Grid items={products}/>
+     <Navbar />
+       <Grid items={products}/>
+      <Routes>
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </div>
   );
 }
