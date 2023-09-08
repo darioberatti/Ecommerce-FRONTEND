@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { Component, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../context/authContext";
-import { onSubmitReload } from "../utils/pageReload";
+import { onSubmitReload } from "../utils/utils";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
