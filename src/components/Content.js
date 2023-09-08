@@ -15,10 +15,6 @@ const Content = () => {
       .catch((err) => console.log(err));
   }, [id]);
 
-  console.log("productId-->", id);
-  console.log("product-->", product);
-  console.log("imgs--->", product.urlImg);
-
   return (
     <div style={{margin:"0 auto" , display:"flex" , alignItems:"center"}}>
       <div style={{ textAlign: "center", width: "80%",textAlign:"center", alignItems:"center"}}>
