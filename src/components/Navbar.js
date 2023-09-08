@@ -20,7 +20,7 @@ const Navbar = () => {
     <>
       <nav
         className="navbar navbar-expand-lg"
-        style={{ backgroundColor: "lightgray" }}
+        style={{ backgroundColor: "#d8d8d8" }}
       >
         <div className="container-fluid">
           <Link to={"/"}>
@@ -28,8 +28,8 @@ const Navbar = () => {
               className="navbar-brand"
               src={LogoRFC}
               alt="RFC"
-              width="60"
-              height="70"
+              width="70"
+              height="80"
             />
           </Link>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
