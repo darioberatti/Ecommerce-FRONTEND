@@ -4,7 +4,7 @@ import Card from "../commons/Card";
 const Grid = ({items}) => {
   return (
     <div className="contenedor-grid">
-      <h1 className="titles">Todos nuestros Productos <span className="badge bg-secondary">New</span></h1>
+      <h1 className="titles">Todos nuestros Productos <span className="badge bg-secondary">Nuevos</span></h1>
       <div
         style={{
           display: "flex",
