@@ -41,7 +41,7 @@ function Register() {
         password,
         address
       })
-      .then((res) => res.data)
+      .then(() => navigate("/login"))
       // .then((data) => navigate(`/`))
       .catch((err) => console.log(err));
   };
