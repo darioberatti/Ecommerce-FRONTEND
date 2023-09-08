@@ -26,8 +26,12 @@ const LoginForm = () => {
       .then(() => {
         navigate("/");
         onSubmitReload();
+        alert("Bienvenido!");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert("Email o contraseña incorrectos");
+      });
   };
 
   return (
@@ -37,7 +41,7 @@ const LoginForm = () => {
         margin: "0 auto",
         textAlign: "center",
         border: "2px solid black",
-        padding:"3%"
+        padding: "3%",
       }}
     >
       <form onSubmit={handleLogin}>

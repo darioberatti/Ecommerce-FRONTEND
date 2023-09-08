@@ -37,7 +37,7 @@ function App() {
         <Route path="/" element={<Grid items={products} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path="/cart" element={<Cart />}/>
+        <Route path="/cart" element={<Cart />} />
         <Route path="/products/:id" element={<Content />} />
       </Routes>
     </div>
