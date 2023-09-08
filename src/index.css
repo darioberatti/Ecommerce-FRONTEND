@@ -33,3 +33,20 @@ code {
     padding: 10px;
 }
 }
+
+
+/* carrito de compras */
+
+.carrito{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.list-group{
+  width: 50%;
+  margin-top: 5%;
+}
