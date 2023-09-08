@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Routes } from "react-router";
 import "./App.css";
 import Grid from "./components/Grid";
@@ -28,8 +28,6 @@ function App() {
       .get("http://localhost:3001/api/products")
       .then((response) => setProducts(response.data));
   }, []);
-
-  console.log(usuario);
 
   return (
     <div>
