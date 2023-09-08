@@ -4,11 +4,12 @@ import "./App.css";
 import Grid from "./components/Grid";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Register from "./commons/Register";
+import Register from "./components/Register";
 import Navbar from "./components/Navbar";
 import LoginForm from "./components/LoginForm";
 import { loginUser } from "./redux/user";
 import { useDispatch, useSelector } from "react-redux";
+import Content from "./components/Content";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -37,6 +38,7 @@ function App() {
         <Route path="/" element={<Grid items={products} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/products/:id" element={<Content />} />
       </Routes>
     </div>
   );
