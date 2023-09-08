@@ -73,7 +73,10 @@ function Register() {
       .then(() => navigate("/login"))
       .then(() => alert("Usuario Creado"))
       // .then((data) => navigate(`/`))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert("Ese correo electronico ya esta registrado");
+      });
   };
 
   return (
