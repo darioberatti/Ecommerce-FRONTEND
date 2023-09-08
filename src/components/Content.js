@@ -13,16 +13,15 @@ const Content = () => {
       .get(`/api/products/${id}`)
       .then((response) => setProduct(response.data))
       .catch((err) => console.log(err));
-  }, [id]);
+  }, []);
 
   return (
-    <div style={{margin:"0 auto" , display:"flex" , alignItems:"center"}}>
-      <div style={{ textAlign: "center", width: "80%",textAlign:"center", alignItems:"center"}}>
-        <h2>{product.name}</h2>
+    <div style={{}}>
+      <div style={{margin: "2% 4%"}}>
         <div class="row">
           <div class="col-sm-6 mb-3 mb-sm-0">
-            <div class="card" style={{width:"80%"}}>
-              <div class="card-body" >
+            <div class="card" style={{ width: "80%" }}>
+              <div class="card-body">
                 <div
                   id="carouselExampleIndicators"
                   class="carousel carousel-dark slide"
@@ -43,19 +42,16 @@ const Content = () => {
                       aria-label="Slide 2"
                     ></button>
                   </div>
-                  <div class="carousel-inner" >
+                  <div class="carousel-inner">
+                    {product.urlImg?.map((img) => {
+                      return (
+                        <div class="carousel-item active">
+                          <img src={img} class="d-block w-100" alt="..." />
+                        </div>
+                      );
+                    })}
 
-                  {/* {product.urlImg[0] ? product.urlImg.map((img)=>{
-                    <div class="carousel-item active">
-                    <img
-                      src={img}
-                      class="d-block w-100"
-                      alt="..."
-                    />
-                  </div>
-                  }) : "hola"} */}
-
-                     <div class="carousel-item active">
+                    {/* <div class="carousel-item active">
                       <img
                         src="https://acdn.mitiendanube.com/stores/216/721/products/photoroom-20220420_092710-5342fc330e2a5cbc2716504584747851-1024-1024.webp"
                         class="d-block w-100"
@@ -69,7 +65,7 @@ const Content = () => {
                         class="d-block w-100"
                         alt="..."
                       />
-                    </div>
+                    </div> */}
 
                     {/* <div class="carousel-item">
                     <img src="..." class="d-block w-100" alt="..." />
@@ -104,14 +100,13 @@ const Content = () => {
             </div>
           </div>
           <div class="col-sm-6">
-            <div class="card" style={{width:"100%"}}>
+            <div class="card" style={{ width: "100%" }}>
               <div class="card-body">
-                <h4 class="card-title">
-                  {" "}
-                  {product.name + " - " + product.team}
-                </h4>
-                <h3 class="card-title"> {product.price}$</h3>
-
+                <h4 class="card-title">{product.name}</h4>
+                <h1 class="card-title"> {product.price}$</h1>
+                <p class="card-text">Equipo: {product.team}</p>
+                <p class="card-text">País: {product.country}</p>
+                <p class="card-text">Año: {product.year}</p>
                 <p class="card-text">{product.description}</p>
                 <p class="card-text">
                   {/* Talles disponibles: {sizeSetter(product.size)} */}
