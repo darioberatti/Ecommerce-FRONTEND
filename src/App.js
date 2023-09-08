@@ -10,6 +10,7 @@ import LoginForm from "./components/LoginForm";
 import { loginUser } from "./redux/user";
 import { useDispatch, useSelector } from "react-redux";
 import Content from "./components/Content";
+import Cart from "./components/Cart";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -38,6 +39,7 @@ function App() {
         <Route path="/" element={<Grid items={products} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/cart" element={<Cart />}/>
         <Route path="/products/:id" element={<Content />} />
       </Routes>
     </div>

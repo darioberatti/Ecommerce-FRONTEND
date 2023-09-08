@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-
 const Navbar = () => {
-  const usuario = useSelector((state)=> state.user.value)
+  const usuario = useSelector((state) => state.user.value);
 
   return (
     <>
@@ -34,11 +33,16 @@ const Navbar = () => {
           </div>
           <div>
             {usuario.name ? (
-              <Link>
-                <button type="button" class="btn btn-dark">
-                  <strong>{usuario.name}</strong>
-                </button>
-              </Link>
+              <div>
+                <Link>
+                  <button type="button" class="btn btn-dark">
+                    <strong>{usuario.name}</strong>
+                  </button>
+                </Link>
+                <Link to={"/cart"}>
+                  <button>Ver Carrito</button>
+                </Link>
+              </div>
             ) : (
               <Link to={"/login"}>
                 <button type="button" class="btn btn-dark">
