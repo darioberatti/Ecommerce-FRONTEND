@@ -11,37 +11,67 @@ function Register() {
   const [password2, setPassword2] = useState("");
   const [address, setAddress] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const validateForm = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (password !== password2){
-      alert("No coinciden las contraseñas. Intentelo nuevamente")
-      return
+    if (containsNumbers(name)) {
+      alert("El nombre no puede contener números");
+      return;
     }
 
-    if (password.length < 8){
-      alert("La contraseña debe contener al menos 8 caracteres")
-      return
+    if (containsNumbers(lastName)) {
+      alert("El apellido no puede contener números");
+      return;
     }
-    
-    handleSubmit()
+
+    if (!email.includes("@")) {
+      alert("Debe ingresar un correo electrónico válido");
+      return;
+    }
+
+    if (password !== password2) {
+      alert("No coinciden las contraseñas. Intentelo nuevamente");
+      return;
+    }
+    if (password.length < 6) {
+      alert("La contraseña debe contener al menos 6 caracteres");
+      return;
+    }
+
+    function containsNumbers(str) {
+      return /\d/.test(str);
+    }
+
+    if (!containsNumbers(password)) {
+      alert("La contraseña debe contener al menos numero");
+      return;
+    }
+
+    // Pedido axios para encontrar un usuario existente con el mismo email
+    // axios.get("/api/users", {
+    //   params:{
+    //     email: email
+    //   }
+    // })
+    // .then(response=>console.log("USUARIO REPETIDO-->", response.data))
+
+    handleSubmit();
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
     axios
-      .post("http://localhost:3001/api/users/register" , {
+      .post("http://localhost:3001/api/users/register", {
         name,
         lastName,
         email,
         userName,
         password,
-        address
+        address,
       })
       .then(() => navigate("/login"))
+      .then(() => alert("Usuario Creado"))
       // .then((data) => navigate(`/`))
       .catch((err) => console.log(err));
   };
@@ -51,7 +81,7 @@ function Register() {
       <div style={{ textAlign: "center" }}>
         <h1>¡Crea tu cuenta!</h1>
       </div>
-      <form onSubmit={handleSubmit}> 
+      <form onSubmit={validateForm}>
         <div className="mb-3">
           <label for="formGroupExampleInput" className="form-label">
             Nombre completo
@@ -113,7 +143,7 @@ function Register() {
           <input
             type="password"
             className="form-control"
-            placeholder="Al menos 8 digitos"
+            placeholder="Al menos 6 digitos y contener al menos 1 numero"
             id="exampleInputPassword1"
             required
             onChange={(e) => setPassword(e.target.value)}
@@ -126,7 +156,7 @@ function Register() {
           <input
             type="password"
             className="form-control"
-            placeholder="Al menos 8 digitos"
+            placeholder="Al menos 6 digitos y contener al menos 1 numero"
             id="exampleInputPassword2"
             required
             onChange={(e) => setPassword2(e.target.value)}
@@ -156,7 +186,7 @@ function Register() {
             Acepto los términos y condiciones
           </label>
         </div>
-        <button type="submit" className="btn btn-primary" >
+        <button type="submit" className="btn btn-primary">
           Registrarse
         </button>
       </form>

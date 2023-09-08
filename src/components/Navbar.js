@@ -1,17 +1,36 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogoRFC from "../assets/Black White Modern Concept Football Club Logo.png";
-
+import axios from "axios";
+import { onSubmitReload } from "../utils/utils.js";
 
 const Navbar = () => {
   const usuario = useSelector((state) => state.user.value);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    axios.post("/api/users/logout").then(() => {
+      onSubmitReload();
+      navigate("/");
+      alert("Usuario deslogueado");
+    });
+  };
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "lightgray" }}>
-        <div className="container-fluid" >
+      <nav
+        className="navbar navbar-expand-lg"
+        style={{ backgroundColor: "#d8d8d8" }}
+      >
+        <div className="container-fluid">
           <Link to={"/"}>
-            <img className="navbar-brand" src={LogoRFC} alt="RFC" width="60" height="70" />
+            <img
+              className="navbar-brand"
+              src={LogoRFC}
+              alt="RFC"
+              width="70"
+              height="80"
+            />
           </Link>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <form className="d-flex" role="search">
@@ -25,7 +44,8 @@ const Navbar = () => {
                 Buscar
               </button>
             </form>
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0" >
+            <div style={{ marginLeft: "600px" }}></div>
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item dropdown">
                 {usuario.name ? (
                   <>
@@ -54,14 +74,17 @@ const Navbar = () => {
                         <hr className="dropdown-divider" />
                       </li>
                       <li>
-                        <button className="dropdown-item">
+                        <button
+                          className="dropdown-item"
+                          onClick={handleLogout}
+                        >
                           Desloguearse
                         </button>
                       </li>
                     </ul>
                   </>
                 ) : (
-                  <ul className="navbar-nav ml-auto" >
+                  <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
                       <Link to={"/login"}>
                         <button type="button" className="btn btn-dark">
