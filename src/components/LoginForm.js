@@ -33,10 +33,11 @@ const LoginForm = () => {
   return (
     <div
       style={{
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        width: "60%",
+        margin: "0 auto",
+        textAlign: "center",
+        border: "2px solid black",
+        padding:"3%"
       }}
     >
       <form onSubmit={handleLogin}>
@@ -81,6 +82,8 @@ const LoginForm = () => {
           Iniciar sesión
         </button>
       </form>
+      <br></br>
+      <p>No tienes una cuenta?</p>
       <Link to={"/register"}>
         <button type="submit" class="btn btn-primary">
           Registrarse

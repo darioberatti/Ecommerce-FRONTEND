@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogoRFC from "../assets/Black White Modern Concept Football Club Logo.png";
 
+
 const Navbar = () => {
   const usuario = useSelector((state) => state.user.value);
 
@@ -36,6 +37,7 @@ const Navbar = () => {
           </div>
           <div>
             {usuario.name ? (
+
               <>
                 <button
                   class="nav-link dropdown-toggle"
@@ -66,6 +68,18 @@ const Navbar = () => {
                   </li>
                 </ul>
               </>
+
+              //<div>
+                //<Link>
+                  //<button type="button" class="btn btn-dark">
+                   // <strong>{usuario.name}</strong>
+                 // </button>
+                //</Link>
+                //<Link to={"/cart"}>
+                  //<button>Ver Carrito</button>
+                //</Link>
+             // </div>
+
             ) : (
               <Link to={"/login"}>
                 <button type="button" class="btn btn-dark">
