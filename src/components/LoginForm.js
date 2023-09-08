@@ -60,7 +60,7 @@ const LoginForm = () => {
             required
           />
           <div id="emailHelp" class="form-text">
-            We'll never share your email with anyone else.
+            No compartiremos tus datos con nadie
           </div>
         </div>
         <div class="mb-3">

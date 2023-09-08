@@ -17,7 +17,7 @@ const Content = () => {
 
   return (
     <div style={{}}>
-      <div style={{margin: "2% 4%"}}>
+      <div style={{margin: "2% 8%"}}>
         <div class="row">
           <div class="col-sm-6 mb-3 mb-sm-0">
             <div class="card" style={{ width: "80%" }}>

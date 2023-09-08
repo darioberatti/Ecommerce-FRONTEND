@@ -44,7 +44,7 @@ const Navbar = () => {
                 Buscar
               </button>
             </form>
-            <div style={{ marginLeft: "600px" }}></div>
+            <div style={{ marginLeft: "1200px" }}></div>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item dropdown">
                 {usuario.name ? (
