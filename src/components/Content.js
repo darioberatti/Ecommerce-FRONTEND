@@ -1,12 +1,15 @@
 import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { sizeSetter } from "../utils/utils";
+import { addToCart } from "../redux/cart";
 
 const Content = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const cart = useSelector(state=>state.cart)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     axios
@@ -112,7 +115,7 @@ const Content = () => {
                   {/* Talles disponibles: {sizeSetter(product.size)} */}
                 </p>
                 <div class="d-grid gap-2">
-                  <button class="btn btn-primary" type="button">
+                  <button class="btn btn-primary" type="button" onClick={()=>dispatch(addToCart(product))}>
                     Agregar al carrito
                   </button>
                 </div>
