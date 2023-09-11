@@ -1,15 +1,17 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { sizeSetter } from "../utils/utils";
 import { addToCart } from "../redux/cart";
 
+
 const Content = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const cart = useSelector(state=>state.cart)
-  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const usuario = useSelector((state) => state.user.value);
+  console.log(usuario)
 
   useEffect(() => {
     axios
@@ -18,9 +20,16 @@ const Content = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  const handleAddToCart = () => {
+    axios
+      .post(`/api/cart/${product.id}`)
+      .then((res) => alert(res.data.message))
+      .catch(()=> navigate("/login"))
+  };
+
   return (
     <div style={{}}>
-      <div style={{margin: "2% 8%"}}>
+      <div style={{ margin: "2% 8%" }}>
         <div class="row">
           <div class="col-sm-6 mb-3 mb-sm-0">
             <div class="card" style={{ width: "80%" }}>
@@ -115,7 +124,13 @@ const Content = () => {
                   {/* Talles disponibles: {sizeSetter(product.size)} */}
                 </p>
                 <div class="d-grid gap-2">
-                  <button class="btn btn-primary" type="button" onClick={()=>dispatch(addToCart(product))}>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    onClick={() => {
+                      handleAddToCart();
+                    }}
+                  >
                     Agregar al carrito
                   </button>
                 </div>
