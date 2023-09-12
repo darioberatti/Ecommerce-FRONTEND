@@ -119,14 +119,14 @@ const Cart = () => {
           </div>
         )}
 
-       // <button
-         // type="button"
-         // class="btn btn-dark"
-         // style={{ marginTop: "10%" }}
-          //onClick={() => handleCheckout()}
-       // >
-        //  Ir a Pagar
-       // </button>
+        {/* <button
+         type="button"
+          class="btn btn-dark"
+         style={{ marginTop: "10%" }}
+          onClick={() => handleCheckout()}
+       >
+          Ir a Pagar
+       </button> */}
 
       </div>
     </div>
