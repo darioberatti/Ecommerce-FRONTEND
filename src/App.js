@@ -14,6 +14,7 @@ import Cart from "./components/Cart";
 import SearchResults from "./components/SearchResults";
 import History from "./components/History";
 import Checkout from "./components/Checkout";
+import Categories from "./components/Categories";
 
 
 function App() {
@@ -44,7 +45,6 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log("categories-->", categories);
   const isSearchResultsPage = location.pathname === "/search-results";
 
   return (
@@ -70,6 +70,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/products/:id" element={<Content />} />
         <Route path="/search-results" element={<SearchResults />} />
+        <Route path="/categories/:type" element={<Categories />} />
         <Route path="/history" element={<History />} />
       </Routes>
     </div>
