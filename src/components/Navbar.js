@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import LogoRFC from "../assets/Black White Modern Concept Football Club Logo.png";
 import axios from "axios";
 import { onSubmitReload } from "../utils/utils.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ categories }) => {
   const usuario = useSelector((state) => state.user.value);
   const navigate = useNavigate();
   const [searchName, setSearchName] = useState("");
@@ -25,6 +25,8 @@ const Navbar = () => {
       alert("Usuario deslogueado");
     });
   };
+
+  console.log("categories navbar -->", categories);
 
   return (
     <nav
@@ -70,7 +72,23 @@ const Navbar = () => {
               Categorías
             </button>
             <ul className="dropdown-menu" aria-labelledby="categoriasDropdown">
-              <li>
+              {categories[0] ? (
+                categories?.map((category) => {
+                  return (
+                    <li>
+                    <Link to={`/${category.type.toLowerCase()}`}>
+                      <button className="dropdown-item">{category.type}</button>
+                    </Link>
+                  </li>
+                  )
+                  
+                })
+              ) : (
+                <li>
+                  <p>No hay categorias</p>
+                </li>
+              )}
+              {/* <li>
                 <Link to={"/camisetas"}>
                   <button className="dropdown-item">Camisetas</button>
                 </Link>
@@ -89,7 +107,7 @@ const Navbar = () => {
                 <Link to={"/Pantalones"}>
                   <button className="dropdown-item">Pantalones</button>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </form>

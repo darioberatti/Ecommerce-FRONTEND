@@ -19,6 +19,7 @@ function App() {
   const usuario = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
   const location = useLocation();
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     axios
@@ -33,11 +34,19 @@ function App() {
       .then((response) => setProducts(response.data));
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`/api/categories`)
+      .then((result) => setCategories(result.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  console.log("categories-->", categories);
   const isSearchResultsPage = location.pathname === "/search-results";
 
   return (
     <div className="bodyBackground">
-      <Navbar />
+      <Navbar categories={categories} />
       <Routes>
         <Route
           path="/"
