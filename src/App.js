@@ -13,12 +13,15 @@ import Content from "./components/Content";
 import Cart from "./components/Cart";
 import SearchResults from "./components/SearchResults";
 import History from "./components/History";
+import Checkout from "./components/Checkout";
+
 
 function App() {
   const [products, setProducts] = useState([]);
   const usuario = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
   const location = useLocation();
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     axios
@@ -34,11 +37,19 @@ function App() {
       .then((response) => setProducts(response.data));
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`/api/categories`)
+      .then((result) => setCategories(result.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  console.log("categories-->", categories);
   const isSearchResultsPage = location.pathname === "/search-results";
 
   return (
     <div className="bodyBackground">
-      <Navbar />
+      <Navbar categories={categories} />
       <Routes>
         <Route
           path="/"
@@ -56,6 +67,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/products/:id" element={<Content />} />
         <Route path="/search-results" element={<SearchResults />} />
         <Route path="/history" element={<History />} />

@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFromCart } from "../redux/cart";
 import axios from "axios";
+import { onSubmitReload } from "../utils/utils";
+
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState("");
@@ -20,11 +22,10 @@ const Cart = () => {
         setCartId(response.data.cart.id);
       })
       .catch(() => {
-        navigate("/");
         alert("Primero debes agregar productos a tu carrito");
+        navigate("/");
       });
   }, []);
-  console.log(totalPrice);
 
   const handleDeleteFromCart = (id) => {
     axios.delete(`/api/cart/${id}`).then((res) => console.log(res.data));
@@ -54,7 +55,10 @@ const Cart = () => {
                   type="button"
                   class="btn btn-light btn-sm"
                   /* onClick={() => dispatch(deleteFromCart(item))} */
-                  onClick={() => handleAddToCart(item.id)}
+                  onClick={() => {
+                    handleAddToCart(item.id);
+                    onSubmitReload();
+                  }}
                 >
                   ➕
                 </button>
@@ -73,7 +77,10 @@ const Cart = () => {
                   type="button"
                   class="btn btn-danger btn-sm"
                   /* onClick={() => dispatch(deleteFromCart(item))} */
-                  onClick={() => handleDeleteFromCart(item.id)}
+                  onClick={() => {
+                    handleDeleteFromCart(item.id);
+                    onSubmitReload();
+                  }}
                 >
                   ➖
                 </button>
@@ -87,14 +94,40 @@ const Cart = () => {
       <div class="contenedor-pagar">
         <h1>El total a pagar por tus productos es de:</h1>
         <h1 style={{ marginTop: "10%" }}>${totalPrice}</h1>
-        <button
-          type="button"
+
+        {cartItems.length ? (
+          <Link to={"/checkout"}>
+            <button
+              type="button"
+              class="btn btn-dark"
+              style={{ marginTop: "10%" }}
+            >
+              Ir a Pagar
+            </button>
+          </Link>
+        ) : (
+          <div>
+          <button
+            type="button"
+            class="btn btn-dark"
+            style={{ marginTop: "10%" }}
+            disabled
+          >
+            Ir a Pagar
+          </button>
+          <p class="mt-3">Primero debes agregar productos al carrito.</p>
+          </div>
+        )}
+
+        {/* <button
+         type="button"
           class="btn btn-dark"
-          style={{ marginTop: "10%" }}
+         style={{ marginTop: "10%" }}
           onClick={() => handleCheckout()}
-        >
+       >
           Ir a Pagar
-        </button>
+       </button> */}
+
       </div>
     </div>
   );

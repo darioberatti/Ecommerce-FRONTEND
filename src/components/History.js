@@ -6,6 +6,7 @@ import { dateSetter } from "../utils/utils";
 const History = () => {
   const [history, setHistory] = useState([]);
   const user = useSelector((state) => state.user.value);
+  // const [cartProducts, setCartProducts] = useState([])
 
   useEffect(() => {
     axios
@@ -14,17 +15,26 @@ const History = () => {
       .catch((err) => console.log(err));
   }, [user]);
 
-  // const productGetter = (id) => {
-  //   axios
-  //     .get(`/api/cart/${id}`)
-  //     .then((products) => products.data)
-  //     .then((data) => {
-  //       data.map((prod) => {prod.name});
-  //     });
-  // };
+  const productGetter = (id) => {
+    axios
+      .get(`/api/cart/${id}`)
+      .then((result) => result.data)
+      .then((data) => {
+        console.log("productos-->", data);
+
+        // data.map(item=>{
+        //  return <li> {item.name} </li>
+        // })
+      })
+      .catch((err) => console.log(err));
+  };
 
   console.log("usuario-->", user);
   console.log("history-->", history);
+  console.log("user-->", user);
+  console.log("user id-->", user.id);
+
+  // console.log("cartProducts-->", cartProducts);
 
   return (
     <div className="table-history">
@@ -44,11 +54,7 @@ const History = () => {
                 <th scope="row">{i + 1}</th>
                 <td>{dateSetter(cart.createdAt)}</td>
                 <td>
-                  <ul>
-                    <li>Product</li>
-                    <li>Product</li>
-                    <li>Product</li>
-                  </ul>
+                  <ul>{productGetter(cart.id)}</ul>
                 </td>
                 <td>${cart.total}</td>
               </tr>
