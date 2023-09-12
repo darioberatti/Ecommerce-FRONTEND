@@ -11,6 +11,7 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState("");
   const navigate = useNavigate();
+  const [cartId, setCartId] = useState("");
 
   useEffect(() => {
     axios
@@ -18,6 +19,7 @@ const Cart = () => {
       .then((response) => {
         setTotalPrice(response.data.cart.total);
         setCartItems(response.data.items);
+        setCartId(response.data.cart.id);
       })
       .catch(() => {
         alert("Primero debes agregar productos a tu carrito");
@@ -33,6 +35,13 @@ const Cart = () => {
     axios.post(`/api/cart/${id}`).then((res) => console.log(res.data));
   };
 
+  const handleCheckout = () => {
+    axios
+      .put(`/api/cart/${cartId}`, { completed: true })
+      .then((res) => console.log(res.data));
+  };
+
+  console.log("cartId-->", cartId);
   return (
     <div className="carrito">
       <div class="list-group">
@@ -85,6 +94,7 @@ const Cart = () => {
       <div class="contenedor-pagar">
         <h1>El total a pagar por tus productos es de:</h1>
         <h1 style={{ marginTop: "10%" }}>${totalPrice}</h1>
+
         {cartItems.length ? (
           <Link to={"/checkout"}>
             <button
@@ -108,6 +118,16 @@ const Cart = () => {
           <p class="mt-3">Primero debes agregar productos al carrito.</p>
           </div>
         )}
+
+       // <button
+         // type="button"
+         // class="btn btn-dark"
+         // style={{ marginTop: "10%" }}
+          //onClick={() => handleCheckout()}
+       // >
+        //  Ir a Pagar
+       // </button>
+
       </div>
     </div>
   );
