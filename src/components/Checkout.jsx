@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/Black White Modern Concept Football Club Logo.png";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const Checkout = () => {
   const [cartId, setCartId] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -13,11 +15,13 @@ const Checkout = () => {
   }, []);
 
   const handleCheckout = () => {
-    axios
-      .put(`/api/cart/${cartId}`, { completed: true })
-      .then((res) => console.log(res.data));
+    axios.put(`/api/cart/${cartId}`, { completed: true }).then((res) => {
+      console.log(res.data);
+      alert("Felicitaciones! Tu compra fue realizada con éxito");
+      navigate("/");
+    });
   };
-  
+
   return (
     <div class="contenedor">
       <div class="text-center">
@@ -32,7 +36,7 @@ const Checkout = () => {
       </div>
       <div class="container-for-pay">
         <h4>Direccion: </h4>
-        <form action="" onSubmit={()=>handleCheckout()}>
+        <form action="" onSubmit={() => handleCheckout()}>
           <div>
             <label for="adress" class="form-label">
               Direccion:{" "}
