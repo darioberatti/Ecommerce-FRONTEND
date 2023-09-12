@@ -26,8 +26,6 @@ const Navbar = () => {
     });
   };
 
-  
-
   return (
     <>
       <nav
@@ -76,6 +74,19 @@ const Navbar = () => {
                       <strong>{usuario.name}</strong>
                     </button>
                     <ul className="dropdown-menu">
+                      {
+                        usuario.isAdmin ? (
+                          <li>
+                        <Link to={"/create-product"}>
+                          <button
+                            className="dropdown-item"
+                          >
+                            Crear nuevo producto
+                          </button>
+                        </Link>
+                      </li>
+                        ) : ""
+                      }
                       <li>
                         <Link to={"/cart"}>
                           <button

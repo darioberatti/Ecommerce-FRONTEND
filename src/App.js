@@ -13,6 +13,7 @@ import Content from "./components/Content";
 import Cart from "./components/Cart";
 import SearchResults from "./components/SearchResults";
 import Checkout from "./components/Checkout";
+import ProductForm from "./components/CreateProductForm";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -57,6 +58,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/products/:id" element={<Content />} />
+        <Route path="/create-product" element={<ProductForm />} />
         <Route path="/search-results" element={<SearchResults />} />
       </Routes>
     </div>

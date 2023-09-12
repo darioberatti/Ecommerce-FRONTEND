@@ -1,14 +1,52 @@
 import React from "react";
 import "../index.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 const Card = ({ item }) => {
-  return (
+  const { pathname } = useLocation();
+
+  
+  
+ return pathname === "/create-product" ? (
+    <div
+      className="card"
+      style={{ width: "18rem", borderRadius: "5px 5px 21px 21px", height: "32rem" }}
+    >
+      <img
+        src={
+          !item.urlImg[0]
+            ? "https://www.fruve.sectechfield.com//media/productImages/imagen-no-disponible.png"
+            : item.urlImg[0]
+        }
+        className="card-img-top"
+        alt="..."
+      />
+      <div
+        className="card-body"
+        style={{ border: "1px solid grey", borderRadius: 20 }}
+      >
+        <h5 className="card-title">{item.name}</h5>
+        <p className="card-text">{item.description}</p>
+          <button class="btn btn-primary" type="submit" disabled>
+            Ver más
+          </button>
+        <span className="span">${item.price}</span>
+      </div>
+    </div>
+  ) : (
     <div
       className="card"
       style={{ width: "18rem", borderRadius: "5px 5px 21px 21px" }}
     >
-      <img src={item.urlImg[0]} className="card-img-top" alt="..." />
+      <img
+        src={
+          !item.urlImg[0]
+            ? "https://www.fruve.sectechfield.com//media/productImages/imagen-no-disponible.png"
+            : item.urlImg[0]
+        }
+        className="card-img-top"
+        alt="..."
+      />
       <div
         className="card-body"
         style={{ border: "1px solid grey", borderRadius: 20 }}
