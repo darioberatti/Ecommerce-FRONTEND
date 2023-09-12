@@ -125,6 +125,11 @@ const Navbar = ({ categories }) => {
                     </Link>
                   </li>
                   <li>
+                        <Link to={"/history"}>
+                          <button className="dropdown-item">Compras</button>
+                        </Link>
+                      </li>
+                  <li>
                     <Link to={"/profile"}>
                       <button className="dropdown-item">Perfil</button>
                     </Link>
