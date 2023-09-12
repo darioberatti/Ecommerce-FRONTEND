@@ -13,6 +13,10 @@ function Register() {
 
   const navigate = useNavigate();
 
+  function containsNumbers(str) {
+    return /\d/.test(str);
+  }
+
   const validateForm = (e) => {
     e.preventDefault();
 
@@ -35,19 +39,11 @@ function Register() {
       alert("No coinciden las contraseñas. Intentelo nuevamente");
       return;
     }
-    if (password.length < 6) {
-      alert("La contraseña debe contener al menos 6 caracteres");
+    if (password.length < 6 || !containsNumbers(password)) {
+      alert("La contraseña debe contener al menos 6 caracteres y al menos 1 numero");
       return;
     }
 
-    function containsNumbers(str) {
-      return /\d/.test(str);
-    }
-
-    if (!containsNumbers(password)) {
-      alert("La contraseña debe contener al menos numero");
-      return;
-    }
 
     // Pedido axios para encontrar un usuario existente con el mismo email
     // axios.get("/api/users", {
@@ -98,6 +94,12 @@ function Register() {
                 aria-label="Nombre"
                 required
                 onChange={(e) => setName(e.target.value)}
+                onBlur={(e) => {
+                  if (containsNumbers(name)) {
+                    alert("El nombre no puede contener números");
+                    return (e.target.value = "");
+                  }
+                }}
               />
             </div>
             <div className="col">
@@ -108,6 +110,12 @@ function Register() {
                 aria-label="Apellido"
                 required
                 onChange={(e) => setLastName(e.target.value)}
+                onBlur={(e) => {
+                  if (containsNumbers(lastName)) {
+                    alert("El apellido no puede contener números");
+                    return (e.target.value = "");
+                  }
+                }}
               />
             </div>
           </div>
@@ -124,6 +132,12 @@ function Register() {
             placeholder="ejemplo@gmail.com"
             required
             onChange={(e) => setEmail(e.target.value)}
+            onBlur={(e) => {
+              // if (!email.includes("@")) {
+              //   alert("Debe ingresar un correo electrónico válido");
+              //   return (e.target.value = "");
+              // }
+            }}
           />
         </div>
         <div className="mb-3">
@@ -150,6 +164,14 @@ function Register() {
             id="exampleInputPassword1"
             required
             onChange={(e) => setPassword(e.target.value)}
+            onBlur={(e) => {
+              if (password.length < 6 || !containsNumbers(password)) {
+                alert(
+                  "La contraseña debe contener al menos 6 caracteres y al menos 1 numero"
+                );
+                return (e.target.value = "");
+              }
+            }}
           />
         </div>
         <div className="mb-3">
@@ -163,6 +185,12 @@ function Register() {
             id="exampleInputPassword2"
             required
             onChange={(e) => setPassword2(e.target.value)}
+            onBlur={(e) => {
+              if (password !== password2) {
+                alert("No coinciden las contraseñas. Intentelo nuevamente");
+                return (e.target.value = "");
+              }
+            }}
           />
         </div>
         <div className="mb-3">

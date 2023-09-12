@@ -40,13 +40,26 @@ code {
 .carrito{
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 100vh;
-  flex-direction: column;
+  flex-direction: row;
+  border: 1px solid black;
 }
 
 .list-group{
-  width: 50%;
+  width: 30%;
   margin-top: 5%;
+  border: 1px solid black;
+  
+}
+
+.contenedor-pagar{
+  border: 1px solid black;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  align-items: center;
+  text-align: center;
 }

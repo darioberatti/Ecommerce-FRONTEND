@@ -26,6 +26,8 @@ const Navbar = () => {
     });
   };
 
+  
+
   return (
     <>
       <nav
@@ -76,7 +78,9 @@ const Navbar = () => {
                     <ul className="dropdown-menu">
                       <li>
                         <Link to={"/cart"}>
-                          <button className="dropdown-item">
+                          <button
+                            className="dropdown-item"
+                          >
                             Ver tu carrito
                           </button>
                         </Link>
