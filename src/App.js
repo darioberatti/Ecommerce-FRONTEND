@@ -13,6 +13,7 @@ import Content from "./components/Content";
 import Cart from "./components/Cart";
 import SearchResults from "./components/SearchResults";
 import Checkout from "./components/Checkout";
+import Categories from "./components/Categories";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -41,7 +42,6 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log("categories-->", categories);
   const isSearchResultsPage = location.pathname === "/search-results";
 
   return (
@@ -67,6 +67,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/products/:id" element={<Content />} />
         <Route path="/search-results" element={<SearchResults />} />
+        <Route path="/categories/:type" element={<Categories />} />
       </Routes>
     </div>
   );

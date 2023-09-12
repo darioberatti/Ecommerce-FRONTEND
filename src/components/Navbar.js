@@ -26,8 +26,6 @@ const Navbar = ({ categories }) => {
     });
   };
 
-  console.log("categories navbar -->", categories);
-
   return (
     <nav
       className="navbar navbar-expand-lg"
@@ -73,41 +71,22 @@ const Navbar = ({ categories }) => {
             </button>
             <ul className="dropdown-menu" aria-labelledby="categoriasDropdown">
               {categories[0] ? (
-                categories?.map((category) => {
+                categories?.map((category, i) => {
                   return (
-                    <li>
-                    <Link to={`/${category.type.toLowerCase()}`}>
-                      <button className="dropdown-item">{category.type}</button>
-                    </Link>
-                  </li>
-                  )
-                  
+                    <li key={i}>
+                      <Link to={`/categories/${category.type.toLowerCase()}`}>
+                        <button className="dropdown-item">
+                          {category.type}
+                        </button>
+                      </Link>
+                    </li>
+                  );
                 })
               ) : (
                 <li>
                   <p>No hay categorias</p>
                 </li>
               )}
-              {/* <li>
-                <Link to={"/camisetas"}>
-                  <button className="dropdown-item">Camisetas</button>
-                </Link>
-              </li>
-              <li>
-                <Link to={"/shorts"}>
-                  <button className="dropdown-item">Shorts</button>
-                </Link>
-              </li>
-              <li>
-                <Link to={"/buzos"}>
-                  <button className="dropdown-item">Buzos</button>
-                </Link>
-              </li>
-              <li>
-                <Link to={"/Pantalones"}>
-                  <button className="dropdown-item">Pantalones</button>
-                </Link>
-              </li> */}
             </ul>
           </div>
         </form>
