@@ -3,10 +3,20 @@ import { useSelector } from "react-redux";
 import LogoRFC from "../assets/Black White Modern Concept Football Club Logo.png";
 import axios from "axios";
 import { onSubmitReload } from "../utils/utils.js";
+import { useState } from "react";
 
 const Navbar = () => {
   const usuario = useSelector((state) => state.user.value);
   const navigate = useNavigate();
+  const [searchName, setSearchName] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    searchName.length === 0
+      ? alert("Debes ingresar una búsqueda")
+      : navigate(`/search-results?name=${searchName}`);
+    setSearchName("");
+  };
 
   const handleLogout = () => {
     axios.post("/api/users/logout").then(() => {
@@ -39,8 +49,14 @@ const Navbar = () => {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                value={searchName}
+                onChange={(e) => setSearchName(e.target.value)}
               />
-              <button className="btn btn-outline-dark" type="submit">
+              <button
+                className="btn btn-outline-dark"
+                type="submit"
+                onClick={handleSearch}
+              >
                 Buscar
               </button>
             </form>

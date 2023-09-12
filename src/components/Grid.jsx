@@ -1,10 +1,10 @@
 import React from "react";
 import Card from "../commons/Card";
 
-const Grid = ({items}) => {
+const Grid = ({ items, title }) => {
   return (
-    <div className="contenedor-grid" style={{margin:"0 8%"}}>
-      <h1 className="titles">Todos nuestros Productos <span className="badge bg-secondary">Nuevos</span></h1>
+    <div className="contenedor-grid" style={{ margin: "0 8%" }}>
+      <h1 className="titles">{title}</h1>
       <div
         style={{
           display: "flex",
@@ -18,7 +18,7 @@ const Grid = ({items}) => {
         }}
       >
         {items.map((item, i) => {
-          return <Card item={item} key={i}/>;
+          return <Card item={item} key={i} />;
         })}
       </div>
     </div>

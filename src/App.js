@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes, useLocation } from "react-router";
 import "./App.css";
 import Grid from "./components/Grid";
 import { useEffect, useState } from "react";
@@ -11,11 +11,13 @@ import { loginUser } from "./redux/user";
 import { useDispatch, useSelector } from "react-redux";
 import Content from "./components/Content";
 import Cart from "./components/Cart";
+import SearchResults from "./components/SearchResults";
 
 function App() {
   const [products, setProducts] = useState([]);
   const usuario = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     axios
@@ -30,15 +32,30 @@ function App() {
       .then((response) => setProducts(response.data));
   }, []);
 
+  const isSearchResultsPage = location.pathname === "/search-results";
+
   return (
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Grid items={products} />} />
+        <Route
+          path="/"
+          element={
+            <Grid
+              items={products}
+              title={
+                isSearchResultsPage
+                  ? "Resultados de la búsqueda"
+                  : "Todos nuestros productos"
+              }
+            />
+          }
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products/:id" element={<Content />} />
+        <Route path="/search-results" element={<SearchResults />} />
       </Routes>
     </div>
   );
