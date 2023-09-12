@@ -24,6 +24,7 @@ function App() {
     axios
       .get("http://localhost:3001/api/users/me", { withCredentials: true })
       .then((user) => {
+        console.log("user.data-->", user.data);
         dispatch(loginUser(user.data.payload));
       })
       .catch((err) => console.error(err));

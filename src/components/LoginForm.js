@@ -23,10 +23,12 @@ const LoginForm = () => {
         email: email,
         password: password,
       })
-      .then(() => {
+      .then((result) => {
+        console.log("result data", result.data);
         navigate("/");
         onSubmitReload();
         alert("Bienvenido!");
+
       })
       .catch((err) => {
         console.log(err);

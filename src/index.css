@@ -61,3 +61,12 @@ code {
   align-items: center;
   text-align: center;
 }
+
+.table-history {
+  margin: 3%;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
