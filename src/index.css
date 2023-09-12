@@ -63,3 +63,17 @@ code {
   align-items: center;
   text-align: center;
 }
+
+.contenedor{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.contenedor-for-pay{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+}
