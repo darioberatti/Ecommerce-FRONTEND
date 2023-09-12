@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Content from "./components/Content";
 import Cart from "./components/Cart";
 import SearchResults from "./components/SearchResults";
+import History from "./components/History";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -56,6 +57,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/products/:id" element={<Content />} />
         <Route path="/search-results" element={<SearchResults />} />
+        <Route path="/history" element={<History />} />
       </Routes>
     </div>
   );
