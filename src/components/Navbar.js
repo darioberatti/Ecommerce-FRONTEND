@@ -26,6 +26,10 @@ const Navbar = ({ categories }) => {
     });
   };
 
+  
+
+
+
   console.log("categories navbar -->", categories);
 
   return (
@@ -88,26 +92,6 @@ const Navbar = ({ categories }) => {
                   <p>No hay categorias</p>
                 </li>
               )}
-              {/* <li>
-                <Link to={"/camisetas"}>
-                  <button className="dropdown-item">Camisetas</button>
-                </Link>
-              </li>
-              <li>
-                <Link to={"/shorts"}>
-                  <button className="dropdown-item">Shorts</button>
-                </Link>
-              </li>
-              <li>
-                <Link to={"/buzos"}>
-                  <button className="dropdown-item">Buzos</button>
-                </Link>
-              </li>
-              <li>
-                <Link to={"/Pantalones"}>
-                  <button className="dropdown-item">Pantalones</button>
-                </Link>
-              </li> */}
             </ul>
           </div>
         </form>
@@ -145,6 +129,11 @@ const Navbar = ({ categories }) => {
                       <button className="dropdown-item">Ver tu carrito</button>
                     </Link>
                   </li>
+                  <li>
+                        <Link to={"/history"}>
+                          <button className="dropdown-item">Compras</button>
+                        </Link>
+                      </li>
                   <li>
                     <Link to={"/profile"}>
                       <button className="dropdown-item">Perfil</button>

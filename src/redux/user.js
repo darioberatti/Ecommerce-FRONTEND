@@ -5,7 +5,8 @@ export const loginUser = createAction("LOGIN-USER")
 const initialState = {
   value: {
     email: undefined,
-    name: undefined
+    name: undefined,
+    id: undefined
   }
 }
 

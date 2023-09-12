@@ -12,7 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Content from "./components/Content";
 import Cart from "./components/Cart";
 import SearchResults from "./components/SearchResults";
+import History from "./components/History";
 import Checkout from "./components/Checkout";
+
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -25,6 +27,7 @@ function App() {
     axios
       .get("http://localhost:3001/api/users/me", { withCredentials: true })
       .then((user) => {
+        console.log("user.data-->", user.data);
         dispatch(loginUser(user.data.payload));
       })
       .catch((err) => console.error(err));
@@ -67,6 +70,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/products/:id" element={<Content />} />
         <Route path="/search-results" element={<SearchResults />} />
+        <Route path="/history" element={<History />} />
       </Routes>
     </div>
   );
