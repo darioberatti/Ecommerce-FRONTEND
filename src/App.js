@@ -36,7 +36,7 @@ function App() {
   const isSearchResultsPage = location.pathname === "/search-results";
 
   return (
-    <div>
+    <div className="bodyBackground">
       <Navbar />
       <Routes>
         <Route
