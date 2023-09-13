@@ -17,7 +17,7 @@ const Categories = () => {
       .catch((error) => {
         console.error("Error fetching search results:", error);
       });
-  }, []);
+  }, [urlCategory]);
 
   useEffect(() => {
     if (category) {
