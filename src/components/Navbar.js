@@ -20,9 +20,9 @@ const Navbar = ({ categories }) => {
 
   const handleLogout = () => {
     axios.post("/api/users/logout").then(() => {
-      onSubmitReload();
       navigate("/");
       alert("Usuario deslogueado");
+      onSubmitReload();
     });
   };
 

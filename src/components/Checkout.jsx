@@ -2,10 +2,22 @@ import React, { useEffect, useState } from "react";
 import logo from "../assets/Black White Modern Concept Football Club Logo.png";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { onSubmitReload } from "../utils/utils";
 
 const Checkout = () => {
   const [cartId, setCartId] = useState("");
   const navigate = useNavigate();
+
+  const [deliveryAddress, setDeliveryAddress] = useState("");
+  const [deliveryStreets, setDeliveryStreets] = useState("");
+  const [deliveryZipCode, setDeliveryZipCode] = useState("");
+  const [deliveryCity, setDeliveryCity] = useState("");
+  const [reciever, setReciever] = useState("");
+  const [cardCompany, setCardCompany] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardCode, setCardCode] = useState("");
+  const [cardName, setCardName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   useEffect(() => {
     axios
@@ -14,12 +26,33 @@ const Checkout = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  // const handleCheckout = () => {
+  //   axios.put(`/api/cart/${cartId}`, { completed: true }).then((res) => {
+  //     console.log(res.data);
+  //   });
+  // };
+
   const handleCheckout = () => {
-    axios.put(`/api/cart/${cartId}`, { completed: true }).then((res) => {
-      console.log(res.data);
-      alert("Felicitaciones! Tu compra fue realizada con éxito");
-      navigate("/");
-    });
+    axios
+      .put(`/api/cart/${cartId}`, {
+        deliveryAddress,
+        deliveryStreets,
+        deliveryZipCode,
+        deliveryCity,
+        reciever,
+        cardCompany,
+        cardNumber,
+        cardCode,
+        cardName,
+        phoneNumber,
+        completed: true,
+      })
+      .then(() => {
+        alert("Felicitaciones! Tu compra fue realizada con éxito");
+        navigate("/history");
+        onSubmitReload()
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -35,18 +68,19 @@ const Checkout = () => {
         <p>No compartiremos tu informacion de pago con nadie.</p>
       </div>
       <div class="container-for-pay">
-        <h4>Direccion: </h4>
+        <h4>Lugar de entrega: </h4>
         <form action="" onSubmit={() => handleCheckout()}>
           <div>
             <label for="adress" class="form-label">
               Direccion:{" "}
             </label>
             <input
-              id="adress"
+              id="address"
               type="text"
               class="form-control"
               placeholder="Ej: Rawson 8833"
               required
+              onChange={(e) => setDeliveryAddress(e.target.value)}
             />
             <small>
               Si no completas este campo, tomaremos la direccion que hayas
@@ -62,6 +96,7 @@ const Checkout = () => {
             class="form-control"
             placeholder="Ej: Mariano Moreno y Avellaneda"
             required
+            onChange={(e) => setDeliveryStreets(e.target.value)}
           />
           <label for="postal" class="form-label mt-3">
             Codigo Postal:{" "}
@@ -72,6 +107,7 @@ const Checkout = () => {
             class="form-control"
             placeholder="Ej: 1718"
             required
+            onChange={(e) => setDeliveryZipCode(e.target.value)}
           />
           <label for="ciudad" class="form-label mt-3">
             Ciudad:{" "}
@@ -82,6 +118,7 @@ const Checkout = () => {
             class="form-control"
             placeholder="Ej: Buenos Aires"
             required
+            onChange={(e) => setDeliveryCity(e.target.value)}
           />
           <label for="received" class="form-label mt-3">
             Nombre Completo de la persona que recibe el paquete:{" "}
@@ -92,6 +129,7 @@ const Checkout = () => {
             class="form-control"
             placeholder="Ej: Luis Moreno Garcia"
             required
+            onChange={(e) => setReciever(e.target.value)}
           />
           <hr />
 
@@ -102,6 +140,7 @@ const Checkout = () => {
               type="radio"
               name="flexRadioDefault"
               id="mastercard"
+              onClick={(e) => setCardCompany(e.target.id)}
             />
             <label class="form-check-label" for="mastercard">
               Mastercard
@@ -113,6 +152,7 @@ const Checkout = () => {
               type="radio"
               name="flexRadioDefault"
               id="visa"
+              onClick={(e) => setCardCompany(e.target.id)}
             />
             <label class="form-check-label" for="visa">
               Visa
@@ -124,6 +164,7 @@ const Checkout = () => {
               type="radio"
               name="flexRadioDefault"
               id="maestro"
+              onClick={(e) => setCardCompany(e.target.id)}
             />
             <label class="form-check-label" for="maestro">
               Maestro
@@ -138,7 +179,21 @@ const Checkout = () => {
             class="form-control"
             placeholder="Ej: 9999888877776666"
             required
+            onChange={(e) => setCardNumber(e.target.value)}
           />
+
+          <div class="col-md-3">
+            <label for="inputZip" class="form-label">
+              Codigo de seguridad
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputZip"
+              placeholder="3 dígitos"
+              onChange={(e) => setCardCode(e.target.value)}
+            />
+          </div>
 
           <label for="name-card" class="form-label mt-3">
             Nombre y Apellido (Como figura en la Tarjeta):{" "}
@@ -149,6 +204,7 @@ const Checkout = () => {
             class="form-control"
             placeholder="Ej: JULIAN G. RAMIREZ"
             required
+            onChange={(e) => setCardName(e.target.value)}
           />
 
           <label for="number" class="form-label mt-3">
@@ -160,6 +216,7 @@ const Checkout = () => {
             class="form-control "
             placeholder="Ej: 11 9999 9999"
             required
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
           <hr />
           <div
