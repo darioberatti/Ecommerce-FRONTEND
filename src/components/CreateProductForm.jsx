@@ -136,7 +136,10 @@ const ProductForm = () => {
                   : ""}
               </label>
               {path !== "/create-product" ? (
-                <input
+                key === "urlImg" ? (
+                  <textarea name={key} className="form-control mb-3" placeholder="http://urlimagen/img.jpg,http://urlimagen/img2.jpg" id={key} cols="30" rows="5" onChange={handleInputChange} value={productInfo[key]} required></textarea>
+                ) : (
+                  <input
                   type={
                     key === "price"
                       ? "number"
@@ -150,8 +153,6 @@ const ProductForm = () => {
                   placeholder={`Ej: ${
                     key === "size"
                       ? "XS, S, M, L, XL"
-                      : key === "urlImg"
-                      ? "http://urlimagen/img.jpg"
                       : key === "price"
                       ? "2500"
                       : key === "name"
@@ -171,8 +172,12 @@ const ProductForm = () => {
                   value={productInfo[key]}
                   onChange={handleInputChange}
                 />
+                )
               ) : (
-                <input
+                key === "urlImg" ? (
+                  <textarea name={key} className="form-control mb-3" placeholder="http://urlimagen/img.jpg,http://urlimagen/img2.jpg" id={key} cols="30" rows="5" onChange={handleInputChange} value={productInfo[key]} required></textarea>
+                ) : (
+                  <input
                   type={
                     key === "price"
                       ? "number"
@@ -186,8 +191,6 @@ const ProductForm = () => {
                   placeholder={`Ej: ${
                     key === "size"
                       ? "XS, S, M, L, XL"
-                      : key === "urlImg"
-                      ? "http://urlimagen/img.jpg"
                       : key === "price"
                       ? "2500"
                       : key === "name"
@@ -208,6 +211,7 @@ const ProductForm = () => {
                   onChange={handleInputChange}
                   required
                 />
+                )
               )}
               {key === "size" ? (
                 <small>
