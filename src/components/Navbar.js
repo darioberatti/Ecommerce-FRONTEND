@@ -26,8 +26,6 @@ const Navbar = ({ categories }) => {
     });
   };
 
-  console.log("categories navbar -->", categories);
-
   return (
     <nav
       className="navbar navbar-expand-lg"
@@ -74,10 +72,10 @@ const Navbar = ({ categories }) => {
             </button>
             <ul className="dropdown-menu" aria-labelledby="categoriasDropdown">
               {categories[0] ? (
-                categories?.map((category) => {
+                categories?.map((category, i) => {
                   return (
-                    <li>
-                      <Link to={`/${category.type.toLowerCase()}`}>
+                    <li key={i}>
+                      <Link to={`/categories/${category.type.toLowerCase()}`}>
                         <button className="dropdown-item">
                           {category.type}
                         </button>
