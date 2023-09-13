@@ -90,3 +90,13 @@ code {
   flex-basis: 50%;
 }
 
+.container-buttons{
+  display: flex;
+  padding: 2px;
+  gap: 4px;
+}
+
+.container-buttons button{
+  flex-grow: 1;
+  gap: 1px;
+}

@@ -21,7 +21,8 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const [categories, setCategories] = useState([]);
-
+  
+  console.log(location.pathname)
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/users/me", { withCredentials: true })
@@ -33,7 +34,7 @@ function App() {
     axios
       .get("http://localhost:3001/api/products")
       .then((response) => setProducts(response.data));
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     axios

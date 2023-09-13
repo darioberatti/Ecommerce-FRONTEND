@@ -9,12 +9,12 @@ const initialProductInfo = {
   urlImg: "",
   name: "",
   description: "",
-  sizes: "",
-  price: "",
+  size: "",
   country: "",
   team: "",
   year: "",
   categoryId: "",
+  price: "",
 };
 
 const ProductForm = () => {
@@ -29,7 +29,6 @@ const ProductForm = () => {
   useEffect(() => {
     if (path === "/edit-product") {
       axios.get(`/api/products/${id}`).then((res) => {
-        setEditToProduct(res.data);
         setProductInfo(res.data);
       });
     } else {
@@ -38,20 +37,21 @@ const ProductForm = () => {
   }, [path, id]);
 
   const sizesArray = (value) => {
-    const size = value.split(",");
-
-    return size;
+    const sizes = value.split(",");
+    const sizesToUppercase = sizes.map((el) => el.toUpperCase().trim());
+    return sizesToUppercase;
   };
 
   const urlsArray = (value) => {
     const images = value.split(",");
-    return images;
+    const imagesTrimmed = images.map((el) => el.trim());
+    return imagesTrimmed;
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "sizes") {
+    if (name === "size") {
       const sizesArrayValue = sizesArray(value);
       setProductInfo((prevProductInfo) => ({
         ...prevProductInfo,
@@ -78,8 +78,10 @@ const ProductForm = () => {
         .put(`/api/products/admin/${id}`, productInfo)
         .then((res) => {
           alert("Cambios hechos correctamente");
-          navigate("/");
-          onSubmitReload();
+          console.log(res.data);
+          navigate("/")
+          /*            onSubmitReload();
+           */
         })
         .catch((err) => {
           console.error(err);
@@ -88,10 +90,13 @@ const ProductForm = () => {
     } else {
       axios
         .post("/api/products/create", productInfo)
-        .then(() => {
+        .then((res) => {
+          setEditToProduct(res.data);
           alert("Producto creado");
-          navigate("/");
-          onSubmitReload();
+                    navigate("/");
+          
+          /*          onSubmitReload();
+           */
         })
         .catch((err) => {
           console.error(err);
@@ -99,7 +104,7 @@ const ProductForm = () => {
         });
     }
   };
-
+  
   return (
     <div
       className="create-product-container"
@@ -110,7 +115,7 @@ const ProductForm = () => {
           {Object.keys(initialProductInfo).map((key, i) => (
             <div key={i}>
               <label for={key} className="form-label mt-2">
-                {key === "sizes"
+                {key === "size"
                   ? "Talles:"
                   : key === "urlImg"
                   ? "Url de Imagenes:"
@@ -132,12 +137,18 @@ const ProductForm = () => {
               </label>
               {path !== "/create-product" ? (
                 <input
-                  type={key === "price" ? "number" : "text"}
+                  type={
+                    key === "price"
+                      ? "number"
+                      : key === "year"
+                      ? "number"
+                      : "text"
+                  }
                   id={key}
                   name={key}
                   className="form-control mb-3"
                   placeholder={`Ej: ${
-                    key === "sizes"
+                    key === "size"
                       ? "XS, S, M, L, XL"
                       : key === "urlImg"
                       ? "http://urlimagen/img.jpg"
@@ -162,12 +173,18 @@ const ProductForm = () => {
                 />
               ) : (
                 <input
-                  type={key === "price" ? "number" : "text"}
+                  type={
+                    key === "price"
+                      ? "number"
+                      : key === "year"
+                      ? "number"
+                      : "text"
+                  }
                   id={key}
                   name={key}
                   className="form-control mb-3"
                   placeholder={`Ej: ${
-                    key === "sizes"
+                    key === "size"
                       ? "XS, S, M, L, XL"
                       : key === "urlImg"
                       ? "http://urlimagen/img.jpg"
@@ -192,7 +209,7 @@ const ProductForm = () => {
                   required
                 />
               )}
-              {key === "sizes" ? (
+              {key === "size" ? (
                 <small>
                   <strong>SEPARAR CADA TALLE CON COMAS</strong>
                 </small>
@@ -213,7 +230,7 @@ const ProductForm = () => {
         </form>
       </div>
       <div>
-        <Card item={path === "/edit-product" ? productInfo : productInfo} />
+        <Card item={productInfo} />
       </div>
     </div>
   );

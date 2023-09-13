@@ -25,6 +25,17 @@ const Content = () => {
       .catch(() => navigate("/login"));
   };
 
+  const handleDeleteProduct = () => {
+    axios.delete(`/api/products/admin/${id}`)
+      .then(()=>{
+        alert("Producto eliminado correctamente")
+        navigate("/")
+      }).catch((err)=>{
+        console.error(err)
+        alert("Ha ocurrido un problema. El producto no pudo ser eliminado.\nIntentelo de nuevo.")
+      })
+  }
+
   return (
     <div style={{}}>
       <div style={{ margin: "2% 8%" }}>
@@ -123,9 +134,22 @@ const Content = () => {
                 </p>
                 <div class="d-grid gap-2">
                   {usuario.isAdmin ? (
-                      <button class="btn btn-warning" type="button" onClick={()=> navigate(`/edit-product/${id}`)}>
+                    <div className="container-buttons">
+                      <button
+                        class="btn btn-danger"
+                        type="button"
+                        onClick={handleDeleteProduct}
+                      >
+                        Eliminar Producto
+                      </button>
+                      <button
+                        class="btn btn-warning"
+                        type="button"
+                        onClick={() => navigate(`/edit-product/${id}`)}
+                      >
                         Editar Producto
                       </button>
+                    </div>
                   ) : (
                     ""
                   )}
