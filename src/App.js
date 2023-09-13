@@ -12,8 +12,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Content from "./components/Content";
 import Cart from "./components/Cart";
 import SearchResults from "./components/SearchResults";
+import History from "./components/History";
 import Checkout from "./components/Checkout";
 import ProductForm from "./components/CreateProductForm";
+import EditCategories from "./components/EditCategories";
+import Categories from "./components/Categories";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -27,6 +30,7 @@ function App() {
     axios
       .get("http://localhost:3001/api/users/me", { withCredentials: true })
       .then((user) => {
+        console.log("user.data-->", user.data);
         dispatch(loginUser(user.data.payload));
       })
       .catch((err) => console.error(err));
@@ -43,7 +47,6 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log("categories-->", categories);
   const isSearchResultsPage = location.pathname === "/search-results";
 
   return (
@@ -71,6 +74,10 @@ function App() {
         <Route path="/create-product" element={<ProductForm />} />
         <Route path="/edit-product/:id" element={<ProductForm />} />
         <Route path="/search-results" element={<SearchResults />} />
+        <Route path="/categories/:type" element={<Categories />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/edit-categories" element={<EditCategories categories={categories}/>} />
+
       </Routes>
     </div>
   );
