@@ -14,10 +14,9 @@ import Cart from "./components/Cart";
 import SearchResults from "./components/SearchResults";
 import History from "./components/History";
 import Checkout from "./components/Checkout";
+import ProductForm from "./components/CreateProductForm";
 import EditCategories from "./components/EditCategories";
 import Categories from "./components/Categories";
-
-
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -25,7 +24,8 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const [categories, setCategories] = useState([]);
-
+  
+  console.log(location.pathname)
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/users/me", { withCredentials: true })
@@ -38,7 +38,7 @@ function App() {
     axios
       .get("http://localhost:3001/api/products")
       .then((response) => setProducts(response.data));
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     axios
@@ -71,6 +71,8 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/products/:id" element={<Content />} />
+        <Route path="/create-product" element={<ProductForm />} />
+        <Route path="/edit-product/:id" element={<ProductForm />} />
         <Route path="/search-results" element={<SearchResults />} />
         <Route path="/categories/:type" element={<Categories />} />
         <Route path="/history" element={<History />} />

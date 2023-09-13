@@ -12,12 +12,10 @@ code {
     monospace;
 }
 
-.span {
-  margin-left: 40%;
-  font-size: 20px;
-  @media (max-width: 380px) {
-    margin-left: 20%;
-  }
+.span{
+  /* margin-left: 32%; */
+  font-size: 23px;
+  /* @media (max-width: 380px){ */
 }
 
 .titles {
@@ -80,3 +78,29 @@ code {
   flex-direction: column;
   flex-basis: 50%;
 }
+
+.create-product-container{
+  display: flex;
+  flex-direction: row;
+  padding: 50px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.contenedor-crear-producto{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+}
+
+.container-buttons{
+  display: flex;
+  padding: 2px;
+  gap: 4px;
+}
+
+.container-buttons button{
+  flex-grow: 1;
+  gap: 1px;
+}
+

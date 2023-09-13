@@ -5,13 +5,11 @@ import axios from "axios";
 import { sizeSetter } from "../utils/utils";
 import { addToCart } from "../redux/cart";
 
-
 const Content = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const usuario = useSelector((state) => state.user.value);
-  console.log(usuario)
 
   useEffect(() => {
     axios
@@ -24,8 +22,19 @@ const Content = () => {
     axios
       .post(`/api/cart/${product.id}`)
       .then((res) => alert(res.data.message))
-      .catch(()=> navigate("/login"))
+      .catch(() => navigate("/login"));
   };
+
+  const handleDeleteProduct = () => {
+    axios.delete(`/api/products/admin/${id}`)
+      .then(()=>{
+        alert("Producto eliminado correctamente")
+        navigate("/")
+      }).catch((err)=>{
+        console.error(err)
+        alert("Ha ocurrido un problema. El producto no pudo ser eliminado.\nIntentelo de nuevo.")
+      })
+  }
 
   return (
     <div style={{}}>
@@ -124,6 +133,26 @@ const Content = () => {
                   {/* Talles disponibles: {sizeSetter(product.size)} */}
                 </p>
                 <div class="d-grid gap-2">
+                  {usuario.isAdmin ? (
+                    <div className="container-buttons">
+                      <button
+                        class="btn btn-danger"
+                        type="button"
+                        onClick={handleDeleteProduct}
+                      >
+                        Eliminar Producto
+                      </button>
+                      <button
+                        class="btn btn-warning"
+                        type="button"
+                        onClick={() => navigate(`/edit-product/${id}`)}
+                      >
+                        Editar Producto
+                      </button>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                   <button
                     class="btn btn-primary"
                     type="button"
