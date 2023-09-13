@@ -79,7 +79,7 @@ const ProductForm = () => {
         .then((res) => {
           alert("Cambios hechos correctamente");
           console.log(res.data);
-          navigate("/")
+          navigate("/");
           /*            onSubmitReload();
            */
         })
@@ -93,8 +93,8 @@ const ProductForm = () => {
         .then((res) => {
           setEditToProduct(res.data);
           alert("Producto creado");
-                    navigate("/");
-          
+          navigate("/");
+
           /*          onSubmitReload();
            */
         })
@@ -104,7 +104,7 @@ const ProductForm = () => {
         });
     }
   };
-  
+
   return (
     <div
       className="create-product-container"
@@ -135,49 +135,21 @@ const ProductForm = () => {
                   ? "ID de la categoria:"
                   : ""}
               </label>
-              {path !== "/create-product" ? (
-                key === "urlImg" ? (
-                  <textarea name={key} className="form-control mb-3" placeholder="http://urlimagen/img.jpg,http://urlimagen/img2.jpg" id={key} cols="30" rows="5" onChange={handleInputChange} value={productInfo[key]} required></textarea>
-                ) : (
-                  <input
-                  type={
-                    key === "price"
-                      ? "number"
-                      : key === "year"
-                      ? "number"
-                      : "text"
-                  }
-                  id={key}
+
+              {key === "urlImg" ? (
+                <textarea
                   name={key}
                   className="form-control mb-3"
-                  placeholder={`Ej: ${
-                    key === "size"
-                      ? "XS, S, M, L, XL"
-                      : key === "price"
-                      ? "2500"
-                      : key === "name"
-                      ? "Camiseta de la Seleccion Brasilera"
-                      : key === "description"
-                      ? "La camiseta que se uso para el mundial 2002, sin duda una de las mas iconicas"
-                      : key === "team"
-                      ? "Seleccion Brasilera de Futbol"
-                      : key === "country"
-                      ? "Brasil"
-                      : key === "year"
-                      ? "2002"
-                      : key === "categoryId"
-                      ? "2"
-                      : ""
-                  }`}
-                  value={productInfo[key]}
+                  placeholder="http://urlimagen/img.jpg,http://urlimagen/img2.jpg"
+                  id={key}
+                  cols="30"
+                  rows="5"
                   onChange={handleInputChange}
-                />
-                )
+                  value={productInfo[key]}
+                  required
+                ></textarea>
               ) : (
-                key === "urlImg" ? (
-                  <textarea name={key} className="form-control mb-3" placeholder="http://urlimagen/img.jpg,http://urlimagen/img2.jpg" id={key} cols="30" rows="5" onChange={handleInputChange} value={productInfo[key]} required></textarea>
-                ) : (
-                  <input
+                <input
                   type={
                     key === "price"
                       ? "number"
@@ -211,7 +183,6 @@ const ProductForm = () => {
                   onChange={handleInputChange}
                   required
                 />
-                )
               )}
               {key === "size" ? (
                 <small>
