@@ -18,6 +18,8 @@ const Content = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  console.log(product)
+
   const handleAddToCart = () => {
     axios
       .post(`/api/cart/${product.id}`)
