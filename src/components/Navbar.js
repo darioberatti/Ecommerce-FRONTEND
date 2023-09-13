@@ -26,10 +26,6 @@ const Navbar = ({ categories }) => {
     });
   };
 
-  
-
-
-
   console.log("categories navbar -->", categories);
 
   return (
@@ -72,6 +68,7 @@ const Navbar = ({ categories }) => {
               id="categoriasDropdown"
               data-bs-toggle="dropdown"
               aria-expanded="false"
+              style={{marginLeft:"5%"}}
             >
               Categorías
             </button>
@@ -80,17 +77,34 @@ const Navbar = ({ categories }) => {
                 categories?.map((category) => {
                   return (
                     <li>
-                    <Link to={`/${category.type.toLowerCase()}`}>
-                      <button className="dropdown-item">{category.type}</button>
-                    </Link>
-                  </li>
-                  )
-                  
+                      <Link to={`/${category.type.toLowerCase()}`}>
+                        <button className="dropdown-item">
+                          {category.type}
+                        </button>
+                      </Link>
+                    </li>
+                  );
                 })
               ) : (
                 <li>
                   <p>No hay categorias</p>
                 </li>
+              )}
+              {usuario.isAdmin ? (
+                <>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <Link to={"/edit-categories"}>
+                      <button className="dropdown-item">
+                        Editar Categorias
+                      </button>
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <></>
               )}
             </ul>
           </div>
@@ -130,10 +144,10 @@ const Navbar = ({ categories }) => {
                     </Link>
                   </li>
                   <li>
-                        <Link to={"/history"}>
-                          <button className="dropdown-item">Compras</button>
-                        </Link>
-                      </li>
+                    <Link to={"/history"}>
+                      <button className="dropdown-item">Compras</button>
+                    </Link>
+                  </li>
                   <li>
                     <Link to={"/profile"}>
                       <button className="dropdown-item">Perfil</button>

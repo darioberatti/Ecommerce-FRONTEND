@@ -14,6 +14,7 @@ import Cart from "./components/Cart";
 import SearchResults from "./components/SearchResults";
 import History from "./components/History";
 import Checkout from "./components/Checkout";
+import EditCategories from "./components/EditCategories";
 
 
 function App() {
@@ -71,6 +72,8 @@ function App() {
         <Route path="/products/:id" element={<Content />} />
         <Route path="/search-results" element={<SearchResults />} />
         <Route path="/history" element={<History />} />
+        <Route path="/edit-categories" element={<EditCategories categories={categories}/>} />
+
       </Routes>
     </div>
   );

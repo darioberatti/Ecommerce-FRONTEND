@@ -6,7 +6,8 @@ const initialState = {
   value: {
     email: undefined,
     name: undefined,
-    id: undefined
+    id: undefined,
+    isAdmin: undefined
   }
 }
 
