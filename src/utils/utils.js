@@ -17,3 +17,11 @@ export const dateSetter = (date) => {
   const [ year, month, day ] = dayAndTime[0].split("-");
   return `${day}-${month}-${year}`;
 };
+
+export const containsNumbers = (str) =>{
+  return /\d/.test(str);
+}
+
+export const containsLetters = (str) =>{
+  return (!/^[0-9]+$/.test(str))
+}
