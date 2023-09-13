@@ -1,72 +1,25 @@
-# Ecommerce-FRONTEND
+# RETRO FUTBOL CLUB (FRONT-END)
 
-# Getting Started with Create React App
+## Antes de empezar..
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##### te sugerimos ir y seguir los pasos del archivo "README.md" del repositorio que pertenece al back-end de este proyecto: <a href="https://github.com/martinferrando2005/Ecommerce-BACKEND.git">Ecommerce-BACKEND</a>
 
-## Available Scripts
+## Descripcion
+<p> Retro Futbol Club es un E-commerce el cual surge como un proyecto propuesto por <a href="https://www.plataforma5.la/" target="blank">Plataforma 5 - Coding Bootcamp.</a> 
+Nos dedicamos a la venta de indumentaria deportiva antigua (precisamente Futbol) de los jugadores mas exitosos en el campo.
+</p>
 
-In the project directory, you can run:
+## Inicializacion
 
-### `npm start`
+- Primero clonamos este repositorio.
+- Abrimos una nueva terminal, nos paramos sobre la carpeta del repositorio y ejecutamos el comando  "code ." para abrirlo en **Visual Studio Code** o tu editor de texto de preferencia. 
+- Una vez hecho esto, volvemos a la terminal (siempre parados sobre la carpeta del repositorio) y ejecutamos los siguientes comandos:  
+	- "npm i" - Para instalar las dependencias.
+	- "npm start" - Para levantar el front-end de nuestra aplicacion.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Integrantes
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```javascript 
+const integrantes = [ "Mateo Navarro", " Santiago Moran", " Dario Beratti", " Martin Ferrando"]
+integrantes.join(",") // "Mateo Navarro, Santiago Moran, Dario Beratti, Martin Ferrando"
+```
