@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { dateSetter } from "../utils/utils";
+import HistoryItem from "../commons/HistoryItem";
 
 const History = () => {
   const [history, setHistory] = useState([]);
@@ -10,24 +11,12 @@ const History = () => {
 
   useEffect(() => {
     axios
-      .get(`/api/cart/${user.id}/history`)
+      .get(`/api/users/${user.id}/history`)
       .then((response) => setHistory(response.data))
       .catch((err) => console.log(err));
   }, [user]);
 
-  const productGetter = (id) => {
-    axios
-      .get(`/api/cart/${id}`)
-      .then((result) => result.data)
-      .then((data) => {
-        console.log("productos-->", data);
-
-        // data.map(item=>{
-        //  return <li> {item.name} </li>
-        // })
-      })
-      .catch((err) => console.log(err));
-  };
+  
 
   console.log("usuario-->", user);
   console.log("history-->", history);
@@ -49,16 +38,7 @@ const History = () => {
         </thead>
         <tbody>
           {history?.map((cart, i) => {
-            return (
-              <tr>
-                <th scope="row">{i + 1}</th>
-                <td>{dateSetter(cart.createdAt)}</td>
-                <td>
-                  <ul>{productGetter(cart.id)}</ul>
-                </td>
-                <td>${cart.total}</td>
-              </tr>
-            );
+            return <HistoryItem cart={cart} i={i}/>;
           })}
           {/* <tr>
             <th scope="row">1</th>
