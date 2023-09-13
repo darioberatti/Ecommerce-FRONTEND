@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { containsNumbers } from "../utils/utils";
 
 function Register() {
   const [name, setName] = useState("");
@@ -13,9 +14,7 @@ function Register() {
 
   const navigate = useNavigate();
 
-  function containsNumbers(str) {
-    return /\d/.test(str);
-  }
+  
 
   const validateForm = (e) => {
     e.preventDefault();
@@ -43,15 +42,6 @@ function Register() {
       alert("La contraseña debe contener al menos 6 caracteres y al menos 1 numero");
       return;
     }
-
-
-    // Pedido axios para encontrar un usuario existente con el mismo email
-    // axios.get("/api/users", {
-    //   params:{
-    //     email: email
-    //   }
-    // })
-    // .then(response=>console.log("USUARIO REPETIDO-->", response.data))
 
     handleSubmit();
   };

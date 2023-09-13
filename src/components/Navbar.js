@@ -66,7 +66,7 @@ const Navbar = ({ categories }) => {
               id="categoriasDropdown"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              style={{marginLeft:"5%"}}
+              style={{ marginLeft: "5%" }}
             >
               Categorías
             </button>
@@ -136,19 +136,6 @@ const Navbar = ({ categories }) => {
                   <strong>{usuario.name}</strong>
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end">
-                {
-                 usuario.isAdmin ? (
-                          <li>
-                        <Link to={"/create-product"}>
-                          <button
-                            className="dropdown-item"
-                          >
-                            Crear nuevo producto
-                          </button>
-                        </Link>
-                      </li>
-                        ) : ""
-                      }
                   <li>
                     <Link to={"/cart"}>
                       <button className="dropdown-item">Ver tu carrito</button>
@@ -164,6 +151,20 @@ const Navbar = ({ categories }) => {
                       <button className="dropdown-item">Perfil</button>
                     </Link>
                   </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  {usuario.isAdmin ? (
+                    <li>
+                      <Link to={"/create-product"}>
+                        <button className="dropdown-item">
+                          Crear Producto
+                        </button>
+                      </Link>
+                    </li>
+                  ) : (
+                    ""
+                  )}
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
