@@ -68,6 +68,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/products/:id" element={<Content />} />
         <Route path="/create-product" element={<ProductForm />} />
+        <Route path="/edit-product/:id" element={<ProductForm />} />
         <Route path="/search-results" element={<SearchResults />} />
       </Routes>
     </div>

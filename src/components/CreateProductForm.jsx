@@ -1,188 +1,219 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../index.css";
 import Card from "../commons/Card";
 import axios from "axios";
+import { useLocation, useNavigate, useParams } from "react-router";
+import { onSubmitReload } from "../utils/utils";
 
+const initialProductInfo = {
+  urlImg: "",
+  name: "",
+  description: "",
+  sizes: "",
+  price: "",
+  country: "",
+  team: "",
+  year: "",
+  categoryId: "",
+};
 
 const ProductForm = () => {
-  const [urlImg, setUrlImg] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [sizes, setSizes] = useState("");
-  const [price, setPrice] = useState("");
-  const [country, setCountry] = useState("");
-  const [team, setTeam] = useState("");
-  const [year, setYear] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+  const navigate = useNavigate();
+  const [productInfo, setProductInfo] = useState(initialProductInfo);
+  // useParams
+  const { id } = useParams();
+  let { pathname } = useLocation();
+  const path = "/" + pathname.split("/")[1];
+  const [productToEdit, setEditToProduct] = useState({});
 
+  useEffect(() => {
+    if (path === "/edit-product") {
+      axios.get(`/api/products/${id}`).then((res) => {
+        setEditToProduct(res.data);
+        setProductInfo(res.data);
+      });
+    } else {
+      setProductInfo(initialProductInfo);
+    }
+  }, [path, id]);
 
-  const sizesArray = () => {
-    const size = sizes.split(",");
-    const allSizes = size.map((el) => {
-      return el.replace(el.toLowerCase(), el.toUpperCase());
-    });
-    return allSizes
+  const sizesArray = (value) => {
+    const size = value.split(",");
+
+    return size;
   };
 
-  const urlsArray = () => {
-    const images = urlImg.split(",");
+  const urlsArray = (value) => {
+    const images = value.split(",");
     return images;
   };
-  
-  const productInfo = {
-    urlImg: urlsArray(),
-    name,
-    description,
-    size: sizesArray(),
-    price,
-    country,
-    team,
-    year,
-    categoryId
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "sizes") {
+      const sizesArrayValue = sizesArray(value);
+      setProductInfo((prevProductInfo) => ({
+        ...prevProductInfo,
+        [name]: sizesArrayValue,
+      }));
+    } else if (name === "urlImg") {
+      const urlsArrayValue = urlsArray(value);
+      setProductInfo((prevProductInfo) => ({
+        ...prevProductInfo,
+        [name]: urlsArrayValue,
+      }));
+    } else {
+      setProductInfo((prevProductInfo) => ({
+        ...prevProductInfo,
+        [name]: value,
+      }));
+    }
   };
 
-  const onSubmitCreate = (e) => {
-    e.preventDefault()
-    axios.post("/api/products/create", productInfo)
-      .then(()=> {
-        alert("Producto creado")
-      }).catch((err)=>{
-        console.error(err)
-        alert("Ha ocurrido un problema. No se pudo crear el producto")
-      })
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (path === "/edit-product") {
+      axios
+        .put(`/api/products/admin/${id}`, productInfo)
+        .then((res) => {
+          alert("Cambios hechos correctamente");
+          navigate("/");
+          onSubmitReload();
+        })
+        .catch((err) => {
+          console.error(err);
+          alert("Algo salió mal, intentalo de nuevo");
+        });
+    } else {
+      axios
+        .post("/api/products/create", productInfo)
+        .then(() => {
+          alert("Producto creado");
+          navigate("/");
+          onSubmitReload();
+        })
+        .catch((err) => {
+          console.error(err);
+          alert("Ha ocurrido un problema. No se pudo crear el producto");
+        });
+    }
+  };
 
   return (
     <div
       className="create-product-container"
       style={{ border: "1px solid black" }}
     >
-      <div class="contenedor-crear-producto">
-        <form onSubmit={onSubmitCreate}>
-          <div>
-            <label for="urlImg" class="form-label mt-3">
-              URL de la IMAGEN:
-            </label>
-            <input
-              type="text"
-              id="urlImg"
-              class="form-control"
-              placeholder="Ej: http://url_img/img.jpg"
-              onChange={(e) => setUrlImg(e.target.value)}
-            />
-            <small class="mb-3">
-              <strong>SEPARAR CON COMAS CADA URL</strong>
-            </small>
-          </div>
-
-          <label for="title" class="form-label mt-2">
-            Titulo:
-          </label>
-          <input
-            type="text"
-            id="title"
-            class="form-control mb-3"
-            placeholder="Ej: Camiseta de River del 86"
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-
-          <label for="description" class="form-label mt-2">
-            Descripcion:
-          </label>
-          <input
-            type="text"
-            id="description"
-            class="form-control mb-3"
-            placeholder="Ej: Camiseta que uso ... en el año 1986 para la copa ..."
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-
-          <label for="country" class="form-label mt-2">
-            Pais:
-          </label>
-          <input
-            type="text"
-            id="country"
-            class="form-control mb-3"
-            placeholder="Ej: Argentina"
-            onChange={(e) => setCountry(e.target.value)}
-            required
-          />
-
-          <label for="team" class="form-label mt-2">
-            Equipo:
-          </label>
-          <input
-            type="text"
-            id="team"
-            class="form-control mb-3"
-            placeholder="Ej: Argentina"
-            onChange={(e) => setTeam(e.target.value)}
-            required
-          />
-
-          <label for="year" class="form-label mt-2">
-            Año:
-          </label>
-          <input
-            type="text"
-            id="year"
-            class="form-control mb-3"
-            placeholder="Ej: Argentina"
-            onChange={(e) => setYear(e.target.value)}
-            required
-          />
-
-          <label for="categoryId" class="form-label mt-2">
-            Id de la Categoria:
-          </label>
-          <input
-            type="text"
-            id="categoryId"
-            class="form-control mb-3"
-            placeholder="Ej: Argentina"
-            onChange={(e) => setCategoryId(e.target.value)}
-            required
-          />
-
-          <div>
-            <label for="sizes" class="form-label mt-2">
-              Talles:
-            </label>
-            <input
-              type="text"
-              id="sizes"
-              class="form-control"
-              placeholder="Ej: XS, S, M, L, XL"
-              onChange={(e) => setSizes(e.target.value)}
-              required
-            />
-            <small class="mb-3">
-              <strong>SEPARAR CON COMAS CADA TALLE</strong>
-            </small>
-          </div>
-
-          <label for="price" class="form-label mt-2">
-            Precio:
-          </label>
-          <input
-            type="number"
-            id="price"
-            class="form-control mb-3"
-            placeholder="Ej: 200"
-            onChange={(e) => setPrice(e.target.value)}
-          />
-
-          <button type="submit" class="btn btn-dark mb-5">
-           Agregar Producto
+      <div className="contenedor-crear-producto">
+        <form onSubmit={handleSubmit}>
+          {Object.keys(initialProductInfo).map((key, i) => (
+            <div key={i}>
+              <label for={key} className="form-label mt-2">
+                {key === "sizes"
+                  ? "Talles:"
+                  : key === "urlImg"
+                  ? "Url de Imagenes:"
+                  : key === "price"
+                  ? "Precio:"
+                  : key === "name"
+                  ? "Titulo:"
+                  : key === "description"
+                  ? "Descripcion:"
+                  : key === "team"
+                  ? "Equipo:"
+                  : key === "country"
+                  ? "Pais:"
+                  : key === "year"
+                  ? "Año:"
+                  : key === "categoryId"
+                  ? "ID de la categoria:"
+                  : ""}
+              </label>
+              {path !== "/create-product" ? (
+                <input
+                  type={key === "price" ? "number" : "text"}
+                  id={key}
+                  name={key}
+                  className="form-control mb-3"
+                  placeholder={`Ej: ${
+                    key === "sizes"
+                      ? "XS, S, M, L, XL"
+                      : key === "urlImg"
+                      ? "http://urlimagen/img.jpg"
+                      : key === "price"
+                      ? "2500"
+                      : key === "name"
+                      ? "Camiseta de la Seleccion Brasilera"
+                      : key === "description"
+                      ? "La camiseta que se uso para el mundial 2002, sin duda una de las mas iconicas"
+                      : key === "team"
+                      ? "Seleccion Brasilera de Futbol"
+                      : key === "country"
+                      ? "Brasil"
+                      : key === "year"
+                      ? "2002"
+                      : key === "categoryId"
+                      ? "2"
+                      : ""
+                  }`}
+                  value={productInfo[key]}
+                  onChange={handleInputChange}
+                />
+              ) : (
+                <input
+                  type={key === "price" ? "number" : "text"}
+                  id={key}
+                  name={key}
+                  className="form-control mb-3"
+                  placeholder={`Ej: ${
+                    key === "sizes"
+                      ? "XS, S, M, L, XL"
+                      : key === "urlImg"
+                      ? "http://urlimagen/img.jpg"
+                      : key === "price"
+                      ? "2500"
+                      : key === "name"
+                      ? "Camiseta de la Seleccion Brasilera"
+                      : key === "description"
+                      ? "La camiseta que se uso para el mundial 2002, sin duda una de las mas iconicas"
+                      : key === "team"
+                      ? "Seleccion Brasilera de Futbol"
+                      : key === "country"
+                      ? "Brasil"
+                      : key === "year"
+                      ? "2002"
+                      : key === "categoryId"
+                      ? "2"
+                      : ""
+                  }`}
+                  value={productInfo[key]}
+                  onChange={handleInputChange}
+                  required
+                />
+              )}
+              {key === "sizes" ? (
+                <small>
+                  <strong>SEPARAR CADA TALLE CON COMAS</strong>
+                </small>
+              ) : key === "urlImg" ? (
+                <small>
+                  <strong>SEPARAR CADA URL CON COMAS</strong>
+                </small>
+              ) : (
+                ""
+              )}
+            </div>
+          ))}
+          <button type="submit" className="btn btn-dark mb-5">
+            {path === "/edit-product"
+              ? "Actualizar Producto"
+              : "Agregar producto"}
           </button>
         </form>
       </div>
-
       <div>
-        <Card item={productInfo} />
+        <Card item={path === "/edit-product" ? productInfo : productInfo} />
       </div>
     </div>
   );

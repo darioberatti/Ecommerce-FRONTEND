@@ -49,7 +49,7 @@ const Cart = () => {
           <div style={{ borderBottom: "1px solid white" }}>
             <div class="list-group-item list-group-item-action active">
               <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{item.name}</h5>
+                <h5 class="mb-1">{item.name.length > 25 ? item.name.slice(0,25) + "..." : item.name}</h5>
                 <p>${item.price}</p>
                 <button
                   type="button"
@@ -63,7 +63,7 @@ const Cart = () => {
                   ➕
                 </button>
               </div>
-              <p class="mb-1">{item.description}</p>
+              <p class="mb-1">{item.description.length > 50 ? item.description.slice(0,50) + "..." : item.description}</p>
               <small>Cantidad: {item.cart_products.quantity}</small>
               {/* <Link to={`/products/${item.id}`}> */}
               <div

@@ -5,13 +5,11 @@ import axios from "axios";
 import { sizeSetter } from "../utils/utils";
 import { addToCart } from "../redux/cart";
 
-
 const Content = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const usuario = useSelector((state) => state.user.value);
-  console.log(usuario)
 
   useEffect(() => {
     axios
@@ -24,7 +22,7 @@ const Content = () => {
     axios
       .post(`/api/cart/${product.id}`)
       .then((res) => alert(res.data.message))
-      .catch(()=> navigate("/login"))
+      .catch(() => navigate("/login"));
   };
 
   return (
@@ -124,6 +122,13 @@ const Content = () => {
                   {/* Talles disponibles: {sizeSetter(product.size)} */}
                 </p>
                 <div class="d-grid gap-2">
+                  {usuario.isAdmin ? (
+                      <button class="btn btn-warning" type="button" onClick={()=> navigate(`/edit-product/${id}`)}>
+                        Editar Producto
+                      </button>
+                  ) : (
+                    ""
+                  )}
                   <button
                     class="btn btn-primary"
                     type="button"
