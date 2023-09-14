@@ -74,9 +74,6 @@ const Profile = () => {
               <h5>Apellido: {user.lastName}</h5>
               <br></br>
               <h5>Dirección: {user.address}</h5>
-              <br></br>
-              <h5>Nombre de usuario: {user.userName}</h5>
-              <br></br>
               <h5>Si querés ver tu carrito hacé click aquí: </h5>
               <br></br>
               <Link to={"/cart"}>
@@ -141,18 +138,6 @@ const Profile = () => {
                 value={editedUser.address || ""}
                 onChange={handleInputChange}
                 placeholder="Dirección"
-              />
-
-              <label for="adress" class="form-label">
-                Nombre de usuario:
-              </label>
-              <input
-                type="text"
-                name="userName"
-                class="form-control"
-                value={editedUser.userName || ""}
-                onChange={handleInputChange}
-                placeholder="Usuario"
               />
 
               <br></br>
