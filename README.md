@@ -12,10 +12,10 @@ Nos dedicamos a la venta de indumentaria deportiva antigua (precisamente Futbol)
 ## Inicializacion
 
 - Primero clonamos este repositorio.
-- Abrimos una nueva terminal, nos paramos sobre la carpeta del repositorio y ejecutamos el comando  "code ." para abrirlo en **Visual Studio Code** o tu editor de texto de preferencia. 
+- Abrimos una nueva terminal, nos paramos sobre la carpeta del repositorio y ejecutamos el comando `code .` para abrirlo en **Visual Studio Code** o tu editor de texto de preferencia. 
 - Una vez hecho esto, volvemos a la terminal (siempre parados sobre la carpeta del repositorio) y ejecutamos los siguientes comandos:  
-	- "npm i" - Para instalar las dependencias.
-	- "npm start" - Para levantar el front-end de nuestra aplicacion.
+	- `npm i` - Para instalar las dependencias.
+	- `npm start` - Para levantar el front-end de nuestra aplicacion.
 
 ## Metodologia de Trabajo
 - Antes de arrancar a trabajar, tener en cuenta las siguientes pautas cada vez que se vaya a crear una nueva funcion en el proyecto:
