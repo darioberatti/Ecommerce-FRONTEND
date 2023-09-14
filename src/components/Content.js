@@ -21,7 +21,10 @@ const Content = () => {
     axios
       .post(`/api/cart/${product.id}`)
       .then((res) => alert(res.data.message))
-      .catch(() => navigate("/login"));
+      .catch(() => {
+        alert("No se registró un usuario logueado");
+        navigate("/login");
+      });
   };
 
   const handleDeleteProduct = () => {
@@ -117,7 +120,9 @@ const Content = () => {
                   Talle: {product.size && setSizes(product.size)}
                 </p>
                 <p class="card-text">{product.description}</p>
+
                 <p class="card-text">Stock disponible: {product.stock}</p>
+
                 <div className="d-grid gap-2">
                   {usuario.isAdmin ? (
                     <div className="container-buttons">

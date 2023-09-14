@@ -6,6 +6,7 @@ import HistoryItem from "../commons/HistoryItem";
 const History = () => {
   const [history, setHistory] = useState([]);
   const user = useSelector((state) => state.user.value);
+  
 
   useEffect(() => {
     axios

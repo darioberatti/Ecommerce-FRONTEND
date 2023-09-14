@@ -34,8 +34,6 @@ const Checkout = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log("CartProducts------", cartProducts); // clg cartProducts
-
   const handleCheckout = () => {
     axios
       .put(`/api/cart/${cartId}`, {
@@ -56,15 +54,29 @@ const Checkout = () => {
         navigate("/history");
         onSubmitReload();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert("No se pudo realizar la compra");
+        console.log(err);
+      });
 
     if (cartProducts.length > 0) {
       cartProducts.map((product) => {
         const prodId = product.id;
-        console.log("PRODUCT ID>>", prodId);
+
+        const remainingStock = {
+          stock: product.stock - product.cart_products.quantity,
+        };
+
+        axios
+          .put(`/api/products/${prodId}`, remainingStock)
+          .then((response) => console.log("RESPUESTA", response))
+          .catch((error) => {
+            alert(error);
+          });
       });
     }
   };
+
   return (
     <div className="contenedor">
       <div className="text-center">
@@ -79,7 +91,13 @@ const Checkout = () => {
       </div>
       <div className="container-for-pay">
         <h4>Lugar de entrega: </h4>
-        <form action="" onSubmit={() => handleCheckout()}>
+        <form
+          action=""
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleCheckout();
+          }}
+        >
           <div>
             <label for="adress" className="form-label">
               Direccion:
