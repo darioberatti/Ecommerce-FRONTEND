@@ -16,24 +16,6 @@ const HistoryItem = ({ cart, i }) => {
       .catch((err) => console.log(err));
   }, [cart]);
 
-  console.log(cartProducts);
-  // const productGetter = (id) => {
-  //   // let productList = ""
-  //   axios
-  //     .get(`/api/cart/${id}`)
-  //     .then((result) => result.data)
-  //     .then((data) => {
-  //       console.log("productos-->", data);
-
-  //       // for(let i=0;i<data.length;i++){
-  //       //   console.log("DATA.Name-->", data[i].name);
-  //       //   productList +=(`<li>${data[i].name}</li>`)
-  //       // }
-  //       // return productList
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
   return (
     <tr>
       <th scope="row">{i + 1}</th>

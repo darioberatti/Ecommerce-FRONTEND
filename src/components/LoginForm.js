@@ -1,7 +1,6 @@
 import axios from "axios";
-import React, { Component, useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { authContext } from "../context/authContext";
 import { onSubmitReload } from "../utils/utils";
 
 const LoginForm = () => {
@@ -48,45 +47,43 @@ const LoginForm = () => {
     >
       <form onSubmit={handleLogin}>
         <h2>Iniciar sesión</h2>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">
+        <div className="mb-3">
+          <label for="exampleInputEmail1" className="form-label">
             Email
           </label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            // value={email}
             onChange={onChangeEmail}
             required
           />
-          <div id="emailHelp" class="form-text">
+          <div id="emailHelp" className="form-text">
             No compartiremos tus datos con nadie
           </div>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">
+        <div className="mb-3">
+          <label for="exampleInputPassword1" className="form-label">
             Contraseña
           </label>
           <input
             type="password"
-            class="form-control"
+            className="form-control"
             id="exampleInputPassword1"
-            // value={password}
             onChange={onChangePassword}
             require
           />
         </div>
         
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Iniciar sesión
         </button>
       </form>
       <br></br>
       <p>No tienes una cuenta?</p>
       <Link to={"/register"}>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Registrarse
         </button>
       </Link>

@@ -3,7 +3,6 @@ import "../index.css";
 import Card from "../commons/Card";
 import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router";
-import { onSubmitReload } from "../utils/utils";
 
 const initialProductInfo = {
   urlImg: "",
@@ -24,7 +23,6 @@ const ProductForm = () => {
   const { id } = useParams();
   let { pathname } = useLocation();
   const path = "/" + pathname.split("/")[1];
-  const [productToEdit, setEditToProduct] = useState({});
 
   useEffect(() => {
     if (path === "/edit-product") {
@@ -76,12 +74,9 @@ const ProductForm = () => {
     if (path === "/edit-product") {
       axios
         .put(`/api/products/admin/${id}`, productInfo)
-        .then((res) => {
+        .then(() => {
           alert("Cambios hechos correctamente");
-          console.log(res.data);
           navigate("/");
-          /*            onSubmitReload();
-           */
         })
         .catch((err) => {
           console.error(err);
@@ -90,13 +85,9 @@ const ProductForm = () => {
     } else {
       axios
         .post("/api/products/create", productInfo)
-        .then((res) => {
-          setEditToProduct(res.data);
+        .then(() => {
           alert("Producto creado");
           navigate("/");
-
-          /*          onSubmitReload();
-           */
         })
         .catch((err) => {
           console.error(err);
