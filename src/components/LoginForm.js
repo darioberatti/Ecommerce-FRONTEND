@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { onSubmitReload } from "../utils/utils";
+import { Toaster, toast } from "sonner";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -23,28 +24,20 @@ const LoginForm = () => {
         password: password,
       })
       .then((result) => {
-        console.log("result data", result.data);
-        navigate("/");
-        onSubmitReload();
-        alert("Bienvenido!");
+        toast.success("Bienvenido! Has iniciado sesión");
 
+        navigate("/");
       })
+
       .catch((err) => {
         console.log(err);
-        alert("Email o contraseña incorrectos");
+        toast.error("Email o contraseña incorrectos");
       });
   };
 
   return (
-    <div
-      style={{
-        width: "60%",
-        margin: "0 auto",
-        textAlign: "center",
-        border: "2px solid black",
-        padding: "3%",
-      }}
-    >
+    <div className="retroForm">
+      <Toaster richColors position="top-center" />
       <form onSubmit={handleLogin}>
         <h2>Iniciar sesión</h2>
         <div className="mb-3">
@@ -75,7 +68,7 @@ const LoginForm = () => {
             require
           />
         </div>
-        
+
         <button type="submit" className="btn btn-primary">
           Iniciar sesión
         </button>

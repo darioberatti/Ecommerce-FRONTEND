@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Toaster, toast } from "sonner";
 
 const Profile = () => {
   const userId = useSelector((state) => state.user.value.id);
@@ -40,17 +41,19 @@ const Profile = () => {
     axios
       .put(`/api/users/${userId}`, editedUser)
       .then((response) => {
+        toast.success("El usuario ha sido editado correctamente");
         setUser(response.data);
         setIsEditMode(false);
       })
       .catch((error) => {
-        alert(error);
+        toast.error("No se pudo actualizar los datos");
       });
   };
 
   return (
     <>
       <div className="contenedor">
+        <Toaster richColors position="top-center" />
         <div className="text-center" style={{ marginTop: "20px" }}>
           <h2>Hola {user.name}!</h2>
           {user.isAdmin ? (
@@ -61,7 +64,7 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className="container" style={{ width: "30%" }}>
+      <div className="container text-center" style={{ width: "30%" }}>
         <div style={{ marginTop: "20px" }}>
           {!isEditMode ? (
             <>
@@ -72,7 +75,7 @@ const Profile = () => {
               <br></br>
               <h5>Dirección: {user.address}</h5>
               <br></br>
-              <h5>Email: {user.email}</h5>
+              <h5>Nombre de usuario: {user.userName}</h5>
               <br></br>
               <h5>Si querés ver tu carrito hacé click aquí: </h5>
               <br></br>
@@ -85,6 +88,9 @@ const Profile = () => {
                   Ver carrito
                 </button>
               </Link>
+              <br></br>
+              <br></br>
+
               <button
                 type="button"
                 className="btn btn-secondary"
@@ -135,6 +141,18 @@ const Profile = () => {
                 value={editedUser.address || ""}
                 onChange={handleInputChange}
                 placeholder="Dirección"
+              />
+
+              <label for="adress" class="form-label">
+                Nombre de usuario:
+              </label>
+              <input
+                type="text"
+                name="userName"
+                class="form-control"
+                value={editedUser.userName || ""}
+                onChange={handleInputChange}
+                placeholder="Usuario"
               />
 
               <br></br>

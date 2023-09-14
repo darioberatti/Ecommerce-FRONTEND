@@ -1,26 +1,34 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { onSubmitReload } from "../utils/utils";
+import { Toaster, toast } from "sonner";
 
 const EditCategories = ({ categories }) => {
   const [newCategory, setNewCategory] = useState("");
   const [editingCategoryIndex, setEditingCategoryIndex] = useState(-1);
-
+  
+  
   const handleSubmit = () => {
+    if (!newCategory) return toast.error("Debe ingregar una categoria");
     axios
       .post(`/api/categories/create`, {
         type: newCategory,
       })
       .then(() => {
-        alert("Categoria creada!");
-        onSubmitReload();
+        toast.success("Categoria creada!");
+        // onSubmitReload();
+        setTimeout(() => {
+          onSubmitReload();
+        }, 1500);
       });
   };
 
   const handleDelete = (category) => {
     axios.delete(`/api/categories/${category.id}`).then(() => {
-      alert("Categoria eliminada!");
-      onSubmitReload();
+      toast.success("Categoria eliminada!");
+      setTimeout(() => {
+        onSubmitReload();
+      }, 1500);
     });
   };
 
@@ -35,9 +43,11 @@ const EditCategories = ({ categories }) => {
         type: newCategory,
       })
       .then(() => {
-        alert("Categoría actualizada!");
-        onSubmitReload();
+        toast.success("Categoría actualizada!");
         setEditingCategoryIndex(-1);
+        setTimeout(() => {
+          onSubmitReload();
+        }, 1500);
       });
   };
 
@@ -48,8 +58,12 @@ const EditCategories = ({ categories }) => {
 
   return (
     <div style={{ textAlign: "center", margin: "2%" }}>
+      <Toaster richColors position="top-center" />
       <h1>Categorías</h1>
-      <div className="input-group mb-3" style={{ width: "60%", margin: "2% auto" }}>
+      <div
+        className="input-group mb-3"
+        style={{ width: "60%", margin: "2% auto" }}
+      >
         <input
           type="text"
           className="form-control"
@@ -92,7 +106,8 @@ const EditCategories = ({ categories }) => {
                       type="button"
                       className="btn btn-success btn-sm"
                       onClick={() => {
-                        if(!newCategory) return alert("Debe agregar un nombre de categoría")
+                        if (!newCategory)
+                          return alert("Debe agregar un nombre de categoría");
                         handleSaveClick(category);
                       }}
                     >

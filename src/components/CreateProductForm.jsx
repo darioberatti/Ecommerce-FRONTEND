@@ -3,6 +3,7 @@ import "../index.css";
 import Card from "../commons/Card";
 import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router";
+import { Toaster, toast } from "sonner";
 
 const initialProductInfo = {
   urlImg: "",
@@ -75,23 +76,27 @@ const ProductForm = () => {
       axios
         .put(`/api/products/admin/${id}`, productInfo)
         .then(() => {
-          alert("Cambios hechos correctamente");
-          navigate("/");
+          toast.success("Cambios hechos correctamente");
+          setTimeout(() => {
+            navigate("/");
+          }, 1500);
         })
         .catch((err) => {
           console.error(err);
-          alert("Algo salió mal, intentalo de nuevo");
+          toast.error("Algo salió mal, intentalo de nuevo");
         });
     } else {
       axios
         .post("/api/products/create", productInfo)
         .then(() => {
-          alert("Producto creado");
-          navigate("/");
+          toast.success("Producto creado");
+          setTimeout(() => {
+            navigate("/");
+          }, 1500);
         })
         .catch((err) => {
           console.error(err);
-          alert("Ha ocurrido un problema. No se pudo crear el producto");
+          toast.error("Ha ocurrido un problema. No se pudo crear el producto");
         });
     }
   };
@@ -101,6 +106,7 @@ const ProductForm = () => {
       className="create-product-container"
       style={{ border: "1px solid black" }}
     >
+      <Toaster richColors position="top-center" />
       <div className="contenedor-crear-producto">
         <form onSubmit={handleSubmit}>
           {Object.keys(initialProductInfo).map((key, i) => (

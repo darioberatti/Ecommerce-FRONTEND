@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { setSizes, sizeSetter } from "../utils/utils";
+import { Toaster, toast } from "sonner";
 
 const Content = () => {
   const { id } = useParams();
@@ -20,9 +21,9 @@ const Content = () => {
   const handleAddToCart = () => {
     axios
       .post(`/api/cart/${product.id}`)
-      .then((res) => alert(res.data.message))
+      .then((res) => toast.success(res.data.message))
       .catch(() => {
-        alert("No se registró un usuario logueado")
+        toast.error("No se registró un usuario logueado");
         navigate("/login");
       });
   };
@@ -31,19 +32,24 @@ const Content = () => {
     axios
       .delete(`/api/products/admin/${id}`)
       .then(() => {
-        alert("Producto eliminado correctamente");
-        navigate("/");
+        toast.success("Producto eliminado correctamente");
+        setTimeout(() => {
+          navigate("/");
+          
+        }, 1500);
       })
+
       .catch((err) => {
         console.error(err);
-        alert(
-          "Ha ocurrido un problema. El producto no pudo ser eliminado.\nIntentelo de nuevo."
+        toast.error(
+          "Ha ocurrido un problema. El producto no pudo ser eliminado. Intentelo de nuevo."
         );
       });
   };
 
   return (
     <div>
+      <Toaster richColors position="top-center" />
       <div style={{ margin: "2% 8%" }}>
         <div className="row">
           <div className="col-sm-6 mb-3 mb-sm-0">
@@ -53,23 +59,21 @@ const Content = () => {
                   id="carouselExampleIndicators"
                   className="carousel carousel-dark slide"
                 >
-                  <div className="carousel-indicators">
-                    <button
-                      type="button"
-                      data-bs-target="#carouselExampleDark"
-                      data-bs-slide-to="0"
-                      className="active"
-                      aria-current="true"
-                      aria-label="Slide 1"
-                    ></button>
-                    <button
-                      type="button"
-                      data-bs-target="#carouselExampleDark"
-                      data-bs-slide-to="1"
-                      aria-label="Slide 2"
-                    ></button>
-                  </div>
+                  <div className="carousel-inners"></div>
                   <div className="carousel-inner">
+                    {/* {product.urlImg ? (
+                      <div className="carousel-item active">
+                        <img
+                          src={product.urlImg[1]}
+                          className="d-block w-100"
+                          alt="..."
+                        />
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                     */}
+
                     {product.urlImg?.map((img, i) => {
                       return (
                         <div className="carousel-item active" key={i}>
