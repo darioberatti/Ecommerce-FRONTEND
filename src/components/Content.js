@@ -4,10 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { setSizes, sizeSetter } from "../utils/utils";
 
-
-
-
-
 const Content = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
@@ -78,7 +74,6 @@ const Content = () => {
                         </div>
                       );
                     })}
-
                   </div>
                   <button
                     className="carousel-control-prev"
@@ -122,9 +117,7 @@ const Content = () => {
                   Talle: {product.size && setSizes(product.size)}
                 </p>
                 <p class="card-text">{product.description}</p>
-                <p class="card-text">
-
-                </p>
+                <p class="card-text">Stock disponible: {product.stock}</p>
                 <div className="d-grid gap-2">
                   {usuario.isAdmin ? (
                     <div className="container-buttons">

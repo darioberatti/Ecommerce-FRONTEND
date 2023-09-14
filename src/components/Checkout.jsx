@@ -11,6 +11,7 @@ import {
 const Checkout = () => {
   const [cartId, setCartId] = useState("");
   const navigate = useNavigate();
+  const [cartProducts, setCartProducts] = useState([]);
 
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [deliveryStreets, setDeliveryStreets] = useState("");
@@ -26,9 +27,14 @@ const Checkout = () => {
   useEffect(() => {
     axios
       .get("/api/cart")
-      .then((response) => setCartId(response.data.cart.id))
+      .then((response) => {
+        setCartId(response.data.cart.id);
+        setCartProducts(response.data.items);
+      })
       .catch((err) => console.log(err));
   }, []);
+
+  console.log("CartProducts------", cartProducts); // clg cartProducts
 
   const handleCheckout = () => {
     axios
@@ -51,8 +57,14 @@ const Checkout = () => {
         onSubmitReload();
       })
       .catch((err) => console.log(err));
-  };
 
+    if (cartProducts.length > 0) {
+      cartProducts.map((product) => {
+        const prodId = product.id;
+        console.log("PRODUCT ID>>", prodId);
+      });
+    }
+  };
   return (
     <div className="contenedor">
       <div className="text-center">
