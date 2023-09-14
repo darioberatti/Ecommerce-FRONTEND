@@ -14,8 +14,6 @@ function Register() {
 
   const navigate = useNavigate();
 
-  
-
   const validateForm = (e) => {
     e.preventDefault();
 
@@ -39,7 +37,9 @@ function Register() {
       return;
     }
     if (password.length < 6 || !containsNumbers(password)) {
-      alert("La contraseña debe contener al menos 6 caracteres y al menos 1 numero");
+      alert(
+        "La contraseña debe contener al menos 6 caracteres y al menos 1 numero"
+      );
       return;
     }
 
@@ -85,9 +85,11 @@ function Register() {
                 required
                 onChange={(e) => setName(e.target.value)}
                 onBlur={(e) => {
-                  if (containsNumbers(name)) {
-                    alert("El nombre no puede contener números");
-                    return (e.target.value = "");
+                  if (e.target.value) {
+                    if (containsNumbers(name)) {
+                      alert("El nombre no puede contener números");
+                      return (e.target.value = "");
+                    }
                   }
                 }}
               />
@@ -101,9 +103,11 @@ function Register() {
                 required
                 onChange={(e) => setLastName(e.target.value)}
                 onBlur={(e) => {
-                  if (containsNumbers(lastName)) {
-                    alert("El apellido no puede contener números");
-                    return (e.target.value = "");
+                  if (e.target.value) {
+                    if (containsNumbers(lastName)) {
+                      alert("El apellido no puede contener números");
+                      return (e.target.value = "");
+                    }
                   }
                 }}
               />
@@ -123,10 +127,12 @@ function Register() {
             required
             onChange={(e) => setEmail(e.target.value)}
             onBlur={(e) => {
-              // if (!email.includes("@")) {
-              //   alert("Debe ingresar un correo electrónico válido");
-              //   return (e.target.value = "");
-              // }
+              if (e.target.value) {
+                if (!email.includes("@")) {
+                  alert("Debe ingresar un correo electrónico válido");
+                  return (e.target.value = "");
+                }
+              }
             }}
           />
         </div>
@@ -155,11 +161,13 @@ function Register() {
             required
             onChange={(e) => setPassword(e.target.value)}
             onBlur={(e) => {
-              if (password.length < 6 || !containsNumbers(password)) {
-                alert(
-                  "La contraseña debe contener al menos 6 caracteres y al menos 1 numero"
-                );
-                return (e.target.value = "");
+              if (e.target.value) {
+                if (password.length < 6 || !containsNumbers(password)) {
+                  alert(
+                    "La contraseña debe contener al menos 6 caracteres y al menos 1 numero"
+                  );
+                  return (e.target.value = "");
+                }
               }
             }}
           />
@@ -176,9 +184,11 @@ function Register() {
             required
             onChange={(e) => setPassword2(e.target.value)}
             onBlur={(e) => {
-              if (password !== password2) {
-                alert("No coinciden las contraseñas. Intentelo nuevamente");
-                return (e.target.value = "");
+              if (e.target.value) {
+                if (password !== password2) {
+                  alert("No coinciden las contraseñas. Intentelo nuevamente");
+                  return (e.target.value = "");
+                }
               }
             }}
           />
@@ -203,7 +213,7 @@ function Register() {
             id="exampleCheck1"
             required
           />
-          <label className="form-check-label" for="exampleCheck1">
+          <label className="form-check-label" for="exampleCheck1" required>
             Acepto los términos y condiciones
           </label>
         </div>

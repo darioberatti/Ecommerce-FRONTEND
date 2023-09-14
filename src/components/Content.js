@@ -2,7 +2,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { sizeSetter } from "../utils/utils";
+import { setSizes, sizeSetter } from "../utils/utils";
 import { addToCart } from "../redux/cart";
 
 const Content = () => {
@@ -18,7 +18,7 @@ const Content = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(product)
+  console.log(product);
 
   const handleAddToCart = () => {
     axios
@@ -28,15 +28,19 @@ const Content = () => {
   };
 
   const handleDeleteProduct = () => {
-    axios.delete(`/api/products/admin/${id}`)
-      .then(()=>{
-        alert("Producto eliminado correctamente")
-        navigate("/")
-      }).catch((err)=>{
-        console.error(err)
-        alert("Ha ocurrido un problema. El producto no pudo ser eliminado.\nIntentelo de nuevo.")
+    axios
+      .delete(`/api/products/admin/${id}`)
+      .then(() => {
+        alert("Producto eliminado correctamente");
+        navigate("/");
       })
-  }
+      .catch((err) => {
+        console.error(err);
+        alert(
+          "Ha ocurrido un problema. El producto no pudo ser eliminado.\nIntentelo de nuevo."
+        );
+      });
+  };
 
   return (
     <div style={{}}>
@@ -90,9 +94,7 @@ const Content = () => {
                       />
                     </div> */}
 
-                    {/* <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="..." />
-                  </div> */}
+
                   </div>
                   <button
                     class="carousel-control-prev"
@@ -130,9 +132,12 @@ const Content = () => {
                 <p class="card-text">Equipo: {product.team}</p>
                 <p class="card-text">País: {product.country}</p>
                 <p class="card-text">Año: {product.year}</p>
+
+                <p class="card-text">
+                  Talle: {product.size && setSizes(product.size)}
+                </p>
                 <p class="card-text">{product.description}</p>
                 <p class="card-text">
-                  {/* Talles disponibles: {sizeSetter(product.size)} */}
                 </p>
                 <div class="d-grid gap-2">
                   {usuario.isAdmin ? (
