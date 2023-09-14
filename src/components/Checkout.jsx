@@ -12,6 +12,7 @@ import { Toaster, toast } from "sonner";
 const Checkout = () => {
   const [cartId, setCartId] = useState("");
   const navigate = useNavigate();
+  const [cartProducts, setCartProducts] = useState([]);
 
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [deliveryStreets, setDeliveryStreets] = useState("");
@@ -27,7 +28,10 @@ const Checkout = () => {
   useEffect(() => {
     axios
       .get("/api/cart")
-      .then((response) => setCartId(response.data.cart.id))
+      .then((response) => {
+        setCartId(response.data.cart.id);
+        setCartProducts(response.data.items);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -57,6 +61,23 @@ const Checkout = () => {
         toast.error("No se pudo realizar la compra");
         console.log(err);
       });
+
+    if (cartProducts.length > 0) {
+      cartProducts.map((product) => {
+        const prodId = product.id;
+
+        const remainingStock = {
+          stock: product.stock - product.cart_products.quantity,
+        };
+
+        axios
+          .put(`/api/products/${prodId}`, remainingStock)
+          .then((response) => console.log("RESPUESTA", response))
+          .catch((error) => {
+            alert(error);
+          });
+      });
+    }
   };
 
   return (
