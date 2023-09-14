@@ -1,13 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { dateSetter } from "../utils/utils";
 import HistoryItem from "../commons/HistoryItem";
 
 const History = () => {
   const [history, setHistory] = useState([]);
   const user = useSelector((state) => state.user.value);
-  // const [cartProducts, setCartProducts] = useState([])
 
   useEffect(() => {
     axios
@@ -16,17 +14,10 @@ const History = () => {
       .catch((err) => console.log(err));
   }, [user]);
 
-  
-
-  console.log("usuario-->", user);
-  console.log("history-->", history);
-  console.log("user-->", user);
-  console.log("user id-->", user.id);
-
 
   return (
     <div className="table-history">
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">#</th>

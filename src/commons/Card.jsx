@@ -1,7 +1,6 @@
 import React from "react";
 import "../index.css";
-import { Link, useLocation, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 
 const Card = ({ item }) => {
   const { pathname } = useLocation();

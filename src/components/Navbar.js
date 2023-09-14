@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import LogoRFC from "../assets/Black White Modern Concept Football Club Logo.png";
 import axios from "axios";
 import { onSubmitReload } from "../utils/utils.js";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Navbar = ({ categories }) => {
   const usuario = useSelector((state) => state.user.value);

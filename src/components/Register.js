@@ -11,7 +11,6 @@ function Register() {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [address, setAddress] = useState("");
-
   const navigate = useNavigate();
 
   const validateForm = (e) => {
@@ -46,7 +45,7 @@ function Register() {
     handleSubmit();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     axios
       .post("http://localhost:3001/api/users/register", {
         name,
@@ -58,7 +57,6 @@ function Register() {
       })
       .then(() => navigate("/login"))
       .then(() => alert("Usuario Creado"))
-      // .then((data) => navigate(`/`))
       .catch((err) => {
         console.log(err);
         alert("Ese correo electronico ya esta registrado");
@@ -134,6 +132,7 @@ function Register() {
                 }
               }
             }}
+
           />
         </div>
         <div className="mb-3">

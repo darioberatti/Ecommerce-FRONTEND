@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../index.css";
-import { fakeData } from "../utils/fakeData";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteFromCart } from "../redux/cart";
 import axios from "axios";
 import { onSubmitReload } from "../utils/utils";
 
@@ -11,7 +8,6 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState("");
   const navigate = useNavigate();
-  const [cartId, setCartId] = useState("");
 
   useEffect(() => {
     axios
@@ -19,7 +15,6 @@ const Cart = () => {
       .then((response) => {
         setTotalPrice(response.data.cart.total);
         setCartItems(response.data.items);
-        setCartId(response.data.cart.id);
       })
       .catch(() => {
         alert("Primero debes agregar productos a tu carrito");
@@ -35,26 +30,18 @@ const Cart = () => {
     axios.post(`/api/cart/${id}`).then((res) => console.log(res.data));
   };
 
-  const handleCheckout = () => {
-    axios
-      .put(`/api/cart/${cartId}`, { completed: true })
-      .then((res) => console.log(res.data));
-  };
-
-  console.log("cartId-->", cartId);
   return (
     <div className="carrito">
-      <div class="list-group">
-        {cartItems?.map((item) => (
-          <div style={{ borderBottom: "1px solid white" }}>
-            <div class="list-group-item list-group-item-action active">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{item.name.length > 25 ? item.name.slice(0,25) + "..." : item.name}</h5>
+      <div className="list-group">
+        {cartItems?.map((item, i) => (
+          <div style={{ borderBottom: "1px solid white" }} key={i}>
+            <div className="list-group-item list-group-item-action active">
+              <div className="d-flex w-100 justify-content-between">
+                <h5 className="mb-1">{item.name.length > 25 ? item.name.slice(0,25) + "..." : item.name}</h5>
                 <p>${item.price}</p>
                 <button
                   type="button"
-                  class="btn btn-light btn-sm"
-                  /* onClick={() => dispatch(deleteFromCart(item))} */
+                  className="btn btn-light btn-sm"
                   onClick={() => {
                     handleAddToCart(item.id);
                     onSubmitReload();
@@ -63,9 +50,8 @@ const Cart = () => {
                   ➕
                 </button>
               </div>
-              <p class="mb-1">{item.description.length > 50 ? item.description.slice(0,50) + "..." : item.description}</p>
+              <p className="mb-1">{item.description.length > 50 ? item.description.slice(0,50) + "..." : item.description}</p>
               <small>Cantidad: {item.cart_products.quantity}</small>
-              {/* <Link to={`/products/${item.id}`}> */}
               <div
                 style={{
                   display: "flex",
@@ -75,8 +61,7 @@ const Cart = () => {
               >
                 <button
                   type="button"
-                  class="btn btn-danger btn-sm"
-                  /* onClick={() => dispatch(deleteFromCart(item))} */
+                  className="btn btn-danger btn-sm"
                   onClick={() => {
                     handleDeleteFromCart(item.id);
                     onSubmitReload();
@@ -85,13 +70,11 @@ const Cart = () => {
                   ➖
                 </button>
               </div>
-              {/*                </Link>
-               */}{" "}
             </div>
           </div>
         ))}
       </div>
-      <div class="contenedor-pagar">
+      <div className="contenedor-pagar">
         <h1>El total a pagar por tus productos es de:</h1>
         <h1 style={{ marginTop: "10%" }}>${totalPrice}</h1>
 
@@ -99,7 +82,7 @@ const Cart = () => {
           <Link to={"/checkout"}>
             <button
               type="button"
-              class="btn btn-dark"
+              className="btn btn-dark"
               style={{ marginTop: "10%" }}
             >
               Ir a Pagar
@@ -109,25 +92,15 @@ const Cart = () => {
           <div>
           <button
             type="button"
-            class="btn btn-dark"
+            className="btn btn-dark"
             style={{ marginTop: "10%" }}
             disabled
           >
             Ir a Pagar
           </button>
-          <p class="mt-3">Primero debes agregar productos al carrito.</p>
+          <p className="mt-3">Primero debes agregar productos al carrito.</p>
           </div>
         )}
-
-        {/* <button
-         type="button"
-          class="btn btn-dark"
-         style={{ marginTop: "10%" }}
-          onClick={() => handleCheckout()}
-       >
-          Ir a Pagar
-       </button> */}
-
       </div>
     </div>
   );

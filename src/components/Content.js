@@ -1,9 +1,12 @@
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { setSizes, sizeSetter } from "../utils/utils";
 import { addToCart } from "../redux/cart";
+
+
+
 
 const Content = () => {
   const { id } = useParams();
@@ -15,10 +18,8 @@ const Content = () => {
     axios
       .get(`/api/products/${id}`)
       .then((response) => setProduct(response.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   }, []);
-
-  console.log(product);
 
   const handleAddToCart = () => {
     axios
@@ -43,22 +44,22 @@ const Content = () => {
   };
 
   return (
-    <div style={{}}>
+    <div>
       <div style={{ margin: "2% 8%" }}>
-        <div class="row">
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <div class="card" style={{ width: "80%" }}>
-              <div class="card-body">
+        <div className="row">
+          <div className="col-sm-6 mb-3 mb-sm-0">
+            <div className="card" style={{ width: "80%" }}>
+              <div className="card-body">
                 <div
                   id="carouselExampleIndicators"
-                  class="carousel carousel-dark slide"
+                  className="carousel carousel-dark slide"
                 >
-                  <div class="carousel-indicators">
+                  <div className="carousel-indicators">
                     <button
                       type="button"
                       data-bs-target="#carouselExampleDark"
                       data-bs-slide-to="0"
-                      class="active"
+                      className="active"
                       aria-current="true"
                       aria-label="Slide 1"
                     ></button>
@@ -69,61 +70,45 @@ const Content = () => {
                       aria-label="Slide 2"
                     ></button>
                   </div>
-                  <div class="carousel-inner">
-                    {product.urlImg?.map((img) => {
+                  <div className="carousel-inner">
+                    {product.urlImg?.map((img, i) => {
                       return (
-                        <div class="carousel-item active">
-                          <img src={img} class="d-block w-100" alt="..." />
+                        <div className="carousel-item active" key={i}>
+                          <img src={img} className="d-block w-100" alt="..." />
                         </div>
                       );
                     })}
 
-                    {/* <div class="carousel-item active">
-                      <img
-                        src="https://acdn.mitiendanube.com/stores/216/721/products/photoroom-20220420_092710-5342fc330e2a5cbc2716504584747851-1024-1024.webp"
-                        class="d-block w-100"
-                        alt="..."
-                      />
-                    </div>
-
-                    <div class="carousel-item active">
-                      <img
-                        src="https://acdn.mitiendanube.com/stores/216/721/products/photoroom-20220420_092637-25e7dcca9b63ef54b616504584747652-1024-1024.webp"
-                        class="d-block w-100"
-                        alt="..."
-                      />
-                    </div> */}
-
-
                   </div>
                   <button
-                    class="carousel-control-prev"
+                    className="carousel-control-prev"
                     type="button"
                     data-bs-target="#carouselExampleIndicators"
                     data-bs-slide="prev"
                   >
                     <span
-                      class="carousel-control-prev-icon"
+                      className="carousel-control-prev-icon"
                       aria-hidden="true"
                     ></span>
-                    <span class="visually-hidden">Anterior</span>
+                    <span className="visually-hidden">Anterior</span>
                   </button>
                   <button
-                    class="carousel-control-next"
+                    className="carousel-control-next"
                     type="button"
                     data-bs-target="#carouselExampleIndicators"
                     data-bs-slide="next"
                   >
                     <span
-                      class="carousel-control-next-icon"
+                      className="carousel-control-next-icon"
                       aria-hidden="true"
                     ></span>
-                    <span class="visually-hidden">Siguiente</span>
+                    <span className="visually-hidden">Siguiente</span>
                   </button>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="col-sm-6">
             <div class="card" style={{ width: "100%" }}>
               <div class="card-body">
@@ -138,19 +123,20 @@ const Content = () => {
                 </p>
                 <p class="card-text">{product.description}</p>
                 <p class="card-text">
+
                 </p>
-                <div class="d-grid gap-2">
+                <div className="d-grid gap-2">
                   {usuario.isAdmin ? (
                     <div className="container-buttons">
                       <button
-                        class="btn btn-danger"
+                        className="btn btn-danger"
                         type="button"
                         onClick={handleDeleteProduct}
                       >
                         Eliminar Producto
                       </button>
                       <button
-                        class="btn btn-warning"
+                        className="btn btn-warning"
                         type="button"
                         onClick={() => navigate(`/edit-product/${id}`)}
                       >
@@ -161,7 +147,7 @@ const Content = () => {
                     ""
                   )}
                   <button
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                     type="button"
                     onClick={() => {
                       handleAddToCart();
