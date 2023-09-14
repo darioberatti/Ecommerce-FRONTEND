@@ -17,13 +17,13 @@ const HistoryItem = ({ cart, i }) => {
   }, [cart]);
 
   return (
-    <tr>
+    <tr key={cart.id}>
       <th scope="row">{i + 1}</th>
       <td>{dateSetter(cart.createdAt)}</td>
       <td>
         <ul>
           {cartProducts?.map((item) => {
-            return <li style={{width:"50%", margin: "0 auto"}}>{item.name} (x{item.cart_products.quantity})</li>;
+            return <li style={{width:"50%", margin: "0 auto"}} key={cart.id}>{item.name} (x{item.cart_products.quantity})</li>;
           })}
         </ul>
       </td>
