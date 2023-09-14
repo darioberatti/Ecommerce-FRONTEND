@@ -50,7 +50,10 @@ const Checkout = () => {
         navigate("/history");
         onSubmitReload();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert("No se pudo realizar la compra");
+        console.log(err);
+      });
   };
 
   return (
@@ -67,7 +70,13 @@ const Checkout = () => {
       </div>
       <div className="container-for-pay">
         <h4>Lugar de entrega: </h4>
-        <form action="" onSubmit={() => handleCheckout()}>
+        <form
+          action=""
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleCheckout();
+          }}
+        >
           <div>
             <label for="adress" className="form-label">
               Direccion:
