@@ -2,6 +2,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { setSizes, sizeSetter } from "../utils/utils";
+import { addToCart } from "../redux/cart";
+
+
 
 
 const Content = () => {
@@ -25,15 +29,19 @@ const Content = () => {
   };
 
   const handleDeleteProduct = () => {
-    axios.delete(`/api/products/admin/${id}`)
-      .then(()=>{
-        alert("Producto eliminado correctamente")
-        navigate("/")
-      }).catch((err)=>{
-        console.error(err)
-        alert("Ha ocurrido un problema. El producto no pudo ser eliminado.\nIntentelo de nuevo.")
+    axios
+      .delete(`/api/products/admin/${id}`)
+      .then(() => {
+        alert("Producto eliminado correctamente");
+        navigate("/");
       })
-  }
+      .catch((err) => {
+        console.error(err);
+        alert(
+          "Ha ocurrido un problema. El producto no pudo ser eliminado.\nIntentelo de nuevo."
+        );
+      });
+  };
 
   return (
     <div>
@@ -70,6 +78,7 @@ const Content = () => {
                         </div>
                       );
                     })}
+
                   </div>
                   <button
                     className="carousel-control-prev"
@@ -99,16 +108,22 @@ const Content = () => {
               </div>
             </div>
           </div>
-          <div className="col-sm-6">
-            <div className="card" style={{ width: "100%" }}>
-              <div className="card-body">
-                <h4 className="card-title">{product.name}</h4>
-                <h1 className="card-title"> {product.price}$</h1>
-                <p className="card-text">Equipo: {product.team}</p>
-                <p className="card-text">País: {product.country}</p>
-                <p className="card-text">Año: {product.year}</p>
-                <p className="card-text">{product.description}</p>
-                <p className="card-text">
+
+          <div class="col-sm-6">
+            <div class="card" style={{ width: "100%" }}>
+              <div class="card-body">
+                <h4 class="card-title">{product.name}</h4>
+                <h1 class="card-title"> {product.price}$</h1>
+                <p class="card-text">Equipo: {product.team}</p>
+                <p class="card-text">País: {product.country}</p>
+                <p class="card-text">Año: {product.year}</p>
+
+                <p class="card-text">
+                  Talle: {product.size && setSizes(product.size)}
+                </p>
+                <p class="card-text">{product.description}</p>
+                <p class="card-text">
+
                 </p>
                 <div className="d-grid gap-2">
                   {usuario.isAdmin ? (

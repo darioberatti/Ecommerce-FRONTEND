@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import logo from "../assets/Black White Modern Concept Football Club Logo.png";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { containsNumbers, onSubmitReload, containsLetters } from "../utils/utils";
+import {
+  containsNumbers,
+  onSubmitReload,
+  containsLetters,
+} from "../utils/utils";
 
 const Checkout = () => {
   const [cartId, setCartId] = useState("");
@@ -76,9 +80,11 @@ const Checkout = () => {
               required
               onChange={(e) => setDeliveryAddress(e.target.value)}
               onBlur={(e) => {
-                if (!containsNumbers(e.target.value)) {
-                  alert("La dirección no es válida");
-                  return (e.target.value = "");
+                if (e.target.value) {
+                  if (!containsNumbers(e.target.value)) {
+                    alert("La dirección no es válida");
+                    return (e.target.value = "");
+                  }
                 }
               }}
             />
@@ -109,12 +115,16 @@ const Checkout = () => {
             required
             onChange={(e) => setDeliveryZipCode(e.target.value)}
             onBlur={(e) => {
-              if (e.target.value.length!==4 || containsLetters(e.target.value)) {
-                alert("El código postal no es válido");
-                return (e.target.value = "");
+              if (e.target.value) {
+                if (
+                  e.target.value.length !== 4 ||
+                  containsLetters(e.target.value)
+                ) {
+                  alert("El código postal no es válido");
+                  return (e.target.value = "");
+                }
               }
             }}
-
           />
           <label for="ciudad" className="form-label mt-3">
             Ciudad:
@@ -138,9 +148,11 @@ const Checkout = () => {
             required
             onChange={(e) => setReciever(e.target.value)}
             onBlur={(e) => {
-              if (containsNumbers(e.target.value)) {
-                alert("El nombre no puede contener números");
-                return (e.target.value = "");
+              if (e.target.value) {
+                if (containsNumbers(e.target.value)) {
+                  alert("El nombre no puede contener números");
+                  return (e.target.value = "");
+                }
               }
             }}
           />
@@ -194,9 +206,14 @@ const Checkout = () => {
             required
             onChange={(e) => setCardNumber(e.target.value)}
             onBlur={(e) => {
-              if (e.target.value.length !== 16 || containsLetters(e.target.value)) {
-                alert("El n° de tarjeta no es válido");
-                return (e.target.value = "");
+              if (e.target.value) {
+                if (
+                  e.target.value.length !== 16 ||
+                  containsLetters(e.target.value)
+                ) {
+                  alert("El n° de tarjeta no es válido");
+                  return (e.target.value = "");
+                }
               }
             }}
           />
@@ -210,11 +227,17 @@ const Checkout = () => {
               className="form-control"
               id="inputZip"
               placeholder="3 dígitos"
+              required
               onChange={(e) => setCardCode(e.target.value)}
               onBlur={(e) => {
-                if (e.target.value.length!==3 || containsLetters(e.target.value)) {
-                  alert("El código de seguridad no es válido");
-                  return (e.target.value = "");
+                if (e.target.value) {
+                  if (
+                    e.target.value.length !== 3 ||
+                    containsLetters(e.target.value)
+                  ) {
+                    alert("El código de seguridad no es válido");
+                    return (e.target.value = "");
+                  }
                 }
               }}
             />
@@ -231,9 +254,11 @@ const Checkout = () => {
             required
             onChange={(e) => setCardName(e.target.value)}
             onBlur={(e) => {
-              if (containsNumbers(e.target.value)) {
-                alert("El nombre no puede contener números");
-                return (e.target.value = "");
+              if (e.target.value) {
+                if (containsNumbers(e.target.value)) {
+                  alert("El nombre no puede contener números");
+                  return (e.target.value = "");
+                }
               }
             }}
           />
@@ -249,15 +274,18 @@ const Checkout = () => {
             required
             onChange={(e) => setPhoneNumber(e.target.value)}
             onBlur={(e) => {
-              if (e.target.value.length!==10 || containsLetters(e.target.value)) {
-                alert("El número de celular no es válida");
-                return (e.target.value = "");
+              if (e.target.value) {
+                if (
+                  e.target.value.length !== 10 ||
+                  containsLetters(e.target.value)
+                ) {
+                  alert("El número de celular no es válida");
+                  return (e.target.value = "");
+                }
               }
             }}
           />
-          <small>
-              No incluyas el prefijo.
-            </small>
+          <small>No incluyas el prefijo.</small>
           <hr />
           <div
             style={{ display: "flex", justifyContent: "center" }}

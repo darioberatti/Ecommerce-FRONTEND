@@ -25,3 +25,8 @@ export const containsNumbers = (str) =>{
 export const containsLetters = (str) =>{
   return (!/^[0-9]+$/.test(str))
 }
+
+export const setSizes =(sizes)=>{
+  let strSizes = sizes[0]
+  return strSizes
+}

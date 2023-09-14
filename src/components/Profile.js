@@ -14,7 +14,7 @@ const Profile = () => {
       .get(`/api/users/${userId}`)
       .then((response) => setUser(response.data))
       .catch((error) => {
-        alert(error);
+        console.log(error);
       });
   }, [userId]);
 

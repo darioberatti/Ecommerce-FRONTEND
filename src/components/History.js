@@ -14,6 +14,7 @@ const History = () => {
       .catch((err) => console.log(err));
   }, [user]);
 
+
   return (
     <div className="table-history">
       <table className="table">
