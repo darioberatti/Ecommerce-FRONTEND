@@ -25,6 +25,7 @@ code {
   @media (max-width: 680px) {
     padding: 10px;
   }
+  
 }
 
 /* carrito de compras */
@@ -33,16 +34,16 @@ code {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  
   height: 100vh;
   flex-direction: row;
-  border: 1px solid black;
 }
 
 .list-group {
   width: 30%;
   margin-top: 5%;
-  border: 1px solid black;
+  
+  height: auto;
 }
 
 .contenedor-pagar {
@@ -53,6 +54,9 @@ code {
   padding: 50px;
   align-items: center;
   text-align: center;
+  margin-top: 5%;
+  height: 40%;
+  border-radius: 20px;
 }
 
 .table-history {
@@ -109,4 +113,8 @@ code {
   border: 2px solid black;
   border-radius: 20px;
   padding: 2%;
+}
+
+.contentRetro {
+  height: 80%;
 }
