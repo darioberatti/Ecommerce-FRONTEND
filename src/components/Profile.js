@@ -18,8 +18,8 @@ const Profile = () => {
 
   return (
     <>
-      <div class="contenedor">
-        <div class="text-center" style={{ marginTop: "20px" }}>
+      <div className="contenedor">
+        <div className="text-center" style={{ marginTop: "20px" }}>
           <h2>Hola {user.name}!</h2>
           {user.isAdmin ? (
             <h3 style={{ marginTop: "20px" }}>Perfil de Administrador</h3>
@@ -29,7 +29,7 @@ const Profile = () => {
         </div>
       </div>
 
-      <div class="container" style={{ width: "30%" }}>
+      <div className="container" style={{ width: "30%" }}>
         <div style={{ marginTop: "20px" }}>
           <h4>Éstos son tus datos</h4>
 

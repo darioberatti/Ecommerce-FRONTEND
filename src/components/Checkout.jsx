@@ -26,12 +26,6 @@ const Checkout = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  // const handleCheckout = () => {
-  //   axios.put(`/api/cart/${cartId}`, { completed: true }).then((res) => {
-  //     console.log(res.data);
-  //   });
-  // };
-
   const handleCheckout = () => {
     axios
       .put(`/api/cart/${cartId}`, {
@@ -56,10 +50,10 @@ const Checkout = () => {
   };
 
   return (
-    <div class="contenedor">
-      <div class="text-center">
+    <div className="contenedor">
+      <div className="text-center">
         <img
-          class="mb-2 mt-5"
+          className="mb-2 mt-5"
           style={{ borderRadius: 300, maxHeight: "150px", maxWidth: "200px" }}
           src={logo}
           alt=""
@@ -67,17 +61,17 @@ const Checkout = () => {
         <h2>Ya casi es tuyo!</h2>
         <p>No compartiremos tu informacion de pago con nadie.</p>
       </div>
-      <div class="container-for-pay">
+      <div className="container-for-pay">
         <h4>Lugar de entrega: </h4>
         <form action="" onSubmit={() => handleCheckout()}>
           <div>
-            <label for="adress" class="form-label">
-              Direccion:{" "}
+            <label for="adress" className="form-label">
+              Direccion:
             </label>
             <input
               id="address"
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Ej: Rawson 8833"
               required
               onChange={(e) => setDeliveryAddress(e.target.value)}
@@ -93,24 +87,24 @@ const Checkout = () => {
               ingresado cuando te registraste.
             </small>
           </div>
-          <label for="streets" class="form-label mt-3">
-            Entre Calles:{" "}
+          <label for="streets" className="form-label mt-3">
+            Entre Calles:
           </label>
           <input
             id="streets"
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Ej: Mariano Moreno y Avellaneda"
             required
             onChange={(e) => setDeliveryStreets(e.target.value)}
           />
-          <label for="postal" class="form-label mt-3">
-            Codigo Postal:{" "}
+          <label for="postal" className="form-label mt-3">
+            Codigo Postal:
           </label>
           <input
             id="postal"
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Ej: 1718"
             required
             onChange={(e) => setDeliveryZipCode(e.target.value)}
@@ -122,24 +116,24 @@ const Checkout = () => {
             }}
 
           />
-          <label for="ciudad" class="form-label mt-3">
-            Ciudad:{" "}
+          <label for="ciudad" className="form-label mt-3">
+            Ciudad:
           </label>
           <input
             id="ciudad"
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Ej: Buenos Aires"
             required
             onChange={(e) => setDeliveryCity(e.target.value)}
           />
-          <label for="received" class="form-label mt-3">
-            Nombre Completo de la persona que recibe el paquete:{" "}
+          <label for="received" className="form-label mt-3">
+            Nombre Completo de la persona que recibe el paquete:
           </label>
           <input
             id="received"
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Ej: Luis Moreno Garcia"
             required
             onChange={(e) => setReciever(e.target.value)}
@@ -152,50 +146,50 @@ const Checkout = () => {
           />
           <hr />
 
-          <h4 class="mt-3 mb-3">Pago: </h4>
-          <div class="form-check">
+          <h4 className="mt-3 mb-3">Pago: </h4>
+          <div className="form-check">
             <input
-              class="form-check-input"
+              className="form-check-input"
               type="radio"
               name="flexRadioDefault"
               id="mastercard"
               onClick={(e) => setCardCompany(e.target.id)}
             />
-            <label class="form-check-label" for="mastercard">
+            <label className="form-check-label" for="mastercard">
               Mastercard
             </label>
           </div>
-          <div class="form-check">
+          <div className="form-check">
             <input
-              class="form-check-input"
+              className="form-check-input"
               type="radio"
               name="flexRadioDefault"
               id="visa"
               onClick={(e) => setCardCompany(e.target.id)}
             />
-            <label class="form-check-label" for="visa">
+            <label className="form-check-label" for="visa">
               Visa
             </label>
           </div>
-          <div class="form-check mb-3">
+          <div className="form-check mb-3">
             <input
-              class="form-check-input"
+              className="form-check-input"
               type="radio"
               name="flexRadioDefault"
               id="maestro"
               onClick={(e) => setCardCompany(e.target.id)}
             />
-            <label class="form-check-label" for="maestro">
+            <label className="form-check-label" for="maestro">
               Maestro
             </label>
           </div>
-          <label for="credit-card" class="form-label">
-            Numero de tarjeta (Sin espacios):{" "}
+          <label for="credit-card" className="form-label">
+            Numero de tarjeta (Sin espacios):
           </label>
           <input
             id="credit-card"
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Ej: 9999888877776666"
             required
             onChange={(e) => setCardNumber(e.target.value)}
@@ -207,13 +201,13 @@ const Checkout = () => {
             }}
           />
 
-          <div class="col-md-3">
-            <label for="inputZip" class="form-label">
+          <div className="col-md-3">
+            <label for="inputZip" className="form-label">
               Codigo de seguridad
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="inputZip"
               placeholder="3 dígitos"
               onChange={(e) => setCardCode(e.target.value)}
@@ -226,13 +220,13 @@ const Checkout = () => {
             />
           </div>
 
-          <label for="name-card" class="form-label mt-3">
-            Nombre y Apellido (Como figura en la Tarjeta):{" "}
+          <label for="name-card" className="form-label mt-3">
+            Nombre y Apellido (Como figura en la Tarjeta):
           </label>
           <input
             id="name-card"
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Ej: JULIAN G. RAMIREZ"
             required
             onChange={(e) => setCardName(e.target.value)}
@@ -244,13 +238,13 @@ const Checkout = () => {
             }}
           />
 
-          <label for="number" class="form-label mt-3">
-            Numero Telefonico:{" "}
+          <label for="number" className="form-label mt-3">
+            Numero Telefonico:
           </label>
           <input
             id="number"
             type="number"
-            class="form-control "
+            className="form-control "
             placeholder="Ej: 11 9999 9999"
             required
             onChange={(e) => setPhoneNumber(e.target.value)}
@@ -267,9 +261,9 @@ const Checkout = () => {
           <hr />
           <div
             style={{ display: "flex", justifyContent: "center" }}
-            class="mt-3"
+            className="mt-3"
           >
-            <button type="submit" class="btn btn-dark mb-5">
+            <button type="submit" className="btn btn-dark mb-5">
               Finalizar mi compra
             </button>
           </div>
