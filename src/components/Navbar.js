@@ -4,6 +4,7 @@ import LogoRFC from "../assets/Black White Modern Concept Football Club Logo.png
 import axios from "axios";
 import { onSubmitReload } from "../utils/utils.js";
 import { useState } from "react";
+import { Toaster, toast } from "sonner";
 
 const Navbar = ({ categories }) => {
   const usuario = useSelector((state) => state.user.value);
@@ -13,16 +14,18 @@ const Navbar = ({ categories }) => {
   const handleSearch = (e) => {
     e.preventDefault();
     searchName.length === 0
-      ? alert("Debes ingresar una búsqueda")
+      ? toast.error("Debes ingresar una búsqueda")
       : navigate(`/search-results?name=${searchName}`);
     setSearchName("");
   };
 
   const handleLogout = () => {
     axios.post("/api/users/logout").then(() => {
-      navigate("/");
-      alert("Usuario deslogueado");
-      onSubmitReload();
+      toast.success("Has cerrado sesión");
+      setTimeout(() => {
+        navigate("/");
+        onSubmitReload();
+      }, 1500);
     });
   };
 
@@ -31,6 +34,7 @@ const Navbar = ({ categories }) => {
       className="navbar navbar-expand-lg"
       style={{ backgroundColor: "#d8d8d8" }}
     >
+      <Toaster richColors position="top-center" />
       <div className="container-fluid">
         <Link to={"/"}>
           <img

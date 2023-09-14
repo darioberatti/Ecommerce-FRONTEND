@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { containsNumbers } from "../utils/utils";
+import { Toaster, toast } from "sonner";
 
 function Register() {
   const [name, setName] = useState("");
@@ -17,26 +18,26 @@ function Register() {
     e.preventDefault();
 
     if (containsNumbers(name)) {
-      alert("El nombre no puede contener números");
+      toast.error("El nombre no puede contener números");
       return;
     }
 
     if (containsNumbers(lastName)) {
-      alert("El apellido no puede contener números");
+      toast.error("El apellido no puede contener números");
       return;
     }
 
     if (!email.includes("@")) {
-      alert("Debe ingresar un correo electrónico válido");
+      toast.error("Debe ingresar un correo electrónico válido");
       return;
     }
 
     if (password !== password2) {
-      alert("No coinciden las contraseñas. Intentelo nuevamente");
+      toast.error("No coinciden las contraseñas. Intentelo nuevamente");
       return;
     }
     if (password.length < 6 || !containsNumbers(password)) {
-      alert(
+      toast.error(
         "La contraseña debe contener al menos 6 caracteres y al menos 1 numero"
       );
       return;
@@ -55,16 +56,21 @@ function Register() {
         password,
         address,
       })
-      .then(() => navigate("/login"))
-      .then(() => alert("Usuario Creado"))
+      .then(() => {
+        toast.success("Usuario Creado");
+        
+          navigate("/login");
+        
+      })
       .catch((err) => {
         console.log(err);
-        alert("Ese correo electronico ya esta registrado");
+        toast.error("Ese correo electronico ya esta registrado");
       });
   };
 
   return (
-    <div style={{ width: "50%", margin: "0 auto" }}>
+    <div className="retroForm" style={{ textAlign: "start" }}>
+      <Toaster richColors position="top-center" />
       <div style={{ textAlign: "center" }}>
         <h1>¡Crea tu cuenta!</h1>
       </div>
@@ -85,7 +91,7 @@ function Register() {
                 onBlur={(e) => {
                   if (e.target.value) {
                     if (containsNumbers(name)) {
-                      alert("El nombre no puede contener números");
+                      toast.error("El nombre no puede contener números");
                       return (e.target.value = "");
                     }
                   }
@@ -103,7 +109,7 @@ function Register() {
                 onBlur={(e) => {
                   if (e.target.value) {
                     if (containsNumbers(lastName)) {
-                      alert("El apellido no puede contener números");
+                      toast.error("El apellido no puede contener números");
                       return (e.target.value = "");
                     }
                   }
@@ -127,12 +133,11 @@ function Register() {
             onBlur={(e) => {
               if (e.target.value) {
                 if (!email.includes("@")) {
-                  alert("Debe ingresar un correo electrónico válido");
+                  toast.error("Debe ingresar un correo electrónico válido");
                   return (e.target.value = "");
                 }
               }
             }}
-
           />
         </div>
         <div className="mb-3">
@@ -162,7 +167,7 @@ function Register() {
             onBlur={(e) => {
               if (e.target.value) {
                 if (password.length < 6 || !containsNumbers(password)) {
-                  alert(
+                  toast.error(
                     "La contraseña debe contener al menos 6 caracteres y al menos 1 numero"
                   );
                   return (e.target.value = "");
@@ -185,7 +190,7 @@ function Register() {
             onBlur={(e) => {
               if (e.target.value) {
                 if (password !== password2) {
-                  alert("No coinciden las contraseñas. Intentelo nuevamente");
+                  toast.error("No coinciden las contraseñas. Intentelo nuevamente");
                   return (e.target.value = "");
                 }
               }

@@ -7,6 +7,7 @@ import {
   onSubmitReload,
   containsLetters,
 } from "../utils/utils";
+import { Toaster, toast } from "sonner";
 
 const Checkout = () => {
   const [cartId, setCartId] = useState("");
@@ -50,12 +51,14 @@ const Checkout = () => {
         completed: true,
       })
       .then(() => {
-        alert("Felicitaciones! Tu compra fue realizada con éxito");
-        navigate("/history");
-        onSubmitReload();
+        toast.success("Felicitaciones! Tu compra fue realizada con éxito");
+        setTimeout(() => {
+          navigate("/history");
+        }, 1500);
+        // onSubmitReload();
       })
       .catch((err) => {
-        alert("No se pudo realizar la compra");
+        toast.error("No se pudo realizar la compra");
         console.log(err);
       });
 
@@ -79,6 +82,7 @@ const Checkout = () => {
 
   return (
     <div className="contenedor">
+      <Toaster richColors position="top-center" />
       <div className="text-center">
         <img
           className="mb-2 mt-5"
