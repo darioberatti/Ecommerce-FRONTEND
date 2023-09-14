@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { setSizes, sizeSetter } from "../utils/utils";
-import { addToCart } from "../redux/cart";
+
 
 
 
