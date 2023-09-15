@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import logo from "../assets/Black White Modern Concept Football Club Logo.png";
+import logo from "../assets/Retro Football Club Logo.png";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { containsNumbers, containsLetters } from "../utils/utils";
@@ -29,10 +29,7 @@ const Checkout = () => {
         setCartProducts(response.data.items);
       })
       .catch((err) => console.log(err));
-
-
   }, []);
-
 
   const handleCheckout = () => {
     axios
