@@ -15,6 +15,7 @@ const Grid = ({ items, title }) => {
           padding: "40px",
           border: "1px solid black",
           marginTop: "40px",
+          borderRadius: "20px"
         }}
       >
         {items.map((item, i) => {

@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-.span{
+.span {
   font-size: 23px;
 }
 
@@ -25,6 +25,7 @@ code {
   @media (max-width: 680px) {
     padding: 10px;
   }
+  
 }
 
 /* carrito de compras */
@@ -33,16 +34,16 @@ code {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  
   height: 100vh;
   flex-direction: row;
-  border: 1px solid black;
 }
 
 .list-group {
   width: 30%;
   margin-top: 5%;
-  border: 1px solid black;
+  
+  height: auto;
 }
 
 .contenedor-pagar {
@@ -53,6 +54,9 @@ code {
   padding: 50px;
   align-items: center;
   text-align: center;
+  margin-top: 5%;
+  height: 40%;
+  border-radius: 20px;
 }
 
 .table-history {
@@ -77,7 +81,7 @@ code {
   flex-basis: 50%;
 }
 
-.create-product-container{
+.create-product-container {
   display: flex;
   flex-direction: row;
   padding: 50px;
@@ -85,20 +89,32 @@ code {
   align-items: center;
 }
 
-.contenedor-crear-producto{
+.contenedor-crear-producto {
   display: flex;
   flex-direction: column;
   flex-basis: 50%;
 }
 
-.container-buttons{
+.container-buttons {
   display: flex;
   padding: 2px;
   gap: 4px;
 }
 
-.container-buttons button{
+.container-buttons button {
   flex-grow: 1;
   gap: 1px;
 }
 
+.retroForm {
+  width: 60%;
+  margin: 3% auto;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 2%;
+}
+
+.contentRetro {
+  height: 80%;
+}

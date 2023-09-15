@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../index.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Toaster, toast } from "sonner";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -16,8 +17,10 @@ const Cart = () => {
       setTotalPrice(response.data.cart.total);
       setCartItems(response.data.items);
     } catch (error) {
-      alert("Primero debes agregar productos a tu carrito");
-      navigate("/");
+      toast.error("Primero debes agregar productos a tu carrito");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     }
   };
 
@@ -45,6 +48,7 @@ const Cart = () => {
 
   return (
     <div className="carrito">
+      <Toaster richColors position="top-center" />
       <div className="list-group">
         {cartItems?.map((item, i) => (
           <div style={{ borderBottom: "1px solid white" }} key={i}>
