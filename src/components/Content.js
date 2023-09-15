@@ -23,7 +23,6 @@ const Content = () => {
       .post(`/api/cart/${product.id}`)
       .then((res) => toast.success(res.data.message))
       .catch(() => {
-
         toast.error("No se registró un usuario logueado");
         navigate("/login");
       });
@@ -36,7 +35,6 @@ const Content = () => {
         toast.success("Producto eliminado correctamente");
         setTimeout(() => {
           navigate("/");
-          
         }, 1500);
       })
 
@@ -124,9 +122,8 @@ const Content = () => {
                 <p class="card-text">
                   Talle: {product.size && setSizes(product.size)}
                 </p>
-                <p class="card-text">{product.description}</p>
-
                 <p class="card-text">Stock disponible: {product.stock}</p>
+                <p class="card-text">{product.description}</p>
 
                 <div className="d-grid gap-2">
                   {usuario.isAdmin ? (
