@@ -16,7 +16,9 @@ const History = () => {
   }, [user]);
 
   return (
-    <>
+    <div style={{ textAlign: "center", margin: "2%" }}>
+      <h1>Tu historal de compras</h1>
+
       <div className="table-history">
         <table className="table">
           <thead>
@@ -34,6 +36,7 @@ const History = () => {
           </tbody>
         </table>
       </div>
+
       <div className="contenedor">
         <Link to={"/"}>
           <button type="button" className="btn btn-dark">
@@ -41,7 +44,7 @@ const History = () => {
           </button>
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 

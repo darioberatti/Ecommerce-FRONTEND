@@ -13,7 +13,7 @@ const Grid = ({ items, title }) => {
           justifyContent: "center",
           gap: 20,
           padding: "40px",
-          border: "1px solid black",
+          border: "3px inset black",
           marginTop: "40px",
           borderRadius: "20px"
         }}
