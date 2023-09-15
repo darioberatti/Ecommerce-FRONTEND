@@ -9,7 +9,7 @@ const EditCategories = ({ categories }) => {
   
   
   const handleSubmit = () => {
-    if (!newCategory) return toast.error("Debe ingregar una categoria");
+    if (!newCategory) return toast.error("Debe ingresar una categoria");
     axios
       .post(`/api/categories/create`, {
         type: newCategory,

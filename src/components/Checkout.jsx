@@ -114,7 +114,7 @@ const Checkout = () => {
               onBlur={(e) => {
                 if (e.target.value) {
                   if (!containsNumbers(e.target.value)) {
-                    alert("La dirección no es válida");
+                    toast.error("La dirección no es válida");
                     return (e.target.value = "");
                   }
                 }
@@ -148,7 +148,7 @@ const Checkout = () => {
                   e.target.value.length !== 4 ||
                   containsLetters(e.target.value)
                 ) {
-                  alert("El código postal no es válido");
+                  toast.error("El código postal no es válido");
                   return (e.target.value = "");
                 }
               }
@@ -178,7 +178,7 @@ const Checkout = () => {
             onBlur={(e) => {
               if (e.target.value) {
                 if (containsNumbers(e.target.value)) {
-                  alert("El nombre no puede contener números");
+                  toast.error("El nombre no puede contener números");
                   return (e.target.value = "");
                 }
               }
@@ -239,7 +239,7 @@ const Checkout = () => {
                   e.target.value.length !== 16 ||
                   containsLetters(e.target.value)
                 ) {
-                  alert("El n° de tarjeta no es válido");
+                  toast.error("El n° de tarjeta no es válido");
                   return (e.target.value = "");
                 }
               }
@@ -263,7 +263,7 @@ const Checkout = () => {
                     e.target.value.length !== 3 ||
                     containsLetters(e.target.value)
                   ) {
-                    alert("El código de seguridad no es válido");
+                    toast.error("El código de seguridad no es válido");
                     return (e.target.value = "");
                   }
                 }
@@ -284,7 +284,7 @@ const Checkout = () => {
             onBlur={(e) => {
               if (e.target.value) {
                 if (containsNumbers(e.target.value)) {
-                  alert("El nombre no puede contener números");
+                  toast.error("El nombre no puede contener números");
                   return (e.target.value = "");
                 }
               }
@@ -307,7 +307,7 @@ const Checkout = () => {
                   e.target.value.length !== 10 ||
                   containsLetters(e.target.value)
                 ) {
-                  alert("El número de celular no es válida");
+                  toast.error("El número de celular no es válida");
                   return (e.target.value = "");
                 }
               }
