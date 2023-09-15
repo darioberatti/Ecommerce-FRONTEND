@@ -18,6 +18,7 @@ import EditCategories from "./components/EditCategories";
 import Categories from "./components/Categories";
 import Profile from "./components/Profile";
 import Carousel from "./components/Carousel";
+import ProtectedUrl from "./commons/ProtectedUrl";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -76,14 +77,32 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:id" element={<Content />} />
-          <Route path="/create-product" element={<ProductForm />} />
-          <Route path="/edit-product/:id" element={<ProductForm />} />
+          <Route
+            path="/create-product"
+            element={
+              <ProtectedUrl>
+                <ProductForm />
+              </ProtectedUrl>
+            }
+          />
+          <Route
+            path="/edit-product/:id"
+            element={
+              <ProtectedUrl>
+                <ProductForm />
+              </ProtectedUrl>
+            }
+          />
           <Route path="/search-results" element={<SearchResults />} />
           <Route path="/categories/:type" element={<Categories />} />
           <Route path="/history" element={<History />} />
           <Route
             path="/edit-categories"
-            element={<EditCategories categories={categories} />}
+            element={
+              <ProtectedUrl>
+                <EditCategories categories={categories} />
+              </ProtectedUrl>
+            }
           />
           <Route path="/profile" element={<Profile />} />
         </Routes>

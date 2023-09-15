@@ -4,12 +4,13 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { containsNumbers, containsLetters } from "../utils/utils";
 import { Toaster, toast } from "sonner";
+import { useSelector } from "react-redux";
 
 const Checkout = () => {
   const [cartId, setCartId] = useState("");
   const navigate = useNavigate();
-  const [cartProducts, setCartProducts] = useState([]);
 
+  const [cartProducts, setCartProducts] = useState([]);
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [deliveryStreets, setDeliveryStreets] = useState("");
   const [deliveryZipCode, setDeliveryZipCode] = useState("");
@@ -29,7 +30,10 @@ const Checkout = () => {
         setCartProducts(response.data.items);
       })
       .catch((err) => console.log(err));
+
+
   }, []);
+
 
   const handleCheckout = () => {
     axios
@@ -99,7 +103,7 @@ const Checkout = () => {
         >
           <div>
             <label htmlFor="adress" className="form-label">
-              Direccion:
+              Direccion de envio:
             </label>
             <input
               id="address"
@@ -117,10 +121,6 @@ const Checkout = () => {
                 }
               }}
             />
-            <small>
-              Si no completas este campo, tomaremos la direccion que hayas
-              ingresado cuando te registraste.
-            </small>
           </div>
           <label htmlFor="streets" className="form-label mt-3">
             Entre Calles:
