@@ -2,14 +2,16 @@ import axios from "axios";
 import React, { useState } from "react";
 import { onSubmitReload } from "../utils/utils";
 import { Toaster, toast } from "sonner";
+import { useNavigate } from "react-router";
+
 
 const EditCategories = ({ categories }) => {
   const [newCategory, setNewCategory] = useState("");
   const [editingCategoryIndex, setEditingCategoryIndex] = useState(-1);
-  
+  const navigate = useNavigate()
   
   const handleSubmit = () => {
-    if (!newCategory) return toast.error("Debe ingregar una categoria");
+    if (!newCategory) return toast.error("Debe ingresar una categoria");
     axios
       .post(`/api/categories/create`, {
         type: newCategory,
@@ -57,6 +59,11 @@ const EditCategories = ({ categories }) => {
   };
 
   return (
+    <><div>
+    <button type="button" class="btn btn-link" onClick={() => navigate(-1)}>
+      Volver
+    </button>
+  </div>
     <div style={{ textAlign: "center", margin: "2%" }}>
       <Toaster richColors position="top-center" />
       <h1>Categorías</h1>
@@ -151,6 +158,7 @@ const EditCategories = ({ categories }) => {
         })}
       </ul>
     </div>
+    </>
   );
 };
 

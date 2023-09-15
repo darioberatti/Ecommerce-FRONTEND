@@ -35,8 +35,8 @@ const Card = ({ item }) => {
           {item.name.length > 60 ? item.name.slice(0, 60) + "..." : item.name}
         </h5>
         <p className="card-text">
-          {item.description.length > 160
-            ? item.description.slice(0, 160) + "..."
+          {item.description.length > 140
+            ? item.description.slice(0, 140) + "..."
             : item.description}
         </p>
         <div
@@ -88,8 +88,8 @@ const Card = ({ item }) => {
           {item.name.length > 33 ? item.name.slice(0, 33) + "..." : item.name}
         </h5>
         <p className="card-text">
-          {item.description.length > 75
-            ? item.description.slice(0, 74) + "..."
+          {item.description.length > 60
+            ? item.description.slice(0, 60) + "..."
             : item.description}
         </p>
 

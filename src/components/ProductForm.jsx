@@ -25,6 +25,7 @@ const ProductForm = () => {
   const { id } = useParams();
   let { pathname } = useLocation();
   const path = "/" + pathname.split("/")[1];
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     if (path === "/edit-product") {
@@ -34,7 +35,11 @@ const ProductForm = () => {
     } else {
       setProductInfo(initialProductInfo);
     }
+
+    axios.get("/api/categories").then((res) => setCategories(res.data));
   }, [path, id]);
+
+  console.log(categories);
 
   const sizesArray = (value) => {
     const sizes = value.split(",");
@@ -71,6 +76,8 @@ const ProductForm = () => {
     }
   };
 
+  console.log(productInfo);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (path === "/edit-product") {
@@ -103,114 +110,138 @@ const ProductForm = () => {
   };
 
   return (
-    <div
-      className="create-product-container"
-    >
-      <Toaster richColors position="top-center" />
-      <div className="contenedor-crear-producto">
-        <form onSubmit={handleSubmit}>
-          {Object.keys(initialProductInfo).map((key, i) => (
-            <div key={i}>
-              <label htmlFor={key} className="form-label mt-2">
-                {key === "size"
-                  ? "Talles:"
-                  : key === "urlImg"
-                  ? "Url de Imagenes:"
-                  : key === "price"
-                  ? "Precio:"
-                  : key === "name"
-                  ? "Titulo:"
-                  : key === "description"
-                  ? "Descripcion:"
-                  : key === "team"
-                  ? "Equipo:"
-                  : key === "country"
-                  ? "Pais:"
-                  : key === "year"
-                  ? "Año:"
-                  : key === "stock"
-                  ? "Stock:"
-                  : key === "categoryId"
-                  ? "ID de la categoria:"
-                  : ""}
-              </label>
-
-              {key === "urlImg" ? (
-                <textarea
-                  name={key}
-                  className="form-control mb-3"
-                  placeholder="http://urlimagen/img.jpg,http://urlimagen/img2.jpg"
-                  id={key}
-                  cols="30"
-                  rows="5"
-                  onChange={handleInputChange}
-                  value={productInfo[key]}
-                  required
-                ></textarea>
-              ) : (
-                <input
-                  type={
-                    key === "price"
-                      ? "number"
-                      : key === "year"
-                      ? "number"
-                      : key === "stock"
-                      ? "number"
-                      : "text"
-                  }
-                  id={key}
-                  name={key}
-                  className="form-control mb-3"
-                  placeholder={`Ej: ${
-                    key === "size"
-                      ? "XS, S, M, L, XL"
-                      : key === "price"
-                      ? "2500"
-                      : key === "name"
-                      ? "Camiseta de la Seleccion Brasilera"
-                      : key === "description"
-                      ? "La camiseta que se uso para el mundial 2002, sin duda una de las mas iconicas"
-                      : key === "team"
-                      ? "Seleccion Brasilera de Futbol"
-                      : key === "country"
-                      ? "Brasil"
-                      : key === "year"
-                      ? "2002"
-                      : key === "stock"
-                      ? "150"
-                      : key === "categoryId"
-                      ? "2"
-                      : ""
-                  }`}
-                  value={productInfo[key]}
-                  onChange={handleInputChange}
-                  required
-                />
-              )}
-              {key === "size" ? (
-                <small>
-                  <strong>SEPARAR CADA TALLE CON COMAS</strong>
-                </small>
-              ) : key === "urlImg" ? (
-                <small>
-                  <strong>SEPARAR CADA URL CON COMAS</strong>
-                </small>
-              ) : (
-                ""
-              )}
-            </div>
-          ))}
-          <button type="submit" className="btn btn-dark mb-5">
-            {path === "/edit-product"
-              ? "Actualizar Producto"
-              : "Agregar producto"}
-          </button>
-        </form>
-      </div>
+    <>
       <div>
-        <Card item={productInfo} />
+        <button type="button" class="btn btn-link" onClick={() => navigate(-1)}>
+          Volver
+        </button>
       </div>
-    </div>
+
+      <div className="create-product-container">
+        <Toaster richColors position="top-center" />
+        <div className="contenedor-crear-producto">
+          <form onSubmit={handleSubmit}>
+            {Object.keys(initialProductInfo).map((key, i) => (
+              <div key={i}>
+                <label htmlFor={key} className="form-label mt-2">
+                  {key === "size"
+                    ? "Talles:"
+                    : key === "urlImg"
+                    ? "Url de Imagenes:"
+                    : key === "price"
+                    ? "Precio:"
+                    : key === "name"
+                    ? "Titulo:"
+                    : key === "description"
+                    ? "Descripcion:"
+                    : key === "team"
+                    ? "Equipo:"
+                    : key === "country"
+                    ? "Pais:"
+                    : key === "year"
+                    ? "Año:"
+                    : key === "stock"
+                    ? "Stock:"
+                    : key === "categoryId"
+                    ? "Categoria:"
+                    : ""}
+                </label>
+
+                {key === "urlImg" ? (
+                  <textarea
+                    name={key}
+                    className="form-control mb-3"
+                    placeholder="http://urlimagen/img.jpg,http://urlimagen/img2.jpg"
+                    id={key}
+                    cols="30"
+                    rows="5"
+                    onChange={handleInputChange}
+                    value={productInfo[key]}
+                    required
+                  ></textarea>
+                ) : key === "categoryId" ? (
+                  <div class="input-group mb-3">
+                    <select
+                      onChange={handleInputChange}
+                      name={key}
+                      class="form-select"
+                      id="inputGroupSelect02"
+                      required
+                    >
+                      <option selected></option>
+                      {categories?.map((el) => {
+                        return <option value={el.id}>{el.type}</option>;
+                      })}
+                    </select>
+                    <label class="input-group-text" for="inputGroupSelect02">
+                      CATEGORIAS
+                    </label>
+                  </div>
+                ) : (
+                  <input
+                    type={
+                      key === "price"
+                        ? "number"
+                        : key === "year"
+                        ? "number"
+                        : key === "stock"
+                        ? "number"
+                        : "text"
+                    }
+                    id={key}
+                    name={key}
+                    className="form-control mb-3"
+                    placeholder={`Ej: ${
+                      key === "size"
+                        ? "XS, S, M, L, XL"
+                        : key === "price"
+                        ? "2500"
+                        : key === "name"
+                        ? "Camiseta de la Seleccion Brasilera"
+                        : key === "description"
+                        ? "La camiseta que se uso para el mundial 2002, sin duda una de las mas iconicas"
+                        : key === "team"
+                        ? "Seleccion Brasilera de Futbol"
+                        : key === "country"
+                        ? "Brasil"
+                        : key === "year"
+                        ? "2002"
+                        : key === "stock"
+                        ? "150"
+                        : key === "categoryId"
+                        ? "2"
+                        : ""
+                    }`}
+                    value={productInfo[key]}
+                    onChange={handleInputChange}
+                    required
+                  />
+                )}
+                {key === "size" ? (
+                  <small>
+                    <strong>SEPARAR CADA TALLE CON COMAS</strong>
+                  </small>
+                ) : key === "urlImg" ? (
+                  <small>
+                    <strong>SEPARAR CADA URL CON COMAS</strong>
+                  </small>
+                ) : (
+                  ""
+                )}
+              </div>
+            ))}
+            <button type="submit" className="btn btn-dark mb-5">
+              {path === "/edit-product"
+                ? "Actualizar Producto"
+                : "Agregar producto"}
+            </button>
+          </form>
+        </div>
+        <div>
+          <Card item={productInfo} />
+        </div>
+      </div>
+    </>
   );
 };
 
