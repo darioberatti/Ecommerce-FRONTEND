@@ -4,7 +4,6 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { containsNumbers, containsLetters } from "../utils/utils";
 import { Toaster, toast } from "sonner";
-import { useSelector } from "react-redux";
 
 const Checkout = () => {
   const [cartId, setCartId] = useState("");
