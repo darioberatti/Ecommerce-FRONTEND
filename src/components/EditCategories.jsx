@@ -100,7 +100,7 @@ const EditCategories = ({ categories }) => {
                     value={newCategory}
                     onChange={(e) => setNewCategory(e.target.value)}
                   />
-                  <div style={{ width: "20%" }}>
+                  <div style={{ width: "30%" }}>
                     <button
                       style={{ marginLeft: "2%" }}
                       type="button"
