@@ -43,7 +43,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className="contenedor">
+      <div className="contenedor" style={{ margin: "2%" }}>
         <Toaster richColors position="top-center" />
         <div className="text-center" style={{ marginTop: "20px" }}>
           <h2>Hola {user.name}!</h2>
