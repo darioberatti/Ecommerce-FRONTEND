@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../assets/Black White Modern Concept Football Club Logo.png";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import {
-  containsNumbers,
-  onSubmitReload,
-  containsLetters,
-} from "../utils/utils";
+import { containsNumbers, containsLetters } from "../utils/utils";
 import { Toaster, toast } from "sonner";
 
 const Checkout = () => {
@@ -55,7 +51,6 @@ const Checkout = () => {
         setTimeout(() => {
           navigate("/history");
         }, 1500);
-        // onSubmitReload();
       })
       .catch((err) => {
         toast.error("No se pudo realizar la compra");
@@ -103,7 +98,7 @@ const Checkout = () => {
           }}
         >
           <div>
-            <label for="adress" className="form-label">
+            <label htmlFor="adress" className="form-label">
               Direccion:
             </label>
             <input
@@ -127,7 +122,7 @@ const Checkout = () => {
               ingresado cuando te registraste.
             </small>
           </div>
-          <label for="streets" className="form-label mt-3">
+          <label htmlFor="streets" className="form-label mt-3">
             Entre Calles:
           </label>
           <input
@@ -138,7 +133,7 @@ const Checkout = () => {
             required
             onChange={(e) => setDeliveryStreets(e.target.value)}
           />
-          <label for="postal" className="form-label mt-3">
+          <label htmlFor="postal" className="form-label mt-3">
             Codigo Postal:
           </label>
           <input
@@ -160,7 +155,7 @@ const Checkout = () => {
               }
             }}
           />
-          <label for="ciudad" className="form-label mt-3">
+          <label htmlFor="ciudad" className="form-label mt-3">
             Ciudad:
           </label>
           <input
@@ -171,7 +166,7 @@ const Checkout = () => {
             required
             onChange={(e) => setDeliveryCity(e.target.value)}
           />
-          <label for="received" className="form-label mt-3">
+          <label htmlFor="received" className="form-label mt-3">
             Nombre Completo de la persona que recibe el paquete:
           </label>
           <input
@@ -201,7 +196,7 @@ const Checkout = () => {
               id="mastercard"
               onClick={(e) => setCardCompany(e.target.id)}
             />
-            <label className="form-check-label" for="mastercard">
+            <label className="form-check-label" htmlFor="mastercard">
               Mastercard
             </label>
           </div>
@@ -213,7 +208,7 @@ const Checkout = () => {
               id="visa"
               onClick={(e) => setCardCompany(e.target.id)}
             />
-            <label className="form-check-label" for="visa">
+            <label className="form-check-label" htmlFor="visa">
               Visa
             </label>
           </div>
@@ -225,11 +220,11 @@ const Checkout = () => {
               id="maestro"
               onClick={(e) => setCardCompany(e.target.id)}
             />
-            <label className="form-check-label" for="maestro">
+            <label className="form-check-label" htmlFor="maestro">
               Maestro
             </label>
           </div>
-          <label for="credit-card" className="form-label">
+          <label htmlFor="credit-card" className="form-label">
             Numero de tarjeta (Sin espacios):
           </label>
           <input
@@ -253,7 +248,7 @@ const Checkout = () => {
           />
 
           <div className="col-md-3">
-            <label for="inputZip" className="form-label">
+            <label htmlFor="inputZip" className="form-label">
               Codigo de seguridad
             </label>
             <input
@@ -277,7 +272,7 @@ const Checkout = () => {
             />
           </div>
 
-          <label for="name-card" className="form-label mt-3">
+          <label htmlFor="name-card" className="form-label mt-3">
             Nombre y Apellido (Como figura en la Tarjeta):
           </label>
           <input
@@ -297,7 +292,7 @@ const Checkout = () => {
             }}
           />
 
-          <label for="number" className="form-label mt-3">
+          <label htmlFor="number" className="form-label mt-3">
             Numero Telefonico:
           </label>
           <input
