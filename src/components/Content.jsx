@@ -24,7 +24,6 @@ const Content = () => {
 
       .then((res) => {
         toast.success(res.data.message);
-        navigate("/");
       })
       .catch(() => {
         toast.error("No se registró un usuario logueado");
@@ -52,6 +51,7 @@ const Content = () => {
 
   return (
     <div>
+      <div style={{marginLeft:"8%"}}><button type="button" class="btn btn-link" onClick={()=>navigate(-1)}>Volver</button></div>
       <Toaster richColors position="top-center" />
       <div style={{ margin: "2% 8%" }}>
         <div className="row">
@@ -102,18 +102,20 @@ const Content = () => {
           </div>
           <div class="col-sm-6">
             <div class="card" style={{ width: "100%" }}>
-              <div class="card-body">
-                <h4 class="card-title">{product.name}</h4>
-                <h1 class="card-title"> {product.price}$</h1>
-                <p class="card-text">Equipo: {product.team}</p>
-                <p class="card-text">País: {product.country}</p>
-                <p class="card-text">Año: {product.year}</p>
+              <div class="card-body" style={{ lineHeight: "2.5" }}>
+                <h2 class="card-title" style={{ lineHeight: "inherit" }}>
+                  {product.name}
+                </h2>
+                <h1 class="card-title" style={{ lineHeight: "inherit" }}> {product.price}$</h1>
+                <h5 class="card-text" style={{ lineHeight: "1.8" }}>Equipo: {product.team}</h5>
+                <h5 class="card-text" style={{ lineHeight: "1.8" }}>País: {product.country}</h5>
+                <h5 class="card-text" style={{ lineHeight: "1.8" }}>Año: {product.year}</h5>
 
-                <p class="card-text">
+                <h5 class="card-text" style={{ lineHeight: "1.8" }}> 
                   Talle: {product.size && setSizes(product.size)}
-                </p>
-                <p class="card-text">Stock disponible: {product.stock}</p>
-                <p class="card-text">{product.description}</p>
+                </h5>
+                <h5 class="card-text" style={{ lineHeight: "1.8" }}>Stock disponible: {product.stock}</h5>
+                <h5 class="card-text" style={{ lineHeight: "1.8" }}>{product.description}</h5>
 
                 <div className="d-grid gap-2">
                   {usuario.isAdmin ? (
@@ -142,7 +144,7 @@ const Content = () => {
                     onClick={() => {
                       handleAddToCart();
                     }}
-                    disabled={(product.stock = "0")}
+                    disabled={product.stock === "0"}
                   >
                     Agregar al carrito
                   </button>
