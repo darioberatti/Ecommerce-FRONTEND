@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { setSizes, sizeSetter } from "../utils/utils";
+import { setSizes } from "../utils/utils";
 import { Toaster, toast } from "sonner";
 
 const Content = () => {
@@ -21,14 +21,11 @@ const Content = () => {
   const handleAddToCart = () => {
     axios
       .post(`/api/cart/${product.id}`)
-<<<<<<< HEAD:src/components/Content.js
+
       .then((res) => {
-        alert(res.data.message);
+        toast.success(res.data.message);
         navigate("/");
       })
-=======
-      .then((res) => toast.success(res.data.message))
->>>>>>> develop:src/components/Content.jsx
       .catch(() => {
         toast.error("No se registró un usuario logueado");
         navigate("/login");

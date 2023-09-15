@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { onSubmitReload } from "../utils/utils";
 import { Toaster, toast } from "sonner";
 
 const LoginForm = () => {
@@ -23,17 +22,9 @@ const LoginForm = () => {
         email: email,
         password: password,
       })
-<<<<<<< HEAD:src/components/LoginForm.js
       .then(() => {
-        navigate("/");
-        onSubmitReload();
-        alert("Bienvenido!");
-=======
-      .then((result) => {
         toast.success("Bienvenido! Has iniciado sesión");
-
         navigate("/");
->>>>>>> develop:src/components/LoginForm.jsx
       })
 
       .catch((err) => {
