@@ -142,7 +142,7 @@ const Content = () => {
                     onClick={() => {
                       handleAddToCart();
                     }}
-                    disabled={(product.stock = "0")}
+                    disabled={product.stock === "0"}
                   >
                     Agregar al carrito
                   </button>
