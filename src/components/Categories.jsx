@@ -1,5 +1,5 @@
 import axios from "axios";
-import Grid from "./Grid";
+import Grid from "../commons/Grid";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 

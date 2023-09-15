@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import HistoryItem from "../commons/HistoryItem";
+import { Link } from "react-router-dom";
 
 const History = () => {
   const [history, setHistory] = useState([]);
@@ -15,8 +16,9 @@ const History = () => {
   }, [user]);
 
   return (
-    <div style={{textAlign:"center", margin: "2%"}}>
+    <div style={{ textAlign: "center", margin: "2%" }}>
       <h1>Tu historal de compras</h1>
+
       <div className="table-history">
         <table className="table">
           <thead>
@@ -33,6 +35,14 @@ const History = () => {
             })}
           </tbody>
         </table>
+      </div>
+
+      <div className="contenedor">
+        <Link to={"/"}>
+          <button type="button" className="btn btn-dark">
+            Volver al Inicio
+          </button>
+        </Link>
       </div>
     </div>
   );

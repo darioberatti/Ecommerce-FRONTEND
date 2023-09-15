@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import axios from "axios";
-import Grid from "./Grid";
+import Grid from "../commons/Grid";
 
 const SearchResults = () => {
   const searchName = useLocation().search;

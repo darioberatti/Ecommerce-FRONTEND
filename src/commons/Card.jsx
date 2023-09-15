@@ -6,7 +6,7 @@ const Card = ({ item }) => {
   const { pathname } = useLocation();
   const path = "/" + pathname.split("/")[1];
 
-  return path === "/create-product" && item ||
+  return (path === "/create-product" && item) ||
     (path === "/edit-product" && item.urlImg) ? (
     <div
       className="card"
@@ -31,9 +31,23 @@ const Card = ({ item }) => {
         className="card-body mt-2"
         style={{ border: "1px solid grey", borderRadius: 20 }}
       >
-        <h5 className="card-title">{item.name.length > 60 ? item.name.slice(0, 60) + "..." : item.name}</h5>
-        <p className="card-text">{item.description.length > 160 ? item.description.slice(0, 160) + "..." : item.description}</p>
-        <div style={{position: "absolute", bottom: "20px", width: "85%", display: "flex", justifyContent:"space-between" }}>
+        <h5 className="card-title">
+          {item.name.length > 60 ? item.name.slice(0, 60) + "..." : item.name}
+        </h5>
+        <p className="card-text">
+          {item.description.length > 160
+            ? item.description.slice(0, 160) + "..."
+            : item.description}
+        </p>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "20px",
+            width: "85%",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
           <button
             to={`/products/${item.id}`}
             className="btn btn-primary"
@@ -70,10 +84,24 @@ const Card = ({ item }) => {
         className="card-body mt-2"
         style={{ border: "1px solid grey", borderRadius: 20 }}
       >
-        <h5 className="card-title">{item.name.length > 33 ? item.name.slice(0, 33) + "..." : item.name}</h5>
-        <p className="card-text">{item.description.length > 75 ? item.description.slice(0,74) + "..." : item.description}</p>
+        <h5 className="card-title">
+          {item.name.length > 33 ? item.name.slice(0, 33) + "..." : item.name}
+        </h5>
+        <p className="card-text">
+          {item.description.length > 75
+            ? item.description.slice(0, 74) + "..."
+            : item.description}
+        </p>
 
-        <div style={{position: "absolute", bottom: "20px", width: "80%", display: "flex", justifyContent:"space-between" }}>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "20px",
+            width: "80%",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
           <Link
             to={`/products/${item.id}`}
             className="btn btn-primary"

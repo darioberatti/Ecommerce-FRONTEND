@@ -217,7 +217,7 @@ function Register() {
             id="exampleCheck1"
             required
           />
-          <label className="form-check-label" for="exampleCheck1" required>
+          <label className="form-check-label" htmlFor="exampleCheck1" required>
             Acepto los términos y condiciones
           </label>
         </div>

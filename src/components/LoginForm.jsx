@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { onSubmitReload } from "../utils/utils";
 import { Toaster, toast } from "sonner";
 
 const LoginForm = () => {
@@ -23,9 +22,8 @@ const LoginForm = () => {
         email: email,
         password: password,
       })
-      .then((result) => {
+      .then(() => {
         toast.success("Bienvenido! Has iniciado sesión");
-
         navigate("/");
       })
 
@@ -65,7 +63,7 @@ const LoginForm = () => {
             className="form-control"
             id="exampleInputPassword1"
             onChange={onChangePassword}
-            require
+            required
           />
         </div>
 
