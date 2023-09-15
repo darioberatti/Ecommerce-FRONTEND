@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import LogoRFC from "../assets/Black White Modern Concept Football Club Logo.png";
+import LogoRFC from "../assets/Retro Football Club Logo.png";
 import axios from "axios";
 import { onSubmitReload } from "../utils/utils.js";
 import { useState } from "react";
