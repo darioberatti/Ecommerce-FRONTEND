@@ -14,6 +14,7 @@ const initialProductInfo = {
   team: "",
   year: "",
   categoryId: "",
+  stock:"",
   price: "",
 };
 
@@ -128,6 +129,8 @@ const ProductForm = () => {
                   ? "Pais:"
                   : key === "year"
                   ? "Año:"
+                  : key === "stock"
+                  ? "Stock:"
                   : key === "categoryId"
                   ? "ID de la categoria:"
                   : ""}
@@ -172,6 +175,8 @@ const ProductForm = () => {
                       ? "Brasil"
                       : key === "year"
                       ? "2002"
+                      : key === "stock"
+                      ? "150"
                       : key === "categoryId"
                       ? "2"
                       : ""
