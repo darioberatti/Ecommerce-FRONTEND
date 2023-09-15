@@ -6,7 +6,6 @@ import HistoryItem from "../commons/HistoryItem";
 const History = () => {
   const [history, setHistory] = useState([]);
   const user = useSelector((state) => state.user.value);
-  
 
   useEffect(() => {
     axios
@@ -15,24 +14,26 @@ const History = () => {
       .catch((err) => console.log(err));
   }, [user]);
 
-
   return (
-    <div className="table-history">
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Productos</th>
-            <th scope="col">Precio Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {history?.map((cart, i) => {
-            return <HistoryItem cart={cart} i={i}/>;
-          })}
-        </tbody>
-      </table>
+    <div style={{textAlign:"center", margin: "2%"}}>
+      <h1>Tu historal de compras</h1>
+      <div className="table-history">
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Productos</th>
+              <th scope="col">Precio Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {history?.map((cart, i) => {
+              return <HistoryItem cart={cart} i={i} />;
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

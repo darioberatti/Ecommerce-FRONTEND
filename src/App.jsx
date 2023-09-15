@@ -46,10 +46,10 @@ function App() {
   const isSearchResultsPage = location.pathname === "/search-results";
 
   return (
-    <div>
+    <div >
       <Navbar categories={categories} />
 
-      <div className="bodyBackground ">
+      <div className=" ">
         <Routes>
           <Route
             path="/"
