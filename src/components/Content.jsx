@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { setSizes } from "../utils/utils";
+import { sizeSetter } from "../utils/utils";
 import { Toaster, toast } from "sonner";
 
 const Content = () => {
@@ -112,7 +112,7 @@ const Content = () => {
                 <h5 class="card-text" style={{ lineHeight: "1.8" }}>Año: {product.year}</h5>
 
                 <h5 class="card-text" style={{ lineHeight: "1.8" }}> 
-                  Talle: {product.size && setSizes(product.size)}
+                  Talle: {product.size && sizeSetter(product.size)}
                 </h5>
                 <h5 class="card-text" style={{ lineHeight: "1.8" }}>Stock disponible: {product.stock}</h5>
                 <h5 class="card-text" style={{ lineHeight: "1.8" }}>{product.description}</h5>
