@@ -132,3 +132,11 @@ code {
 }
 
 
+
+/* @media(max-width: 1425px){
+  .contenedor-descripcion-detallada card{
+    border: 1px solid black;
+    width: 10px;
+  }
+} */
+

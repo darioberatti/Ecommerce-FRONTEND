@@ -50,7 +50,6 @@ function App() {
   return (
     <div >
       <Navbar categories={categories} />
-
       <div className=" ">
         <Routes>
           <Route

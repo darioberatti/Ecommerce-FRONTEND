@@ -114,8 +114,8 @@ const Cart = () => {
           <div className="contenedor-pagar">
             <h1>El total a pagar por tus productos es de:</h1>
             <h1 style={{ marginTop: "10%" }}>${totalPrice}</h1>
-
             {cartItems.length ? (
+              <>
               <Link to={"/checkout"}>
                 <button
                   type="button"
@@ -125,6 +125,16 @@ const Cart = () => {
                   Ir a Pagar
                 </button>
               </Link>
+              <Link to={"/"}>
+              <button
+                type="button"
+                className="btn btn-dark"
+                style={{ marginTop: "10%" }}
+              >
+                Volver al inicio
+              </button>
+            </Link>
+            </>
             ) : (
               <div>
                 <button
