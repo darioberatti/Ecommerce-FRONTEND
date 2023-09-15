@@ -1,26 +1,17 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { loginUser } from "../redux/user";
 
 const Profile = () => {
-  const userId = useSelector((state) => state.user.value.id);
-  const [user, setUser] = useState("");
+  const user = useSelector((state) => state.user.value);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedUser, setEditedUser] = useState({});
-
-  useEffect(() => {
-    axios
-      .get(`/api/users/${userId}`)
-      .then((response) => setUser(response.data))
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [userId]);
+  const dispatch = useDispatch();
 
   const handleEditClick = () => {
     setIsEditMode(true);
-
     setEditedUser(user);
   };
 
@@ -38,9 +29,9 @@ const Profile = () => {
 
   const handleSaveClick = () => {
     axios
-      .put(`/api/users/${userId}`, editedUser)
+      .put(`/api/users/${user.id}`, editedUser)
       .then((response) => {
-        setUser(response.data);
+        dispatch(loginUser(response.data));
         setIsEditMode(false);
       })
       .catch((error) => {
@@ -72,9 +63,6 @@ const Profile = () => {
               <br></br>
               <h5>Dirección: {user.address}</h5>
               <br></br>
-              <h5>Email: {user.email}</h5>
-              <br></br>
-              <h5>Si querés ver tu carrito hacé click aquí: </h5>
               <br></br>
               <Link to={"/cart"}>
                 <button

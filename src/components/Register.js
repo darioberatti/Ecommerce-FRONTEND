@@ -70,7 +70,7 @@ function Register() {
       </div>
       <form onSubmit={validateForm}>
         <div className="mb-3">
-          <label for="formGroupExampleInput" className="form-label">
+          <label htmlFor="formGroupExampleInput" className="form-label">
             Nombre completo
           </label>
           <div className="row">
@@ -114,7 +114,7 @@ function Register() {
         </div>
 
         <div className="mb-3">
-          <label for="formGroupExampleInput" className="form-label">
+          <label htmlFor="formGroupExampleInput" className="form-label">
             E-mail
           </label>
           <input
@@ -132,11 +132,10 @@ function Register() {
                 }
               }
             }}
-
           />
         </div>
         <div className="mb-3">
-          <label for="formGroupExampleInput3" className="form-label">
+          <label htmlFor="formGroupExampleInput3" className="form-label">
             Nombre de usuario
           </label>
           <input
@@ -149,7 +148,7 @@ function Register() {
           />
         </div>
         <div className="mb-3">
-          <label for="exampleInputPassword1" className="form-label">
+          <label htmlFor="exampleInputPassword1" className="form-label">
             Contraseña
           </label>
           <input
@@ -172,7 +171,7 @@ function Register() {
           />
         </div>
         <div className="mb-3">
-          <label for="exampleInputPassword2" className="form-label">
+          <label htmlFor="exampleInputPassword2" className="form-label">
             Repite la contraseña
           </label>
           <input
@@ -193,7 +192,7 @@ function Register() {
           />
         </div>
         <div className="mb-3">
-          <label for="formGroupExampleInput2" className="form-label">
+          <label htmlFor="formGroupExampleInput2" className="form-label">
             Dirección
           </label>
           <input
@@ -212,7 +211,7 @@ function Register() {
             id="exampleCheck1"
             required
           />
-          <label className="form-check-label" for="exampleCheck1" required>
+          <label className="form-check-label" htmlFor="exampleCheck1" required>
             Acepto los términos y condiciones
           </label>
         </div>

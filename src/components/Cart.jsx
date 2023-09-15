@@ -7,11 +7,12 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState("");
   const navigate = useNavigate();
+  const [noProductsMessage, setNoProductsMessage] = useState(false);
 
   const axiosData = async () => {
     try {
       const response = await axios.get("/api/cart");
-      response["data"]["items"].sort((a,b)=> a["id"] - b["id"])
+      response["data"]["items"].sort((a, b) => a["id"] - b["id"]);
       setTotalPrice(response.data.cart.total);
       setCartItems(response.data.items);
     } catch (error) {
@@ -22,7 +23,7 @@ const Cart = () => {
 
   useEffect(() => {
     axiosData();
-  }, []); 
+  }, []);
 
   const handleDeleteFromCart = async (id) => {
     await axios.delete(`/api/cart/${id}`);
@@ -33,6 +34,14 @@ const Cart = () => {
     await axios.post(`/api/cart/${id}`);
     axiosData();
   };
+
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      setNoProductsMessage(true);
+    } else {
+      setNoProductsMessage(false);
+    }
+  }, [cartItems]);
 
   return (
     <div className="carrito">
@@ -51,8 +60,11 @@ const Cart = () => {
                   type="button"
                   className="btn btn-light btn-sm"
                   onClick={() => {
-                    handleAddToCart(item.id);
+                    if (item.cart_products.quantity < item.stock) {
+                      handleAddToCart(item.id);
+                    }
                   }}
+                  disabled={item.cart_products.quantity >= item.stock}
                 >
                   ➕
                 </button>
@@ -63,6 +75,8 @@ const Cart = () => {
                   : item.description}
               </p>
               <small>Cantidad: {item.cart_products.quantity}</small>
+              <br />
+              <small>Stock disponible: {item.stock}</small>
               <div
                 style={{
                   display: "flex",
@@ -84,34 +98,51 @@ const Cart = () => {
           </div>
         ))}
       </div>
-      <div className="contenedor-pagar">
-        <h1>El total a pagar por tus productos es de:</h1>
-        <h1 style={{ marginTop: "10%" }}>${totalPrice}</h1>
-
-        {cartItems.length ? (
-          <Link to={"/checkout"}>
+      {noProductsMessage ? (
+        <div className="contenedor-pagar">
+          <h1>No tienes productos en el carrito.</h1>
+          <Link to={"/"}>
             <button
               type="button"
               className="btn btn-dark"
               style={{ marginTop: "10%" }}
             >
-              Ir a Pagar
+              Volver al inicio
             </button>
           </Link>
-        ) : (
-          <div>
-            <button
-              type="button"
-              className="btn btn-dark"
-              style={{ marginTop: "10%" }}
-              disabled
-            >
-              Ir a Pagar
-            </button>
-            <p className="mt-3">Primero debes agregar productos al carrito.</p>
-          </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="contenedor-pagar">
+          <h1>El total a pagar por tus productos es de:</h1>
+          <h1 style={{ marginTop: "10%" }}>${totalPrice}</h1>
+
+          {cartItems.length ? (
+            <Link to={"/checkout"}>
+              <button
+                type="button"
+                className="btn btn-dark"
+                style={{ marginTop: "10%" }}
+              >
+                Ir a Pagar
+              </button>
+            </Link>
+          ) : (
+            <div>
+              <button
+                type="button"
+                className="btn btn-dark"
+                style={{ marginTop: "10%" }}
+                disabled
+              >
+                Ir a Pagar
+              </button>
+              <p className="mt-3">
+                Primero debes agregar productos al carrito.
+              </p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

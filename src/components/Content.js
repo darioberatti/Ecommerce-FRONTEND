@@ -20,7 +20,10 @@ const Content = () => {
   const handleAddToCart = () => {
     axios
       .post(`/api/cart/${product.id}`)
-      .then((res) => alert(res.data.message))
+      .then((res) => {
+        alert(res.data.message);
+        navigate("/");
+      })
       .catch(() => {
         alert("No se registró un usuario logueado");
         navigate("/login");
@@ -150,6 +153,7 @@ const Content = () => {
                     onClick={() => {
                       handleAddToCart();
                     }}
+                    disabled={(product.stock = "0")}
                   >
                     Agregar al carrito
                   </button>

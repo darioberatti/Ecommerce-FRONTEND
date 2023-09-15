@@ -22,12 +22,10 @@ const LoginForm = () => {
         email: email,
         password: password,
       })
-      .then((result) => {
-        console.log("result data", result.data);
+      .then(() => {
         navigate("/");
         onSubmitReload();
         alert("Bienvenido!");
-
       })
       .catch((err) => {
         console.log(err);
@@ -48,7 +46,7 @@ const LoginForm = () => {
       <form onSubmit={handleLogin}>
         <h2>Iniciar sesión</h2>
         <div className="mb-3">
-          <label for="exampleInputEmail1" className="form-label">
+          <label htmlFor="exampleInputEmail1" className="form-label">
             Email
           </label>
           <input
@@ -64,7 +62,7 @@ const LoginForm = () => {
           </div>
         </div>
         <div className="mb-3">
-          <label for="exampleInputPassword1" className="form-label">
+          <label htmlFor="exampleInputPassword1" className="form-label">
             Contraseña
           </label>
           <input
@@ -72,10 +70,10 @@ const LoginForm = () => {
             className="form-control"
             id="exampleInputPassword1"
             onChange={onChangePassword}
-            require
+            required
           />
         </div>
-        
+
         <button type="submit" className="btn btn-primary">
           Iniciar sesión
         </button>
