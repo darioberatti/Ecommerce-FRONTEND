@@ -23,10 +23,17 @@ const LoginForm = () => {
         email: email,
         password: password,
       })
+<<<<<<< HEAD:src/components/LoginForm.js
+      .then(() => {
+        navigate("/");
+        onSubmitReload();
+        alert("Bienvenido!");
+=======
       .then((result) => {
         toast.success("Bienvenido! Has iniciado sesión");
 
         navigate("/");
+>>>>>>> develop:src/components/LoginForm.jsx
       })
 
       .catch((err) => {
@@ -65,7 +72,7 @@ const LoginForm = () => {
             className="form-control"
             id="exampleInputPassword1"
             onChange={onChangePassword}
-            require
+            required
           />
         </div>
 

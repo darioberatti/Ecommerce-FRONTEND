@@ -21,7 +21,14 @@ const Content = () => {
   const handleAddToCart = () => {
     axios
       .post(`/api/cart/${product.id}`)
+<<<<<<< HEAD:src/components/Content.js
+      .then((res) => {
+        alert(res.data.message);
+        navigate("/");
+      })
+=======
       .then((res) => toast.success(res.data.message))
+>>>>>>> develop:src/components/Content.jsx
       .catch(() => {
         toast.error("No se registró un usuario logueado");
         navigate("/login");
@@ -138,6 +145,7 @@ const Content = () => {
                     onClick={() => {
                       handleAddToCart();
                     }}
+                    disabled={(product.stock = "0")}
                   >
                     Agregar al carrito
                   </button>

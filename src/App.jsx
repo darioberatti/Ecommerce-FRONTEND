@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes, useLocation } from "react-router";
-import Grid from "./components/Grid";
+import Grid from "./commons/Grid";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Register from "./components/Register";
@@ -34,6 +34,7 @@ function App() {
       .catch((err) => console.error(err));
 
     axios.get("/api/products").then((response) => setProducts(response.data));
+    // eslint-disable-next-line
   }, [location.pathname]);
 
   useEffect(() => {

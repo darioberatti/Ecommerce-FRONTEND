@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../commons/Card";
+import Card from "./Card";
 
 const Grid = ({ items, title }) => {
   return (
