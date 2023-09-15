@@ -47,7 +47,7 @@ const Checkout = () => {
         completed: true,
       })
       .then(() => {
-        toast.success("Felicitaciones! Tu compra fue realizada con éxito");
+        toast.success("Tu compra fue realizada con éxito. Revisa tu email.");
         setTimeout(() => {
           navigate("/history");
         }, 1500);
